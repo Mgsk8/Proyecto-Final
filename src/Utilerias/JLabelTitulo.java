@@ -4,7 +4,7 @@ Proposito: está clase nos permite implementar un título general para todas las
     Jhon Alex Rodríguez Benítez - 2264363
     Miguel Angel Escobar Marín - 2264305
     John Alejandro Vallarino Cruz - 2264332
-Fecha de ultima modificacion  26/09/2023
+Fecha de ultima modificacion  20/10/2023
 version: 1.0
 */
 

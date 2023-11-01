@@ -10,17 +10,32 @@ version: 1.0
 package Modelo;
 
 public class Usuario {
-    String cedula, nombre, apellido, tipoUsuario, grupoSanguineo ,fechaNacimiento, email, password;
+    String cedula, nombre, apellido, tipoUsuario, grupoSanguineo,dia, mes, year, email, password, estado;
 
-    public Usuario(String cedula, String nombre, String apellido, String tipoUsuario, String grupoSanguineo, String fechaNacimiento, String email, String password) {
+    public Usuario(String cedula, String nombre, String apellido, String tipoUsuario, String grupoSanguineo, String dia, String mes, String year, String email, String password, String estado) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
         this.tipoUsuario = tipoUsuario;
         this.grupoSanguineo = grupoSanguineo;
-        this.fechaNacimiento = fechaNacimiento;
+        this.dia = dia;
+        this.mes = mes;
+        this.year = year;
         this.email = email;
         this.password = password;
+        this.estado = estado;
+    }
+
+    public String getDia() {
+        return dia;
+    }
+
+    public String getMes() {
+        return mes;
+    }
+
+    public String getYear() {
+        return year;
     }
 
     public String getCedula() {
@@ -42,17 +57,22 @@ public class Usuario {
     public String getGrupoSanguineo() {
         return grupoSanguineo;
     }
-
-    public String getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public String getPassword() {
         return password;
+    }
+    
+    public String getEstado() {
+        return estado;
+    }
+
+    @Override
+    public String toString() {
+        return cedula + ";" + nombre + ";" + apellido + ";"
+            + tipoUsuario + ";" + grupoSanguineo + ";" + dia + ";" + mes + ";"+ year + ";" + email + ";" + password + ";" + estado;
     }
 
 }
