@@ -79,7 +79,7 @@ public class ListadoEstadoxUsuario extends JFrame {
 
         jp.add(js);
 
-        jbVolver = new JButtonFuncion(60, "Volver listados", 'v', "/Imagenes/volver.png");
+        jbVolver = new JButtonFuncion(60, 400,"Volver listados", 'v', "/Imagenes/volver.png");
         jbVolver.addActionListener(cles);
         jp.add(jbVolver);
 

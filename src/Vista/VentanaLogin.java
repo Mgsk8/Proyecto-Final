@@ -25,6 +25,7 @@ import javax.swing.JToggleButton;
 
 import Controlador.ControlVentanaLogin;
 import Utilerias.LimitadorCaracteres;
+import java.awt.Image;
 
 public class VentanaLogin extends JFrame{
     
@@ -39,6 +40,8 @@ public class VentanaLogin extends JFrame{
         super("Ingreso al sistema");
         setSize(400, 300);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        Image icono = new ImageIcon(getClass().getResource("/Imagenes/LogoBlancoVentana.png")).getImage();
+        setIconImage(icono);
         setLocationRelativeTo(null);
         setLayout(null);
         setResizable(false);
@@ -76,7 +79,7 @@ public class VentanaLogin extends JFrame{
 
         jpPassw = new JPasswordField();
         jpPassw.setBounds(120, 140, 150, 30);
-        jpPassw.setEchoChar('*');
+        //jpPassw.setEchoChar('*');
         add(jpPassw);
 
         ver  = new ImageIcon(getClass().getResource("/Imagenes/visible.png"));
@@ -104,7 +107,7 @@ public class VentanaLogin extends JFrame{
         add(jbingresar);
 
     }
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         VentanaLogin vl = new VentanaLogin();
-    }
+    }*/
 }

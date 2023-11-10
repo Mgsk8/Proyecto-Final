@@ -18,7 +18,7 @@ import java.io.FileReader;
 
 import javax.swing.JOptionPane;
 
-import Vista.MenuAdmin;
+import Vista.MenuAdministrador;
 import Vista.VentanaLogin;
 
 public class ControlVentanaLogin implements ActionListener, WindowListener {
@@ -44,7 +44,7 @@ public class ControlVentanaLogin implements ActionListener, WindowListener {
             if (login.equals("admin") && passw.equals("admin")) {
                 vl.setVisible(false);
                 vl.dispose();
-                MenuAdmin mp = new MenuAdmin();
+                MenuAdministrador mp = new MenuAdministrador();
             } else {
                 if (login.equals("") || passw.equals("")) {
                     JOptionPane.showMessageDialog(vl, "Login y/o password no pueden ser vacios");
@@ -141,7 +141,7 @@ public class ControlVentanaLogin implements ActionListener, WindowListener {
                             existe = true;
                             vl.setVisible(false);
                             vl.dispose();
-                            MenuAdmin mp = new MenuAdmin();
+                            MenuAdministrador mp = new MenuAdministrador();
                             break;
                         }
                     }

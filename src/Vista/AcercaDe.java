@@ -23,12 +23,12 @@ import javax.swing.SwingConstants;
 
 public class AcercaDe extends JDialog{
     
-    public MenuAdmin mp;
+    public MenuAdministrador mp;
     public ControlAcercaDe cad;
     public JLabel jlNom1, jlCorreo1, jlimg1, jlNom2, jlCorreo2, jlimg2, jlNom3, jlCorreo3, jlimg3;
     public JButton jbVolver;
     
-    public AcercaDe(MenuAdmin mp){
+    public AcercaDe(MenuAdministrador mp){
         super(mp, "Acerca de...", true);
         this.mp = mp;
         setSize(800, 700);

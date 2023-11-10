@@ -32,6 +32,24 @@ public class ControlListados implements ActionListener, WindowListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource().equals(l.jtListadoGeneral)){
+            if(l.jpListadoEstxSan.isVisible()){l.jpListadoEstxSan.setVisible(false);}
+            if(l.jpListadoEstxTip.isVisible()){l.jpListadoEstxTip.setVisible(false);}
+            l.jpListadoGeneral.setVisible(true);
+            l.llenarTablaGeneral();
+        }
+        if(e.getSource().equals(l.jtListadoEstxSan)){
+            if(l.jpListadoGeneral.isVisible()){l.jpListadoGeneral.setVisible(false);}
+            if(l.jpListadoEstxTip.isVisible()){l.jpListadoEstxTip.setVisible(false);}
+            l.jpListadoEstxSan.setVisible(true);
+            //l.llenarTablaGeneral();
+        }
+        if(e.getSource().equals(l.jtListadoEstxTip)){
+            if(l.jpListadoGeneral.isVisible()){l.jpListadoGeneral.setVisible(false);}
+            if(l.jpListadoEstxSan.isVisible()){l.jpListadoEstxSan.setVisible(false);}
+            l.jpListadoEstxTip.setVisible(true);
+            //l.llenarTablaGeneral();
+        }
         if(e.getSource().equals(l.jbListadoGeneral)){
             ListadoGeneral lg = new ListadoGeneral(l);
             l.setVisible(false);

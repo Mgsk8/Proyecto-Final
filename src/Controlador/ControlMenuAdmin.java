@@ -18,17 +18,17 @@ import Vista.Listados;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import Vista.MenuAdmin;
+import Vista.MenuAdministrador;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JOptionPane;
 
 public class ControlMenuAdmin implements ActionListener, WindowListener {
 
-    MenuAdmin mp; // crea un obj de la clase que controla
+    MenuAdministrador mp; // crea un obj de la clase que controla
 
-    public ControlMenuAdmin(MenuAdmin obj) {
-        mp = obj; // Guarda el objeto que recibe de MenuAdmin en la variable antes creado
+    public ControlMenuAdmin(MenuAdministrador obj) {
+        mp = obj; // Guarda el objeto que recibe de MenuAdministrador en la variable antes creado
     }
 
     @Override
@@ -57,6 +57,7 @@ public class ControlMenuAdmin implements ActionListener, WindowListener {
             ActualizarUsuario au = new ActualizarUsuario(mp);
             mp.setVisible(false);
         }
+        
         if (e.getSource().equals(mp.jbEstadistica)) {
             // System.out.println("Clic en jbGrafica");
            Graficos g = new Graficos(mp);

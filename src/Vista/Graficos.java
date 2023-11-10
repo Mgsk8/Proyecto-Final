@@ -26,10 +26,10 @@ public class Graficos extends JFrame{
 
     public JButton jbGraficoEstado, jbGraficoGrupo, jbGraficoPersonal, jbVolver;
     public ControlGraficos cg;
-    public MenuAdmin mp;
+    public MenuAdministrador mp;
 
 
-    public Graficos(MenuAdmin obj){
+    public Graficos(MenuAdministrador obj){
         super("Gráficos");
         mp = obj;
         setSize(1000, 700);
@@ -76,7 +76,7 @@ public class Graficos extends JFrame{
         jbGraficoPersonal.addActionListener(cg);
         jp.add(jbGraficoPersonal);
     
-        jbVolver = new JButtonFuncion(320, "Volver al menu", 'v', "/Imagenes/volver.png");
+        jbVolver = new JButtonFuncion(320, 400,"Volver al menu", 'v', "/Imagenes/volver.png");
         jbVolver.addActionListener(cg);
         jp.add(jbVolver);
     }

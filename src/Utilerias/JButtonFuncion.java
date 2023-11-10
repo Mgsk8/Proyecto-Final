@@ -1,4 +1,4 @@
-/*
+ /*
 Proposito: está clase nos permite implementar un botón de manera rápida y general para la vista que lo necesite.
 @author 
     Jhon Alex Rodríguez Benítez - 2264363
@@ -18,9 +18,9 @@ import javax.swing.SwingConstants;
 
 public class JButtonFuncion extends JButton {
     
-    public JButtonFuncion(int x, String texto, char letra, String imagen){
+    public JButtonFuncion(int x,int y, String texto, char letra, String imagen){
 
-        setBounds(x, 360, 150, 80);
+        setBounds(x, y, 150, 80);
         setText(texto);
         ImageIcon ii = new ImageIcon(getClass().getResource(imagen));
         setIcon(ii);
