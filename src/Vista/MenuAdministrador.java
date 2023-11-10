@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 
 
 public class MenuAdministrador extends JFrame{
@@ -100,8 +101,8 @@ public class MenuAdministrador extends JFrame{
                 "/Imagenes/LogoBlanco.png", "/Imagenes/LogoNegro.png", 'L', this);
         add(jbLogo);
     }
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         MenuAdministrador ma = new MenuAdministrador();
-    }
+    }*/
     
 }

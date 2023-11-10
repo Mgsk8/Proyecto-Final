@@ -49,8 +49,6 @@ public class ControlVentanaLogin implements ActionListener, WindowListener {
                 if (login.equals("") || passw.equals("")) {
                     JOptionPane.showMessageDialog(vl, "Login y/o password no pueden ser vacios");
                     vl.jtLogin.requestFocus();
-                }else{
-                    evento_validar();
                 }
             }
         }
@@ -68,103 +66,6 @@ public class ControlVentanaLogin implements ActionListener, WindowListener {
             vl.jpPassw.setEchoChar('*');
         }
         vl.jpPassw.requestFocus();
-    }
-
-    public boolean consultar_x_ced(String ced) {
-        FileReader fr = null;// permite leer el archivo
-        boolean error = false;
-        boolean existe = false;
-        try {
-            fr = new FileReader("Usuarios.csv");
-        } catch (Exception e) {
-            error = true;
-            JOptionPane.showMessageDialog(null,
-                    e + "\n\nError al abrir el archivo");
-        }
-        if (!error) {
-            BufferedReader br = new BufferedReader(fr);// clase que se utiliza para leer texto
-            String linea = "";
-            String[] tokens;
-
-            try {
-                while ((linea = br.readLine()) != null) { // readLine() es un método utilizado para leer una línea de
-                    // texto
-                    tokens = linea.split(";");// divir los caracteres
-                    if (tokens[0].equals(ced)) {
-                        existe = true;
-                        break; // romper el while, para que no siga buscando en el archivo
-                    }
-                } // fin while
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null,
-                        e + "\n\nError al leer el archivo");
-            }
-            try {
-                fr.close();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null,
-                        e + "\n\nError al cerrar el archivo");
-            }
-        }
-        return existe;
-    }
-
-    private void evento_validar() {
-        String login = vl.jtLogin.getText();
-        char caracteres[] = vl.jpPassw.getPassword(); // obtener los caracteres escritos como un arreglo de tipo char[]
-        String passw = String.valueOf(caracteres);// Convertir el arreglo de char a String
-        FileReader fr = null;// permite leer el archivo
-        boolean error = false;
-        try {
-            fr = new FileReader("Usuarios.csv");
-        } catch (Exception e) {
-            error = true;
-            JOptionPane.showMessageDialog(null,
-                    e + "\n\nError al abrir el archivo");
-        }
-        if (!error) {
-            BufferedReader br = new BufferedReader(fr);// clase que se utiliza para leer texto
-            String linea = "";
-            String[] tokens;
-            boolean existe = false;
-            try {
-                while ((linea = br.readLine()) != null) { // readLine() es un método utilizado para leer una línea de
-                    // texto
-                    tokens = linea.split(";");// divir los caracteres
-                    if (login.equals("") || passw.equals("")) {
-                        JOptionPane.showMessageDialog(vl, "Login y/o password no pueden ser vacios");
-                        vl.jtLogin.requestFocus();
-                        existe = true;
-                        break;
-                    } else {
-                        if (login.equals(tokens[8]) && passw.equals(tokens[9])) {
-                            existe = true;
-                            vl.setVisible(false);
-                            vl.dispose();
-                            MenuAdministrador mp = new MenuAdministrador();
-                            break;
-                        }
-                    }
-
-                } // fin while
-                if (!existe) {
-                    JOptionPane.showMessageDialog(vl, "Ingreso Incorrecto. Login y/o password incorrectos",
-                            "Error", JOptionPane.WARNING_MESSAGE);
-                    evento_limpiar();
-                    vl.jtLogin.requestFocus();
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null,
-                        e + "\n\nError al leer el archivo");
-            }
-            try {
-                fr.close();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null,
-                        e + "\n\nError al cerrar el archivo");
-            }
-        }
-
     }
 
     public void evento_salir() {
