@@ -18,7 +18,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import Controlador.ControlListados;
-import Modelo.Administrador;
 import Utilerias.Conexion;
 import Utilerias.DatosConexion;
 import static Utilerias.DatosConexion.baseDatos;
@@ -26,20 +25,20 @@ import static Utilerias.DatosConexion.host;
 import static Utilerias.DatosConexion.login;
 import static Utilerias.DatosConexion.user;
 import Utilerias.JButtonFuncion;
-import Utilerias.JButtonMenu;
 import Utilerias.JLabelTitulo;
-import com.mysql.jdbc.ResultSet;
 import java.awt.Cursor;
 import java.awt.Font;
-import java.awt.List;
-import java.util.ArrayList;
-import java.util.Vector;
+import java.awt.Image;
 import javax.swing.JToggleButton;
 import javax.swing.border.TitledBorder;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 
 public class Listados extends JFrame implements DatosConexion{
@@ -48,10 +47,13 @@ public class Listados extends JFrame implements DatosConexion{
     public JToggleButton jtListadoGeneral, jtListadoEstxSan, jtListadoEstxTip;
     public ControlListados cl;
     public MenuAdministrador mp;
-    public JButton jbVolver;
-    public JPanel jpListadoGeneral, jpListadoClientes, jpListadoEstxSan, jpListadoEstxTip;
+    public JButton jbVolver, jbLimpiar, jbConsultar;
+    public JPanel jpListadoGeneral, jpListadoEstxSan, jpListadoEstxTip;
+    public JLabel jlEstado, jlGrupoSanguineo, jlTipoUsuario;
+    public JComboBox jcEstado1, jcEstado2, jcGrupoSanguineo, jcTipoUsuario;
+    public JTextField jtEstado1, jtEstado2, jtGrupoSanguineo, jtTipoUsuario;
     public Listados l;
-    ModeloTabla mt, mt2, mt3;
+    public ModeloTabla mt, mt2, mt3;
     JTable tabla, tabla2, tabla3;
 
     public Listados(MenuAdministrador obj){
@@ -63,6 +65,8 @@ public class Listados extends JFrame implements DatosConexion{
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setLayout(null);
         cl = new ControlListados(this);
+        Image icono = new ImageIcon(getClass().getResource("/Imagenes/LogoBlancoVentana.png")).getImage();
+        setIconImage(icono);
         addWindowListener(cl);
         crearGUI();
         
@@ -153,16 +157,16 @@ public class Listados extends JFrame implements DatosConexion{
 
         jpListadoGeneral.add(js);
         
-        //-------------------- JPanel Listado Estado x Grupo Sanguineo ----------------------------------------------------------------------
+        //-------------------- JPanel Listado Clientes Estado x Grupo Sanguineo ----------------------------------------------------------------------
         jpListadoEstxSan = new JPanel();
-        jpListadoEstxSan.setBounds(250, 80, 900, 360);
+        jpListadoEstxSan.setBounds(250, 80, 900, 400);
         //jpListadoEstxSan.setBackground(Color.gray);
         jpListadoEstxSan.setLayout(null);
         jpListadoEstxSan.setBorder(new TitledBorder ( "Listado Estado x Grupo Sanguineo"));
         jpListadoEstxSan.setVisible(false);
         add(jpListadoEstxSan);
         
-        String encabezados2[] = { "Cedula", "Nombre", "Apellido", "Dia nac", "Mes nac", "Año nac", "Email", "Password", "Sueldo"};
+        String encabezados2[] = {"Cedula", "Nombre", "Apellido", "Dia nac", "Mes nac", "Año nac", "Email", "Tipo usuario"};
         String datos2[][] = { { "", "", "", "", "", "", "", "", ""} };
         
         mt2 = new ModeloTabla(datos2, encabezados2);
@@ -171,20 +175,42 @@ public class Listados extends JFrame implements DatosConexion{
         tabla2.setSelectionBackground(Color.lightGray);
 
         JScrollPane js2 = new JScrollPane(tabla2);
-        js2.setBounds(10, 50, 880, 270);
+        js2.setBounds(10, 100, 880, 270);
 
         jpListadoEstxSan.add(js2);
         
+        jlEstado = new JLabel("Estado: ");
+        jlEstado.setBounds(10, 10, 200, 40);
+        jpListadoEstxSan.add(jlEstado);
+        jcEstado1 = new JComboBox<>();
+        String estado[] = {"Activo", "Inactivo"};
+        for (int i = 0; i < estado.length; i++) {
+            jcEstado1.addItem(estado[i]); 
+        }
+        jcEstado1.setBounds(10, 50, 200, 30);
+        jpListadoEstxSan.add(jcEstado1);
+        
+        jlGrupoSanguineo = new JLabel("Grupo sanguineo: ");
+        jlGrupoSanguineo.setBounds(300, 10, 200, 40);
+        jpListadoEstxSan.add(jlGrupoSanguineo);
+        jcGrupoSanguineo = new JComboBox<>();
+        String grupoSanguineo[] = {"A+","O+","B+","AB+","A-","O-","B-","AB-"};
+        for (int i = 0; i < grupoSanguineo.length; i++) {
+            jcGrupoSanguineo.addItem(grupoSanguineo[i]); 
+        }
+        jcGrupoSanguineo.setBounds(300, 50, 200, 30);
+        jpListadoEstxSan.add(jcGrupoSanguineo);
+        
         //-------------------- JPanel Listado Estado x Tipo de usuario ----------------------------------------------------------------------
         jpListadoEstxTip = new JPanel();
-        jpListadoEstxTip.setBounds(250, 80, 900, 360);
+        jpListadoEstxTip.setBounds(250, 80, 900, 400);
         //jpListadoEstxTip.setBackground(Color.gray);
         jpListadoEstxTip.setLayout(null);
         jpListadoEstxTip.setBorder(new TitledBorder ( "Listado Estado x Tipo de usuario"));
         jpListadoEstxTip.setVisible(false);
         add(jpListadoEstxTip);
         
-        String encabezados3[] = {"Cedula", "Nombre", "Apellido", "Dia nac", "Mes nac", "Año nac", "Email", "Tipo usuario",};
+        String encabezados3[] = {"Cedula", "Nombre", "Apellido", "Dia nac", "Mes nac", "Año nac", "Email", "Tipo usuario"};
         String datos3[][] = { {"", "", "", "", "", "", "", "", ""} };
         
         mt3 = new ModeloTabla(datos3, encabezados3);
@@ -193,14 +219,47 @@ public class Listados extends JFrame implements DatosConexion{
         tabla3.setSelectionBackground(Color.lightGray);
 
         JScrollPane js3 = new JScrollPane(tabla3);
-        js3.setBounds(10, 50, 880, 270);
+        js3.setBounds(10, 100, 880, 270);
 
         jpListadoEstxTip.add(js3);
+        
+        jlEstado = new JLabel("Estado: ");
+        jlEstado.setBounds(10, 10, 200, 40);
+        jpListadoEstxTip.add(jlEstado);
+        jcEstado2 = new JComboBox<>();
+        String estado2[] = {"Activo", "Inactivo"};
+        for (int i = 0; i < estado2.length; i++) {
+            jcEstado2.addItem(estado2[i]); 
+        }
+        jcEstado2.setBounds(10, 50, 200, 30);
+        jpListadoEstxTip.add(jcEstado2);
+        
+        jlTipoUsuario = new JLabel("Tipo de usuario: ");
+        jlTipoUsuario.setBounds(300, 10, 200, 40);
+        jpListadoEstxTip.add(jlTipoUsuario);
+        jcTipoUsuario = new JComboBox<>();
+        String tipoUsuario[] = {"Administrador","Supervisor","Recepcionista","Entrenador","Cliente"};
+        for (int i = 0; i < tipoUsuario.length; i++) {
+            jcTipoUsuario.addItem(tipoUsuario[i]); 
+        }
+        jcTipoUsuario.setBounds(300, 50, 200, 30);
+        jpListadoEstxTip.add(jcTipoUsuario);
         
         //------------------------- boton volver ----------------------------------
         jbVolver = new JButtonFuncion(70,500,"Volver al menu", 'v', "/Imagenes/volver.png");
         jbVolver.addActionListener(cl);
         add(jbVolver);
+        //-----------------------------Limpiar -----------------------------------------------------------------------------
+        jbLimpiar = new JButtonFuncion(230, 500, "Limpiar", 'L', "/Imagenes/limpiar.png");
+        jbLimpiar.addActionListener(cl);
+        jbLimpiar.setVisible(false);
+        add(jbLimpiar);
+
+        //----------------------------- Consultar -------------------------------------------------------------------------------
+        jbConsultar = new JButtonFuncion(390, 500, "Consultar", 'C', "/Imagenes/ConsultarConColor.png");
+        jbConsultar.addActionListener(cl);
+        jbConsultar.setVisible(false);
+        add(jbConsultar);
     }
     
     public void llenarTablaGeneral() {
@@ -227,22 +286,23 @@ public class Listados extends JFrame implements DatosConexion{
         }
     }
     
-    /*public void llenarTablaGeneral() {
-        for (int i = mt.getRowCount() - 1; i >= 0; i--) {
-            mt.removeRow(i);
+    public void llenarTablaEstadoxGrupoSanguineo(String valores) {
+        for (int i = mt2.getRowCount() - 1; i >= 0; i--) {
+            mt2.removeRow(i);
         }
         Conexion con = new Conexion();
         boolean error = con.conectarMySQL(baseDatos, user, login, host);
         if (!error) {
-            String[][] datos = con.consultaMatriz("usuario", "1");
+            String[][] datos = con.consultaMatriz("usuario, cliente", valores);
+            //String[][] datos2 = con.consultaMatriz("usuario", "estado = " );
             if (datos == null) {
-                JOptionPane.showMessageDialog(this, "No existen usuarios aún");  
+                JOptionPane.showMessageDialog(this, "No existen usuarios con esta condicion aún");  
             }else{
                 //mt.removeRow(0);
                 try {
                     for (int i = 0; i < datos.length; i++) {
                         String[] arreglo = datos[i];
-                        mt.addRow(arreglo);
+                        mt2.addRow(arreglo);
                     }
                 }catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Error al leer la base de datos");
@@ -251,20 +311,29 @@ public class Listados extends JFrame implements DatosConexion{
         }
     }
     
-    /*private void evento_jbConsultar() {
+    public void llenarTablaEstadoxTipoUsuario(String valores) {
+        for (int i = mt3.getRowCount() - 1; i >= 0; i--) {
+            mt3.removeRow(i);
+        }
         Conexion con = new Conexion();
         boolean error = con.conectarMySQL(baseDatos, user, login, host);
         if (!error) {
-            String[][] datos =  con.consultaMatriz("administradores", "0");
+            String[][] datos = con.consultaMatriz("usuario", valores);
+            
+            //datos2 = con.
             if (datos == null) {
-                JOptionPane.showMessageDialog(this, "No existen administradores aún");  
+                JOptionPane.showMessageDialog(this, "No existen usuarios con esta condicion aún");  
             }else{
-                jtNom.setText(datos[2]);
-                jtApe.setText(datos[1]);
-                jcPlanes.setSelectedItem(datos[3]);
+                //mt.removeRow(0);
+                try {
+                    for (int i = 0; i < datos.length; i++) {
+                        String[] arreglo = datos[i];
+                        mt3.addRow(arreglo);
+                    }
+                }catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Error al leer la base de datos");
+                }
             }
         }
-    }*/
-    
-
+    }
 }

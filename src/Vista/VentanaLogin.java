@@ -107,7 +107,7 @@ public class VentanaLogin extends JFrame{
         add(jbingresar);
 
     }
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         VentanaLogin vl = new VentanaLogin();
-    }*/
+    }
 }

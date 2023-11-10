@@ -17,9 +17,6 @@ import java.awt.event.WindowListener;
 
 import javax.swing.JOptionPane;
 
-import Vista.GraficoEstado;
-import Vista.GraficoGrupoSanguineo;
-import Vista.GraficoPersonal;
 import Vista.Graficos;
 
 public class ControlGraficos implements ActionListener, WindowListener{
@@ -32,20 +29,28 @@ public class ControlGraficos implements ActionListener, WindowListener{
 
      @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource().equals(g.jtGraficoPersonal)){
+            if(g.jpGraficoEstado.isVisible()){g.jpGraficoEstado.setVisible(false);}
+            if(g.jpGrupoSanguineo.isVisible()){g.jpGrupoSanguineo.setVisible(false);}
+            
+            g.jpGraficoPersonal.setVisible(true);
+        }
+        if(e.getSource().equals(g.jtGraficoEstado)){
+            if(g.jpGraficoPersonal.isVisible()){g.jpGraficoPersonal.setVisible(false);}
+            if(g.jpGrupoSanguineo.isVisible()){g.jpGrupoSanguineo.setVisible(false);}
+            
+            g.jpGraficoEstado.setVisible(true);
+            
+            if(e.getSource().equals(g.jbConsultar)){}
+        }
+        if(e.getSource().equals(g.jtGraficoGrupoSanquineo)){
+            if(g.jpGraficoPersonal.isVisible()){g.jpGraficoPersonal.setVisible(false);}
+            if(g.jpGraficoEstado.isVisible()){g.jpGraficoEstado.setVisible(false);}
+            
+            g.jpGrupoSanguineo.setVisible(true);
+        }
         if(e.getSource().equals(g.jbVolver)){
             volver();
-        }
-        if(e.getSource().equals(g.jbGraficoEstado)){
-            GraficoEstado ge = new GraficoEstado(g);
-            g.setVisible(false);
-        }
-        if(e.getSource().equals(g.jbGraficoGrupo)){
-            GraficoGrupoSanguineo ggs = new GraficoGrupoSanguineo(g);
-            g.setVisible(false);
-        }
-        if(e.getSource().equals(g.jbGraficoPersonal)){
-            GraficoPersonal gp = new GraficoPersonal(g);
-            g.setVisible(false);
         }
     }
 

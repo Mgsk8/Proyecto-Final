@@ -58,22 +58,27 @@ public class ControlConsultarUsuario implements ActionListener, WindowListener {
             }
         }
         if (e.getSource().equals(cu.jtAdministrador)) {
+            limpiarAdmin();
             hacerVisibleAdm();
             cu.contextoActualizar = "Administrador";
         }
         if (e.getSource().equals(cu.jtSupervisor)) {
+            limpiarPersonal();
             hacerVisibleEmp();
             cu.contextoActualizar = "Supervisor";
         }
         if (e.getSource().equals(cu.jtRecepcionista)) {
+            limpiarPersonal();
             hacerVisibleEmp();
             cu.contextoActualizar = "Recepcionista";
         }
         if (e.getSource().equals(cu.jtEntrenador)) {
+            limpiarEntrenador();
             hacerVisibleEnt();
             cu.contextoActualizar = "Entrenador";
         }
         if (e.getSource().equals(cu.JTcliente)) {
+            limpiarCliente();
             hacerVisibleCl();
             cu.contextoActualizar = "Cliente";
         }

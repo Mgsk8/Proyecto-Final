@@ -9,17 +9,11 @@ version: 1.1
 */
 
 package Controlador;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-
 import javax.swing.JOptionPane;
-
-import Vista.FormListadoEstadoxSanguineo;
-import Vista.FormListadoEstadoxUsuario;
-import Vista.ListadoGeneral;
 import Vista.Listados;
 
 public class ControlListados implements ActionListener, WindowListener{
@@ -35,35 +29,40 @@ public class ControlListados implements ActionListener, WindowListener{
         if(e.getSource().equals(l.jtListadoGeneral)){
             if(l.jpListadoEstxSan.isVisible()){l.jpListadoEstxSan.setVisible(false);}
             if(l.jpListadoEstxTip.isVisible()){l.jpListadoEstxTip.setVisible(false);}
+            if(l.jbLimpiar.isVisible()){l.jbLimpiar.setVisible(false);}
+            if(l.jbConsultar.isVisible()){l.jbConsultar.setVisible(false);}
+            
             l.jpListadoGeneral.setVisible(true);
             l.llenarTablaGeneral();
         }
         if(e.getSource().equals(l.jtListadoEstxSan)){
             if(l.jpListadoGeneral.isVisible()){l.jpListadoGeneral.setVisible(false);}
             if(l.jpListadoEstxTip.isVisible()){l.jpListadoEstxTip.setVisible(false);}
+            if(!l.jbLimpiar.isVisible()){l.jbLimpiar.setVisible(true);}
+            if(!l.jbConsultar.isVisible()){l.jbConsultar.setVisible(true);}
+            
             l.jpListadoEstxSan.setVisible(true);
-            //l.llenarTablaGeneral();
+            
+            if(e.getSource().equals(l.jbConsultar)){}
         }
         if(e.getSource().equals(l.jtListadoEstxTip)){
             if(l.jpListadoGeneral.isVisible()){l.jpListadoGeneral.setVisible(false);}
             if(l.jpListadoEstxSan.isVisible()){l.jpListadoEstxSan.setVisible(false);}
+            if(!l.jbLimpiar.isVisible()){l.jbLimpiar.setVisible(true);}
+            if(!l.jbConsultar.isVisible()){l.jbConsultar.setVisible(true);}
+            
             l.jpListadoEstxTip.setVisible(true);
-            //l.llenarTablaGeneral();
         }
-        if(e.getSource().equals(l.jbListadoGeneral)){
-            ListadoGeneral lg = new ListadoGeneral(l);
-            l.setVisible(false);
-        }
-        if(e.getSource().equals(l.jbListadoEstadoxSanguineo)){
-            FormListadoEstadoxSanguineo fles = new FormListadoEstadoxSanguineo(l);
-            l.setVisible(false);
-        }
-        if(e.getSource().equals(l.jbListadoEstadoxTipo)){
-            FormListadoEstadoxUsuario fleu = new FormListadoEstadoxUsuario(l);
-            l.setVisible(false); 
-        }if(e.getSource().equals(l.jbVolver)){
+        if(e.getSource().equals(l.jbVolver)){
             volver();
         }
+        if(e.getSource().equals(l.jbLimpiar)){
+            limpiar();
+        }
+        if(e.getSource().equals(l.jbConsultar)){
+            consultar();
+        }
+        
     }
     public void evento_salir(){
        int respuesta = JOptionPane.showConfirmDialog(l,
@@ -76,7 +75,34 @@ public class ControlListados implements ActionListener, WindowListener{
         l.setVisible(false);
         l.dispose();
         l.mp.setVisible(true);
-    }  
+    }
+    public void limpiar(){
+        l.jcEstado1.setSelectedItem("Activo");
+        l.jcEstado2.setSelectedItem("Activo");
+        l.jcGrupoSanguineo.setSelectedItem("A+");
+        l.jcTipoUsuario.setSelectedItem("Administrador");
+        for (int i = l.mt2.getRowCount() - 1; i >= 0; i--) {
+            l.mt2.removeRow(i);
+        }
+        for (int i = l.mt3.getRowCount() - 1; i >= 0; i--) {
+            l.mt3.removeRow(i);
+        }
+    }
+    public void consultar(){
+        if(l.jpListadoEstxSan.isVisible()){
+            System.out.println(l.jcEstado1.getSelectedItem());
+            String valores = "cedula_usuario = id_cliente AND usuario.estado = '" 
+                    + l.jcEstado1.getSelectedItem() + "' AND cliente.grupo_sanguineo = '"
+                    + l.jcGrupoSanguineo.getSelectedItem() + "';";
+            l.llenarTablaEstadoxGrupoSanguineo(valores);
+        }
+        if(l.jpListadoEstxTip.isVisible()){
+            String valores = "usuario.estado = '" 
+                    + l.jcEstado2.getSelectedItem() + "' AND usuario.tipo_usuario = '"
+                    + l.jcTipoUsuario.getSelectedItem() + "';";
+            l.llenarTablaEstadoxTipoUsuario(valores);
+        }
+    }
 
     @Override
     public void windowOpened(WindowEvent e) {
