@@ -2,15 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
-<<<<<<< HEAD
         <group name="NetBeansProjects">
             <file>file:/E:/Proyecto%20Final/Prototipo1/src/Vista/Graficos.java</file>
             <file>file:/E:/Proyecto%20Final/Prototipo1/src/Controlador/ControlGraficos.java</file>
             <file>file:/E:/Proyecto%20Final/Prototipo1/src/Vista/MenuAdministrador.java</file>
             <file>file:/E:/Proyecto%20Final/Prototipo1/src/Vista/Listados.java</file>
         </group>
-=======
->>>>>>> 357a6729434ed42d696f5975ebfdc6d8f3e2b28b
+        <group>
+            <file>file:/C:/Users/migue/OneDrive/Escritorio/Proyecto%20Final/Prototipo1/src/Vista/MenuAdministrador.java</file>
+        </group>
     </open-files>
 </project-private>

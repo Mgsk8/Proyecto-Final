@@ -6,12 +6,13 @@ Proposito: Nos permite controlar la acciones de la vista menu principal
     John Alejandro Vallarino Cruz - 2264332
     Fecha de ultima modificacion  20/10/2023
 version: 1.1
-*/
+ */
 package Controlador;
 
 import Vista.AcercaDe;
 import Vista.ActualizarUsuario;
 import Vista.ConsultarUsuario;
+import Vista.CrearProducto;
 import Vista.CrearUsuario;
 import Vista.Graficos;
 import Vista.Listados;
@@ -19,6 +20,7 @@ import Vista.Listados;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vista.MenuAdministrador;
+import Vista.ModificarProducto;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JOptionPane;
@@ -57,11 +59,22 @@ public class ControlMenuAdmin implements ActionListener, WindowListener {
             ActualizarUsuario au = new ActualizarUsuario(mp);
             mp.setVisible(false);
         }
-        
+
         if (e.getSource().equals(mp.jbEstadistica)) {
             // System.out.println("Clic en jbGrafica");
-           Graficos g = new Graficos(mp);
+            Graficos g = new Graficos(mp);
             mp.setVisible(false);
+        }
+        if (e.getSource().equals(mp.jbProducto)) {
+            CrearProducto cp = new CrearProducto(mp);
+            mp.setVisible(false);
+        }
+        if (e.getSource().equals(mp.jbActualizarProd)) {
+            ModificarProducto cp = new ModificarProducto(mp);
+            mp.setVisible(false);
+        }
+        if(e.getSource().equals(mp.jbRenovarMembresia)){
+            JOptionPane.showMessageDialog(mp, "Proximamente...");
         }
     }
 
@@ -70,8 +83,9 @@ public class ControlMenuAdmin implements ActionListener, WindowListener {
                 "¿Desea salir de la aplicación?",
                 "Confirmación",
                 JOptionPane.YES_NO_OPTION);
-        if (respuesta == JOptionPane.YES_OPTION)
+        if (respuesta == JOptionPane.YES_OPTION) {
             System.exit(0);
+        }
     }
 
     @Override

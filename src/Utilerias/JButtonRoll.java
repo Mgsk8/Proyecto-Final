@@ -20,16 +20,13 @@ import javax.swing.JButton;
 public class JButtonRoll extends JButton{
     
     public JButtonRoll(int x, int y, int ancho, int alto,
-            String texto, String mensaje, String imagen1, String imagen2,
+            String texto, String mensaje, String imagen1,
             char letra, Component vt){
         setBounds(x, y, ancho, alto);        
         setFont(new Font("Tahoma", 0, 15));
         ImageIcon ii1 = new ImageIcon(
                 vt.getClass().getResource(imagen1));
         setIcon(ii1);
-        ImageIcon ii2 = new ImageIcon(
-                vt.getClass().getResource(imagen2));
-        setRolloverIcon(ii2);
         setMnemonic(letra);
         setToolTipText(mensaje);
         setText(texto);

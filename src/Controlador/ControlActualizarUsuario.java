@@ -4,8 +4,8 @@ Proposito: Gestiona las interacciones del usuario en la vista Actualizar Usuario
     Jhon Alex Rodríguez Benítez - 2264363
     Miguel Angel Escobar Marín - 2264305
     John Alejandro Vallarino Cruz - 2264332
-Fecha de ultima modificacion  20/10/2023
-version: 1.1
+Fecha de ultima modificacion  14/11/2023
+version: 1.2
  */
 package Controlador;
 
@@ -257,6 +257,7 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
                                 + au.jtCedula.getText() + " no existe en la tabla");
                     } else {
                         String datos2[] = con.consultaFila("usuario", "cedula_usuario", datos[0]);
+                        String datos3[] = con.consultaFila("membresia_cliente", "id_cliente", datos[0]); //consulta membresia
                         volverEditableCl();
                         au.jtNom.setText(datos2[1]);
                         au.jtApe.setText(datos2[2]);
@@ -277,7 +278,7 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
                             au.jrInactivo.setSelected(true);
                         }
                         au.jcGrupoSanguineo.setSelectedItem(datos[1]);
-                        au.jcMembresia.setSelectedItem(datos[2]);
+                        au.jcMembresia.setSelectedItem(datos3[3]);
 
                     }
                 }
@@ -529,7 +530,7 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
                     cli.setYear(year + "");
                     cli.setEmail(au.jtEmailNoLoginCl.getText());
                     cli.setGrupoSanguineo((String) au.jcGrupoSanguineo.getSelectedItem());
-                    cli.setMembresia((String)au.jcMembresia.getSelectedItem());
+                    //cli.setMembresia((String)au.jcMembresia.getSelectedItem());
 
                     ArrayList<String> datosUsu = new ArrayList<>();
                     datosUsu.add("nombre = '"+ cli.getNombre()+"'");
@@ -543,14 +544,19 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
 
                     ArrayList<String> datosEnt = new ArrayList<>();
                     datosEnt.add("grupo_sanguineo = '" +cli.getGrupoSanguineo()+"'");
-                    datosEnt.add("membresia = '" +cli.getMembresia()+"'");
+                    
+                    ArrayList<String> datosMem = new ArrayList<>();
+                    datosMem.add("tipo_membresia = '" +au.jcMembresia.getSelectedItem()+"'");
+                    
                     Conexion con = new Conexion();
                     boolean error = con.conectarMySQL(baseDatos, user, login, host);
                     boolean error2 = error;
+                    boolean error3 = error;
                     if (!error) { // si no hay error de conexion a la bd, entonces ...
                         error = con.actualizarFila("usuario",datosUsu,"cedula_usuario = '" + au.jtCedula.getText() + "'"); 
                         error2 = con.actualizarFila("cliente",datosEnt,"id_cliente = '" + au.jtCedula.getText() + "'");
-                        if (!error && !error2) { // si no hay error al insertar en la tabla, mostrar un mensaje de confirmación
+                        error3 = con.actualizarFila("membresia_cliente",datosMem,"id_cliente = '" + au.jtCedula.getText() + "'");
+                        if (!error && !error2 && !error3) { // si no hay error al insertar en la tabla, mostrar un mensaje de confirmación
                             int res = JOptionPane.showConfirmDialog(au,
                                     "Se actualzo con exito al cliente.\n¿Desea actualizar otro?",
                                     "Confirmación", JOptionPane.YES_NO_OPTION);

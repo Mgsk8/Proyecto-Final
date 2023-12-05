@@ -4,8 +4,8 @@ Proposito: Gestiona las interacciones del usuario en la vista Crear Usuario.
     Jhon Alex Rodríguez Benítez - 2264363
     Miguel Angel Escobar Marín - 2264305
     John Alejandro Vallarino Cruz - 2264332
-Fecha de ultima modificacion  20/10/2023
-version: 1.1
+Fecha de ultima modificacion  14/11/2023
+version: 1.2
  */
 package Controlador;
 
@@ -18,15 +18,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import Modelo.Usuario;
+import Utilerias.ClienteMembresiaPDF;
 import Utilerias.Conexion;
 import Utilerias.DatosConexion;
+import Utilerias.JCalendarFull;
+import Utilerias.ClienteMembresiaPDF;
+import static Utilerias.DatosConexion.baseDatos;
+import static Utilerias.DatosConexion.host;
+import static Utilerias.DatosConexion.login;
+import static Utilerias.DatosConexion.user;
+import Utilerias.EnviarCorreo;
 import Vista.CrearUsuario;
+import com.toedter.calendar.JCalendar;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -349,7 +359,7 @@ public class ControlCrearUsuario implements ActionListener, WindowListener, Dato
                     cl.setYear(year + "");
                     String grupoSanguineo = (String) cu.jcGrupoSanguineo.getSelectedItem();
                     cl.setGrupoSanguineo(grupoSanguineo);
-                    cl.setMembresia((String) cu.jcMembresia.getSelectedItem());
+                    //cl.setMembresia((String) cu.jcMembresia.getSelectedItem());
                     cl.setEmail(cu.jtEmailNoLoginCl.getText());
                     String estado = "Activo";
                     cl.setEstado(estado);
@@ -369,14 +379,30 @@ public class ControlCrearUsuario implements ActionListener, WindowListener, Dato
                     ArrayList<String> datosCli = new ArrayList<>();
                     datosCli.add(cl.getCedula());
                     datosCli.add(cl.getGrupoSanguineo());
-                    datosCli.add(cl.getMembresia());
+                    
+                    LocalDate fechaActual = LocalDate.now();
+                    //String fechaInicio = fechaActual.getDayOfMonth() + "-" + fechaActual.getMonth() + "-" + fechaActual.getYear();
+                    String fechaInicio = fechaActual.toString();
+                    String fechaFinal = fechaActual.plusMonths(1).toString();
+                    ArrayList<String> datosMem = new ArrayList<>();
+                    datosMem.add(null);
+                    datosMem.add(fechaInicio);
+                    datosMem.add(fechaFinal);
+                    datosMem.add(cu.jcMembresia.getSelectedItem().toString());
+                    datosMem.add(cl.getCedula());
+                    
                     Conexion con = new Conexion();
                     boolean error = con.conectarMySQL(baseDatos, user, login, host);
                     boolean error2 = error;
+                    boolean error3 = error;
                     if (!error) { // si no hay error de conexion a la bd, entonces ...
                         error = con.insertar("usuario", datosUsu); // insertar los datos en la tabla clientes
-                        error2 = con.insertar("cliente", datosCli);
-                        if (!error && !error2) { // si no hay error al insertar en la tabla, mostrar un mensaje de confirmación
+                        if(!error){error2 = con.insertar("cliente", datosCli);}
+                        if(!error2){error3 = con.insertar("membresia_cliente", datosMem);}
+                        
+                        if (!error && !error2 && !error3) { // si no hay error al insertar en la tabla, mostrar un mensaje de confirmación
+                            ClienteMembresiaPDF cmpdf = new ClienteMembresiaPDF(datosUsu, datosCli, datosMem);
+                            EnviarCorreo correo = new EnviarCorreo(cl.getEmail());
                             int res = JOptionPane.showConfirmDialog(cu,
                                     "Se registro con exito la venta.\n¿Desea registrar otra?",
                                     "Confirmación", JOptionPane.YES_NO_OPTION);

@@ -28,7 +28,8 @@ import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 
 public class MenuAdministrador extends JFrame{
 
-    public JButton jbNuevoUsuario, jbVentanaListado, jbConsultarUsuario,jbEstadistica,jbLiquidar, jbListados, jbActualizar;
+    public JButton jbNuevoUsuario, jbVentanaListado, jbConsultarUsuario,jbEstadistica,jbLiquidar, jbListados,
+            jbActualizar, jbActualizarProd, jbProducto, jbRenovarMembresia;
     ControlMenuAdmin cma;
     
     
@@ -58,37 +59,55 @@ public class MenuAdministrador extends JFrame{
                 60, "Menu Principal", this, "/Imagenes/hogar.png");
         add(jt);
         cma = new ControlMenuAdmin(this);
-        jbNuevoUsuario = new JButtonMenu(60, 150, 400, 50, 
+        jbNuevoUsuario = new JButtonMenu(60, 130, 400, 50, 
                 "Nuevo Usuario", "Ir a crear usuarios", 
                 "/imagenes/agregar-usuario.png", 'C', this);
         jbNuevoUsuario.addActionListener(cma);
         add(jbNuevoUsuario);
         
-        jbConsultarUsuario = new JButtonMenu(490, 150, 400, 50, 
+        jbConsultarUsuario = new JButtonMenu(490, 130, 400, 50, 
                 "Consultar usuario", "Ir a consulta de usuarios", 
                 "/imagenes/Consultar.png", 'C', this);    
         jbConsultarUsuario.addActionListener(cma);
         add(jbConsultarUsuario);
         
-        jbListados = new JButtonMenu(60, 250, 400, 50, 
+        jbListados = new JButtonMenu(60, 230, 400, 50, 
                 "Listados", "Ir a Listado Usuarios", 
                 "/imagenes/Listado.png", 'l', this);
         jbListados.addActionListener(cma);
         add(jbListados);
 
-        jbActualizar = new JButtonMenu(490, 250, 400, 50, 
+        jbActualizar = new JButtonMenu(490, 230, 400, 50, 
                 "Actualizar Usuario", "Ir a actualizacion de usuarios", 
                 "/imagenes/Actualizar.png", 'A', this);
         jbActualizar.addActionListener(cma);
         add(jbActualizar);
         
-        jbEstadistica = new JButtonMenu(60, 350, 400, 50,
+        jbEstadistica = new JButtonMenu(60, 330, 400, 50,
                 "Estadisticas", "Ir a Estadiscas", 
                 "/imagenes/Statistic-icon.png", 'A', this);
         jbEstadistica.addActionListener(cma);
         add(jbEstadistica);
         
-        jbAcerca = new JButtonMenu(490, 350, 400, 50, 
+        jbProducto = new JButtonMenu(490, 330, 400, 50,
+                "Nuevo Producto", "Ir a crear producto", 
+                "/imagenes/productoIMG.png", 'N', this);
+        jbProducto.addActionListener(cma);
+        add(jbProducto);
+        
+        jbActualizarProd = new JButtonMenu(60, 430, 400, 50,
+                "Modificar producto", "Ir a actualizar producto", 
+                "/imagenes/actualizarProd.png", 'M', this);
+        jbActualizarProd.addActionListener(cma);
+        add(jbActualizarProd);
+        
+        jbRenovarMembresia = new JButtonMenu(490, 430, 400, 50,
+                "renovar membresia", "Ir a renovar membresia", 
+                "/imagenes/membresia.png", 'r', this);
+        jbRenovarMembresia.addActionListener(cma);
+        add(jbRenovarMembresia);
+        
+        jbAcerca = new JButtonMenu((1000-400)/2, 530, 400, 50, 
                 "Acerca de...", "Ir a Acerca de", 
                 "/imagenes/info.png", 'A', this);
         jbAcerca.setBorderPainted(false);
@@ -98,11 +117,7 @@ public class MenuAdministrador extends JFrame{
         
         jbLogo = new JButtonRoll(800, 480, 150, 150, 
                 "", "Logo", 
-                "/Imagenes/LogoBlanco.png", "/Imagenes/LogoNegro.png", 'L', this);
+                "/Imagenes/LogoBlanco.png", 'L', this);
         add(jbLogo);
     }
-    /*public static void main(String[] args) {
-        MenuAdministrador ma = new MenuAdministrador();
-    }*/
-    
 }

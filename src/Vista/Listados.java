@@ -63,6 +63,7 @@ public class Listados extends JFrame implements DatosConexion{
         setLocationRelativeTo(null);
         //getContentPane().setBackground(color.);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setResizable(false);
         setLayout(null);
         cl = new ControlListados(this);
         Image icono = new ImageIcon(getClass().getResource("/Imagenes/LogoBlancoVentana.png")).getImage();

@@ -4,8 +4,8 @@ Proposito: Gestiona las interacciones del usuario en la vista Consultar Usuario.
     Jhon Alex Rodríguez Benítez - 2264363
     Miguel Angel Escobar Marín - 2264305
     John Alejandro Vallarino Cruz - 2264332
-Fecha de ultima modificacion  20/10/2023
-version: 1.1
+Fecha de ultima modificacion  14/11/2023
+version: 1.2
  */
 package Controlador;
 
@@ -214,6 +214,7 @@ public class ControlConsultarUsuario implements ActionListener, WindowListener {
                                 + cu.jtCedula.getText() + " no existe en la tabla");
                     } else {
                         String datos2[] = con.consultaFila("usuario", "cedula_usuario", datos[0]);
+                        String datos3[] = con.consultaFila("membresia_cliente", "id_cliente", datos[0]);
                         cu.jtNom.setText(datos2[1]);
                         cu.jtApe.setText(datos2[2]);
                         String fechaString = datos2[3] + "/" + datos2[4] + "/" + datos2[5];
@@ -229,7 +230,7 @@ public class ControlConsultarUsuario implements ActionListener, WindowListener {
                         if(datos2[8].equals("Activo")){cu.jrActivo.setSelected(true);}
                         if(datos2[8].equals("Inactivo")){cu.jrInactivo.setSelected(true);}
                         cu.jcGrupoSanguineo.setSelectedItem(datos[1]);
-                        cu.jcMembresia.setSelectedItem(datos[2]);
+                        cu.jcMembresia.setSelectedItem(datos3[3]);
                         
                     }
                 }

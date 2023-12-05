@@ -59,6 +59,7 @@ public class Graficos extends JFrame implements DatosConexion{
         //getContentPane().setBackground(color.);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setLayout(null);
+        setResizable(false);
         cg = new ControlGraficos(this);
         Image icono = new ImageIcon(getClass().getResource("/Imagenes/LogoBlancoVentana.png")).getImage();
         setIconImage(icono);
