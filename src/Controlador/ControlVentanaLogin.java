@@ -9,6 +9,11 @@ version: 1.1
  */
 package Controlador;
 
+import Utilerias.Conexion;
+import static Utilerias.DatosConexion.baseDatos;
+import static Utilerias.DatosConexion.host;
+import static Utilerias.DatosConexion.login;
+import static Utilerias.DatosConexion.user;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -38,17 +43,51 @@ public class ControlVentanaLogin implements ActionListener, WindowListener {
             evento_salir();
         }
         if (e.getSource().equals(vl.jbingresar)) {
-            String login = vl.jtLogin.getText();
+            String login1 = vl.jtLogin.getText();
             char caracteres[] = vl.jpPassw.getPassword(); // obtener los caracteres escritos como un arreglo de tipo char[]
             String passw = String.valueOf(caracteres);
-            if (login.equals("admin") && passw.equals("admin")) {
+            if (login1.equals("admin") && passw.equals("admin")) {
                 vl.setVisible(false);
                 vl.dispose();
                 MenuAdministrador mp = new MenuAdministrador();
             } else {
-                if (login.equals("") || passw.equals("")) {
+                if (login1.equals("") || passw.equals("")) {
                     JOptionPane.showMessageDialog(vl, "Login y/o password no pueden ser vacios");
                     vl.jtLogin.requestFocus();
+                } else {
+                    Conexion con = new Conexion();
+                    boolean error = con.conectarMySQL(baseDatos, user, login, host);
+                    if (!error) {
+                        String datos[] = con.consultaFila("usuario", "email", login1);
+                        String datos2[] = con.consultaFila("administrador", "password", passw);
+                        String datos3[] = con.consultaFila("supervisor", "password", passw);
+                        String datos4[] = con.consultaFila("recepcionista", "password", passw);
+                        if (datos == null) {
+                            JOptionPane.showMessageDialog(vl, "El usuario "
+                                    + login1 + " no existe, intente nuevamente");
+                        } else {
+                            if (datos[7].equals("Administrador") && datos2 != null) {
+                                vl.setVisible(false);
+                                vl.dispose();
+                                MenuAdministrador mp = new MenuAdministrador();
+                            } else {
+                                if (datos[7].equals("Supervisor") && datos3 != null) {
+                                    vl.setVisible(false);
+                                    vl.dispose();
+                                    MenuAdministrador mp = new MenuAdministrador();
+                                } else {
+                                    if (datos[7].equals("Recepcionista") && datos4 != null) {
+                                        vl.setVisible(false);
+                                        vl.dispose();
+                                        MenuAdministrador mp = new MenuAdministrador();
+                                    } else {
+                                        JOptionPane.showMessageDialog(vl, "El usuario "
+                                                + login1 + " no tiene acceso a la app, intente nuevamente con otro correo");
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -56,6 +95,7 @@ public class ControlVentanaLogin implements ActionListener, WindowListener {
             vl.jpPassw.requestFocus(); // al precionar enter, pasa el cursur al password
         }
     }
+    
 
     private void evento_jtVer() {
         if (vl.jtVer.isSelected()) {
@@ -77,11 +117,12 @@ public class ControlVentanaLogin implements ActionListener, WindowListener {
             System.exit(0);
         }
     }
-    
-    public void evento_limpiar(){
+
+    public void evento_limpiar() {
         vl.jtLogin.setText("");
         vl.jpPassw.setText("");
     }
+
     @Override
     public void windowOpened(WindowEvent e) {
 
