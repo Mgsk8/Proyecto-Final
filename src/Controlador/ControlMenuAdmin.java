@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Vista.MenuAdministrador;
 import Vista.ModificarProducto;
+import Vista.TipoConsulta;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JOptionPane;
@@ -46,7 +47,7 @@ public class ControlMenuAdmin implements ActionListener, WindowListener {
 
         if (e.getSource().equals(mp.jbConsultarUsuario)) {
             // System.out.println("Clic en jbGrafica");
-            ConsultarUsuario cu = new ConsultarUsuario(mp);
+            TipoConsulta tc = new TipoConsulta(mp);
             mp.setVisible(false);
         }
         if (e.getSource().equals(mp.jbListados)) {

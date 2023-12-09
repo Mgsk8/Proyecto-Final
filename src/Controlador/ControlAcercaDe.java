@@ -1,36 +1,55 @@
-/*
-Proposito: Gestiona las interacciones del usuario en la vista AcercaDe.
-@author 
-    Jhon Alex Rodríguez Benítez - 2264363
-    Miguel Angel Escobar Marín - 2264305
-    John Alejandro Vallarino Cruz - 2264332
-Fecha de ultima modificacion  20/10/2023
-version: 1.1
-*/
+/**
+ * ControlAcercaDe es la clase que maneja las interacciones del usuario
+ * en la ventana AcercaDe.
+ *
+ * @author John Alejandro Vallarino - 2264332
+ * @author Jhon Alex Rodriguez - 2264363
+ * @author Miguel Ángel Escobar Marín - 2264305
+ * @version 1.3
+ * @since 4-12-2023
+ */
 package Controlador;
 
 import Vista.AcercaDe;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * La clase ControlAcercaDe implementa la interfaz ActionListener para
+ * gestionar eventos en la ventana AcercaDe.
+ */
+public class ControlAcercaDe implements ActionListener {
 
-public class ControlAcercaDe implements ActionListener{
-    
+    /** La instancia de la ventana AcercaDe */
     AcercaDe ad;
-    
-    public ControlAcercaDe(AcercaDe obj){
+
+    /**
+     * Constructor de la clase ControlAcercaDe.
+     *
+     * @param obj Instancia de la ventana AcercaDe
+     */
+    public ControlAcercaDe(AcercaDe obj) {
         ad = obj;
     }
-   
+
+    /**
+     * Método que se ejecuta cuando se realiza una acción en la interfaz.
+     *
+     * @param e Evento de acción
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(ad.jbVolver)) {
             volver();
         }
     }
-    public void volver(){
+
+    /**
+     * Método que oculta y cierra la ventana AcercaDe.
+     */
+    public void volver() {
         ad.setVisible(false);
         ad.dispose();
-    }     
-    
+    }
+
 }

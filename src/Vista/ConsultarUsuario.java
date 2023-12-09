@@ -40,7 +40,7 @@ public class ConsultarUsuario extends JFrame{
     public JRadioButton jrActivo, jrInactivo;
     public JToggleButton jtAdministrador, jtSupervisor, jtEntrenador, jtRecepcionista, JTcliente;
     public JButton jbVolver, jbConsultar, jbLimpiar;
-    public MenuAdministrador mp;
+    public TipoConsulta tc;
     public JTextField jtCedula, jtNom, jtApe, jtEmail,jtEmailNoLoginEnt,jtEmailNoLoginCl,jtPassword, jtSueldo;
     public JComboBox<String> jcGrupoSanguineo, jcTurno, jcTurnoEnt, jcMembresia;
     public JDateChooser fecha_nac;
@@ -51,9 +51,9 @@ public class ConsultarUsuario extends JFrame{
     ControlConsultarUsuario ccu;
     
     
-    public ConsultarUsuario(MenuAdministrador mp){
+    public ConsultarUsuario(TipoConsulta tc){
         super("Consultar datos");
-        this.mp = mp;
+        this.tc = tc;
         setSize(1000, 700);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -69,8 +69,7 @@ public class ConsultarUsuario extends JFrame{
     }
     
     public void crearGUI(){
-        ControlConsultarUsuario ccu = new ControlConsultarUsuario(this);
-        
+        ccu = new ControlConsultarUsuario(this);
         JLabelTitulo jt = new JLabelTitulo(
                 60, "Consultar Usuario", this, "/Imagenes/agregar-usuario.png");
         add(jt);

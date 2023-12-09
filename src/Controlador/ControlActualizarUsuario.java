@@ -1,11 +1,13 @@
-/*
-Proposito: Gestiona las interacciones del usuario en la vista Actualizar Usuario.
-@author 
-    Jhon Alex Rodríguez Benítez - 2264363
-    Miguel Angel Escobar Marín - 2264305
-    John Alejandro Vallarino Cruz - 2264332
-Fecha de ultima modificacion  14/11/2023
-version: 1.2
+/**
+ * Controlador para la ventana de actualización de usuarios.
+ *
+ * Autores:
+ *
+ * @author John Alejandro Vallarino - 2264332
+ * @author Jhon Alex Rodriguez - 2264363
+ * @author Miguel Ángel Escobar Marín - 2264305
+ * @version 1.3
+ * @since 4-12-2023
  */
 package Controlador;
 
@@ -25,10 +27,6 @@ import javax.swing.JOptionPane;
 import Vista.ActualizarUsuario;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,15 +35,33 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Esta clase interactúa con la interfaz gráfica ActualizarUsuario y gestiona
+ * eventos de botones y componentes para realizar acciones como volver, limpiar
+ * campos, cambiar el contexto de actualización y realizar consultas o
+ * actualizaciones de datos.
+ */
 public class ControlActualizarUsuario implements ActionListener, WindowListener {
 
     ActualizarUsuario au;
 
+    /**
+     * Constructor de la clase ControlActualizarUsuario.
+     *
+     * @param obj Objeto de la clase ActualizarUsuario asociado al controlador.
+     */
     public ControlActualizarUsuario(ActualizarUsuario obj) {
         au = obj;
 
     }
 
+    /**
+     * Maneja los eventos de los botones y componentes de la ventana.
+     *
+     * @param e Evento generado al realizar una acción en la interfaz gráfica.
+     * Puede ser un evento de clic en un botón, selección de un elemento, etc.
+     * Este parámetro proporciona información sobre la acción realizada.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -110,7 +126,7 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
                 boolean error = con.conectarMySQL(baseDatos, user, login, host);
                 if (!error) {
                     String datos[] = con.consultaFila("administrador", "id_administrador", au.jtCedula.getText());
-                    
+
                     if (datos == null) {
                         JOptionPane.showMessageDialog(au, "El administrador con cedula "
                                 + au.jtCedula.getText() + " no existe en la tabla");
@@ -145,7 +161,7 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
                 boolean error = con.conectarMySQL(baseDatos, user, login, host);
                 if (!error) {
                     String datos[] = con.consultaFila("supervisor", "id_supervisor", au.jtCedula.getText());
-                    
+
                     if (datos == null) {
                         JOptionPane.showMessageDialog(au, "El supervisor con cedula "
                                 + au.jtCedula.getText() + " no existe en la tabla");
@@ -181,7 +197,7 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
                 boolean error = con.conectarMySQL(baseDatos, user, login, host);
                 if (!error) {
                     String datos[] = con.consultaFila("recepcionista", "id_recepcionista", au.jtCedula.getText());
-                    
+
                     if (datos == null) {
                         JOptionPane.showMessageDialog(au, "El o la recepcionista con cedula "
                                 + au.jtCedula.getText() + " no existe en la tabla");
@@ -217,7 +233,7 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
                 boolean error = con.conectarMySQL(baseDatos, user, login, host);
                 if (!error) {
                     String datos[] = con.consultaFila("entrenador", "id_entrenador", au.jtCedula.getText());
-                    
+
                     if (datos == null) {
                         JOptionPane.showMessageDialog(au, "El entrenador con cedula "
                                 + au.jtCedula.getText() + " no existe en la tabla");
@@ -308,27 +324,31 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
 
                     ArrayList<String> datosUsu = new ArrayList<>();
                     //datosUsu.add(cli.getCedula());
-                    datosUsu.add("nombre = '"+ adm.getNombre()+"'");
-                    datosUsu.add("apellido = '"+adm.getApellido()+"'");
-                    datosUsu.add("dia_nac = '"+adm.getDia()+"'");
-                    datosUsu.add("mes_nac = '"+adm.getMes()+"'");
-                    datosUsu.add("year_nac = '"+adm.getYear()+"'");
-                    datosUsu.add("email = '"+adm.getEmail()+"'");
+                    datosUsu.add("nombre = '" + adm.getNombre() + "'");
+                    datosUsu.add("apellido = '" + adm.getApellido() + "'");
+                    datosUsu.add("dia_nac = '" + adm.getDia() + "'");
+                    datosUsu.add("mes_nac = '" + adm.getMes() + "'");
+                    datosUsu.add("year_nac = '" + adm.getYear() + "'");
+                    datosUsu.add("email = '" + adm.getEmail() + "'");
                     //datosUsu.add("tipo_usuario = "+au.contextoActualizar);
-                    if(au.jrActivo.isSelected())datosUsu.add("estado = '"+"Activo"+"'" );
-                    if(au.jrInactivo.isSelected())datosUsu.add("estado = '"+"Inactivo"+"'");
+                    if (au.jrActivo.isSelected()) {
+                        datosUsu.add("estado = '" + "Activo" + "'");
+                    }
+                    if (au.jrInactivo.isSelected()) {
+                        datosUsu.add("estado = '" + "Inactivo" + "'");
+                    }
 
                     ArrayList<String> datosAdm = new ArrayList<>();
                     //datosAdm.add(cli.getCedula());
-                    datosAdm.add("password = '"+adm.getPassword()+"'");
+                    datosAdm.add("password = '" + adm.getPassword() + "'");
                     //datosAdm.add("sueldo = "+cli.getSalario());
 
                     Conexion con = new Conexion();
                     boolean error = con.conectarMySQL(baseDatos, user, login, host);
                     boolean error2 = error;
                     if (!error) { // si no hay error de conexion a la bd, entonces ...
-                        error = con.actualizarFila("usuario",datosUsu,"cedula_usuario = '" + au.jtCedula.getText() + "'"); 
-                        error2 = con.actualizarFila("administrador",datosAdm,"id_administrador = '" + au.jtCedula.getText() + "'");
+                        error = con.actualizarFila("usuario", datosUsu, "cedula_usuario = '" + au.jtCedula.getText() + "'");
+                        error2 = con.actualizarFila("administrador", datosAdm, "id_administrador = '" + au.jtCedula.getText() + "'");
                         if (!error && !error2) { // si no hay error al insertar en la tabla, mostrar un mensaje de confirmación
                             int res = JOptionPane.showConfirmDialog(au,
                                     "Se actualzo con exito al administrador.\n¿Desea actualizar otro?",
@@ -350,7 +370,7 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
                         || au.jtEmail.getText().isEmpty() || au.jtPassword.equals("") || au.fecha_nac.equals("")) {
                     JOptionPane.showMessageDialog(au, "Complete todos los datos",
                             "Error", 2);
-                }else {
+                } else {
                     Supervisor sup = new Supervisor();
                     sup.setCedula(au.jtCedula.getText());
                     sup.setNombre(au.jtNom.getText());
@@ -367,24 +387,28 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
                     sup.setTurno((String) au.jcTurno.getSelectedItem());
 
                     ArrayList<String> datosUsu = new ArrayList<>();
-                    datosUsu.add("nombre = '"+ sup.getNombre()+"'");
-                    datosUsu.add("apellido = '"+sup.getApellido()+"'");
-                    datosUsu.add("dia_nac = '"+sup.getDia()+"'");
-                    datosUsu.add("mes_nac = '"+sup.getMes()+"'");
-                    datosUsu.add("year_nac = '"+sup.getYear()+"'");
-                    datosUsu.add("email = '"+sup.getEmail()+"'");
-                    if(au.jrActivo.isSelected())datosUsu.add("estado = '"+"Activo"+"'" );
-                    if(au.jrInactivo.isSelected())datosUsu.add("estado = '"+"Inactivo"+"'");
+                    datosUsu.add("nombre = '" + sup.getNombre() + "'");
+                    datosUsu.add("apellido = '" + sup.getApellido() + "'");
+                    datosUsu.add("dia_nac = '" + sup.getDia() + "'");
+                    datosUsu.add("mes_nac = '" + sup.getMes() + "'");
+                    datosUsu.add("year_nac = '" + sup.getYear() + "'");
+                    datosUsu.add("email = '" + sup.getEmail() + "'");
+                    if (au.jrActivo.isSelected()) {
+                        datosUsu.add("estado = '" + "Activo" + "'");
+                    }
+                    if (au.jrInactivo.isSelected()) {
+                        datosUsu.add("estado = '" + "Inactivo" + "'");
+                    }
 
                     ArrayList<String> datosSup = new ArrayList<>();
-                    datosSup.add("password = '"+sup.getPassword()+"'");
-                    datosSup.add("turno = '" +sup.getTurno() +"'");
+                    datosSup.add("password = '" + sup.getPassword() + "'");
+                    datosSup.add("turno = '" + sup.getTurno() + "'");
                     Conexion con = new Conexion();
                     boolean error = con.conectarMySQL(baseDatos, user, login, host);
                     boolean error2 = error;
                     if (!error) { // si no hay error de conexion a la bd, entonces ...
-                        error = con.actualizarFila("usuario",datosUsu,"cedula_usuario = '" + au.jtCedula.getText() + "'"); 
-                        error2 = con.actualizarFila("supervisor",datosSup,"id_supervisor = '" + au.jtCedula.getText() + "'");
+                        error = con.actualizarFila("usuario", datosUsu, "cedula_usuario = '" + au.jtCedula.getText() + "'");
+                        error2 = con.actualizarFila("supervisor", datosSup, "id_supervisor = '" + au.jtCedula.getText() + "'");
                         if (!error && !error2) { // si no hay error al insertar en la tabla, mostrar un mensaje de confirmación
                             int res = JOptionPane.showConfirmDialog(au,
                                     "Se actualzo con exito al Supervisor.\n¿Desea actualizar otro?",
@@ -406,7 +430,7 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
                         || au.jtEmail.getText().isEmpty() || au.jtPassword.equals("") || au.fecha_nac.equals("")) {
                     JOptionPane.showMessageDialog(au, "Complete todos los datos",
                             "Error", 2);
-                }else {
+                } else {
                     Recepcionista rec = new Recepcionista();
                     rec.setCedula(au.jtCedula.getText());
                     rec.setNombre(au.jtNom.getText());
@@ -423,24 +447,28 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
                     rec.setTurno((String) au.jcTurno.getSelectedItem());
 
                     ArrayList<String> datosUsu = new ArrayList<>();
-                    datosUsu.add("nombre = '"+ rec.getNombre()+"'");
-                    datosUsu.add("apellido = '"+rec.getApellido()+"'");
-                    datosUsu.add("dia_nac = '"+rec.getDia()+"'");
-                    datosUsu.add("mes_nac = '"+rec.getMes()+"'");
-                    datosUsu.add("year_nac = '"+rec.getYear()+"'");
-                    datosUsu.add("email = '"+rec.getEmail()+"'");
-                    if(au.jrActivo.isSelected())datosUsu.add("estado = '"+"Activo"+"'" );
-                    if(au.jrInactivo.isSelected())datosUsu.add("estado = '"+"Inactivo"+"'");
+                    datosUsu.add("nombre = '" + rec.getNombre() + "'");
+                    datosUsu.add("apellido = '" + rec.getApellido() + "'");
+                    datosUsu.add("dia_nac = '" + rec.getDia() + "'");
+                    datosUsu.add("mes_nac = '" + rec.getMes() + "'");
+                    datosUsu.add("year_nac = '" + rec.getYear() + "'");
+                    datosUsu.add("email = '" + rec.getEmail() + "'");
+                    if (au.jrActivo.isSelected()) {
+                        datosUsu.add("estado = '" + "Activo" + "'");
+                    }
+                    if (au.jrInactivo.isSelected()) {
+                        datosUsu.add("estado = '" + "Inactivo" + "'");
+                    }
 
                     ArrayList<String> datosRec = new ArrayList<>();
-                    datosRec.add("password = '"+rec.getPassword()+"'");
-                    datosRec.add("turno = '" +rec.getTurno() +"'");
+                    datosRec.add("password = '" + rec.getPassword() + "'");
+                    datosRec.add("turno = '" + rec.getTurno() + "'");
                     Conexion con = new Conexion();
                     boolean error = con.conectarMySQL(baseDatos, user, login, host);
                     boolean error2 = error;
                     if (!error) { // si no hay error de conexion a la bd, entonces ...
-                        error = con.actualizarFila("usuario",datosUsu,"cedula_usuario = '" + au.jtCedula.getText() + "'"); 
-                        error2 = con.actualizarFila("recepcionista",datosRec,"id_recepcionista = '" + au.jtCedula.getText() + "'");
+                        error = con.actualizarFila("usuario", datosUsu, "cedula_usuario = '" + au.jtCedula.getText() + "'");
+                        error2 = con.actualizarFila("recepcionista", datosRec, "id_recepcionista = '" + au.jtCedula.getText() + "'");
                         if (!error && !error2) { // si no hay error al insertar en la tabla, mostrar un mensaje de confirmación
                             int res = JOptionPane.showConfirmDialog(au,
                                     "Se actualzo con exito al o la recepcionista.\n¿Desea actualizar otro?",
@@ -462,7 +490,7 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
                         || au.jtEmailNoLoginEnt.getText().isEmpty() || au.fecha_nac.equals("")) {
                     JOptionPane.showMessageDialog(au, "Complete todos los datos",
                             "Error", 2);
-                }else {
+                } else {
                     Entrenador entr = new Entrenador();
                     entr.setCedula(au.jtCedula.getText());
                     entr.setNombre(au.jtNom.getText());
@@ -478,28 +506,32 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
                     entr.setTurno((String) au.jcTurnoEnt.getSelectedItem());
 
                     ArrayList<String> datosUsu = new ArrayList<>();
-                    datosUsu.add("nombre = '"+ entr.getNombre()+"'");
-                    datosUsu.add("apellido = '"+entr.getApellido()+"'");
-                    datosUsu.add("dia_nac = '"+entr.getDia()+"'");
-                    datosUsu.add("mes_nac = '"+entr.getMes()+"'");
-                    datosUsu.add("year_nac = '"+entr.getYear()+"'");
-                    datosUsu.add("email = '"+entr.getEmail()+"'");
-                    if(au.jrActivo.isSelected())datosUsu.add("estado = '"+"Activo"+"'" );
-                    if(au.jrInactivo.isSelected())datosUsu.add("estado = '"+"Inactivo"+"'");
+                    datosUsu.add("nombre = '" + entr.getNombre() + "'");
+                    datosUsu.add("apellido = '" + entr.getApellido() + "'");
+                    datosUsu.add("dia_nac = '" + entr.getDia() + "'");
+                    datosUsu.add("mes_nac = '" + entr.getMes() + "'");
+                    datosUsu.add("year_nac = '" + entr.getYear() + "'");
+                    datosUsu.add("email = '" + entr.getEmail() + "'");
+                    if (au.jrActivo.isSelected()) {
+                        datosUsu.add("estado = '" + "Activo" + "'");
+                    }
+                    if (au.jrInactivo.isSelected()) {
+                        datosUsu.add("estado = '" + "Inactivo" + "'");
+                    }
 
                     ArrayList<String> datosEnt = new ArrayList<>();
-                    datosEnt.add("turno = '" +entr.getTurno() +"'");
+                    datosEnt.add("turno = '" + entr.getTurno() + "'");
                     Conexion con = new Conexion();
                     boolean error = con.conectarMySQL(baseDatos, user, login, host);
                     boolean error2 = error;
                     if (!error) { // si no hay error de conexion a la bd, entonces ...
-                        error = con.actualizarFila("usuario",datosUsu,"cedula_usuario = '" + au.jtCedula.getText() + "'"); 
-                        error2 = con.actualizarFila("entrenador",datosEnt,"id_entrenador = '" + au.jtCedula.getText() + "'");
+                        error = con.actualizarFila("usuario", datosUsu, "cedula_usuario = '" + au.jtCedula.getText() + "'");
+                        error2 = con.actualizarFila("entrenador", datosEnt, "id_entrenador = '" + au.jtCedula.getText() + "'");
                         if (!error && !error2) { // si no hay error al insertar en la tabla, mostrar un mensaje de confirmación
                             int res = JOptionPane.showConfirmDialog(au,
                                     "Se actualzo con exito al o la entrenador@.\n¿Desea actualizar otro?",
                                     "Confirmación", JOptionPane.YES_NO_OPTION);
-                            if (res == JOptionPane.YES_OPTION) { 
+                            if (res == JOptionPane.YES_OPTION) {
                                 limpiarEntrenador(); // limpiar el formulario
                             } else {
                                 volver(); // de lo contrario volver el menu principal
@@ -516,7 +548,7 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
                         || au.jtEmailNoLoginCl.getText().isEmpty() || au.fecha_nac.equals("")) {
                     JOptionPane.showMessageDialog(au, "Complete todos los datos",
                             "Error", 2);
-                }else {
+                } else {
                     Clientes cli = new Clientes();
                     cli.setCedula(au.jtCedula.getText());
                     cli.setNombre(au.jtNom.getText());
@@ -533,34 +565,38 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
                     //cli.setMembresia((String)au.jcMembresia.getSelectedItem());
 
                     ArrayList<String> datosUsu = new ArrayList<>();
-                    datosUsu.add("nombre = '"+ cli.getNombre()+"'");
-                    datosUsu.add("apellido = '"+cli.getApellido()+"'");
-                    datosUsu.add("dia_nac = '"+cli.getDia()+"'");
-                    datosUsu.add("mes_nac = '"+cli.getMes()+"'");
-                    datosUsu.add("year_nac = '"+cli.getYear()+"'");
-                    datosUsu.add("email = '"+cli.getEmail()+"'");
-                    if(au.jrActivo.isSelected())datosUsu.add("estado = '"+"Activo"+"'" );
-                    if(au.jrInactivo.isSelected())datosUsu.add("estado = '"+"Inactivo"+"'");
+                    datosUsu.add("nombre = '" + cli.getNombre() + "'");
+                    datosUsu.add("apellido = '" + cli.getApellido() + "'");
+                    datosUsu.add("dia_nac = '" + cli.getDia() + "'");
+                    datosUsu.add("mes_nac = '" + cli.getMes() + "'");
+                    datosUsu.add("year_nac = '" + cli.getYear() + "'");
+                    datosUsu.add("email = '" + cli.getEmail() + "'");
+                    if (au.jrActivo.isSelected()) {
+                        datosUsu.add("estado = '" + "Activo" + "'");
+                    }
+                    if (au.jrInactivo.isSelected()) {
+                        datosUsu.add("estado = '" + "Inactivo" + "'");
+                    }
 
                     ArrayList<String> datosEnt = new ArrayList<>();
-                    datosEnt.add("grupo_sanguineo = '" +cli.getGrupoSanguineo()+"'");
-                    
+                    datosEnt.add("grupo_sanguineo = '" + cli.getGrupoSanguineo() + "'");
+
                     ArrayList<String> datosMem = new ArrayList<>();
-                    datosMem.add("tipo_membresia = '" +au.jcMembresia.getSelectedItem()+"'");
-                    
+                    datosMem.add("tipo_membresia = '" + au.jcMembresia.getSelectedItem() + "'");
+
                     Conexion con = new Conexion();
                     boolean error = con.conectarMySQL(baseDatos, user, login, host);
                     boolean error2 = error;
                     boolean error3 = error;
                     if (!error) { // si no hay error de conexion a la bd, entonces ...
-                        error = con.actualizarFila("usuario",datosUsu,"cedula_usuario = '" + au.jtCedula.getText() + "'"); 
-                        error2 = con.actualizarFila("cliente",datosEnt,"id_cliente = '" + au.jtCedula.getText() + "'");
-                        error3 = con.actualizarFila("membresia_cliente",datosMem,"id_cliente = '" + au.jtCedula.getText() + "'");
+                        error = con.actualizarFila("usuario", datosUsu, "cedula_usuario = '" + au.jtCedula.getText() + "'");
+                        error2 = con.actualizarFila("cliente", datosEnt, "id_cliente = '" + au.jtCedula.getText() + "'");
+                        error3 = con.actualizarFila("membresia_cliente", datosMem, "id_cliente = '" + au.jtCedula.getText() + "'");
                         if (!error && !error2 && !error3) { // si no hay error al insertar en la tabla, mostrar un mensaje de confirmación
                             int res = JOptionPane.showConfirmDialog(au,
                                     "Se actualzo con exito al cliente.\n¿Desea actualizar otro?",
                                     "Confirmación", JOptionPane.YES_NO_OPTION);
-                            if (res == JOptionPane.YES_OPTION) { 
+                            if (res == JOptionPane.YES_OPTION) {
                                 limpiarCliente(); // limpiar el formulario
                             } else {
                                 volver(); // de lo contrario volver el menu principal
@@ -574,14 +610,22 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
             }
         }
     }
-        //--------------------***metodo volver***----------------------------------------------------------------------
+
+    /**
+     * Oculta la ventana actual y muestra la ventana principal.
+     */
     private void volver() {
         au.setVisible(false);
         au.dispose();
         au.mp.setVisible(true);
     }
 
-    //---------------------***metodos hacer visible-----------------------------------------------------------------
+    /**
+     * Hace visibles los paneles necesarios para la consulta y edición de datos
+     * de un administrador. Este método ajusta la visibilidad de los paneles en
+     * la interfaz gráfica de acuerdo al contexto de la operación relacionada
+     * con administradores.
+     */
     public void hacerVisibleAdm() {
         au.jpConsultarDatosBase.setVisible(true);
         au.jpLoguearse.setVisible(true);
@@ -590,6 +634,12 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
         au.jpSueldo.setVisible(true);
     }
 
+    /**
+     * Hace visibles los paneles necesarios para la consulta y edición de datos
+     * de un supervisor o recepcionista. Este método ajusta la visibilidad de
+     * los paneles en la interfaz gráfica de acuerdo al contexto de la operación
+     * relacionada con supervisores o recepcionistas.
+     */
     public void hacerVisibleEmp() {
         au.jpConsultarDatosBase.setVisible(true);
         au.jpLoguearse.setVisible(true);
@@ -598,6 +648,12 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
         au.jpSueldo.setVisible(true);
     }
 
+    /**
+     * Hace visibles los paneles necesarios para la consulta y edición de datos
+     * de un entrenador. Este método ajusta la visibilidad de los paneles en la
+     * interfaz gráfica de acuerdo al contexto de la operación relacionada con
+     * entrenadores.
+     */
     public void hacerVisibleEnt() {
         au.jpConsultarDatosBase.setVisible(true);
         au.jpLoguearse.setVisible(false);
@@ -607,6 +663,12 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
         au.jpSueldo.setVisible(true);
     }
 
+    /**
+     * Hace visibles los paneles necesarios para la consulta y edición de datos
+     * de un cliente. Este método ajusta la visibilidad de los paneles en la
+     * interfaz gráfica de acuerdo al contexto de la operación relacionada con
+     * clientes.
+     */
     public void hacerVisibleCl() {
         au.jpConsultarDatosBase.setVisible(true);
         au.jpLoguearse.setVisible(false);
@@ -616,7 +678,12 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
         au.jpSueldo.setVisible(false);
     }
 
-    //---------------------***metodos limpiar***-------------------------------------------------------------------
+    /**
+     * Limpia los campos y configuraciones relacionados con la consulta y
+     * edición de datos de un administrador. Este método restablece los valores
+     * de varios componentes en la interfaz gráfica asociados al contexto de
+     * administradores, preparándolos para una nueva operación.
+     */
     private void limpiarAdmin() {
         au.jtCedula.setText("");
         au.jtNom.setText("");
@@ -631,6 +698,13 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
         au.jtSueldo.setText("");
     }
 
+    /**
+     * Limpia los campos y configuraciones relacionados con la consulta y
+     * edición de datos de un recepcionista o supervisor. Este método restablece
+     * los valores de varios componentes en la interfaz gráfica asociados al
+     * contexto de recepcionistas o supervisores, preparándolos para una nueva
+     * operación.
+     */
     private void limpiarPersonal() {
         au.jtCedula.setText("");
         au.jtNom.setText("");
@@ -645,6 +719,12 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
         au.jtSueldo.setText("");
     }
 
+    /**
+     * Limpia los campos y configuraciones relacionados con la consulta y
+     * edición de datos de un entrenador. Este método restablece los valores de
+     * varios componentes en la interfaz gráfica asociados al contexto de
+     * entrenadores, preparándolos para una nueva operación.
+     */
     private void limpiarEntrenador() {
         au.jtCedula.setText("");
         au.jtNom.setText("");
@@ -657,6 +737,12 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
         au.jtSueldo.setText("");
     }
 
+    /**
+     * Limpia los campos y configuraciones relacionados con la consulta y
+     * edición de datos de un cliente. Este método restablece los valores de
+     * varios componentes en la interfaz gráfica asociados al contexto de
+     * clientes, preparándolos para una nueva operación.
+     */
     private void limpiarCliente() {
         au.jtCedula.setText("");
         au.jtNom.setText("");
@@ -668,7 +754,12 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
         au.jtCedula.requestFocus();
     }
 
-    //---------------------Volver editables-----------------------------------------------------------
+    /**
+     * Habilita la edición de los campos relacionados con la consulta y edición
+     * de datos de un administrador. Este método permite la edición de varios
+     * componentes en la interfaz gráfica asociados al contexto de
+     * administradores, preparándolos para la modificación de información.
+     */
     public void volverEditableAdm() {
         au.jtCedula.setEditable(false);
         au.jtNom.setEditable(true);
@@ -681,6 +772,12 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
         au.jtPassword.setEditable(true);
     }
 
+    /**
+     * Habilita la edición de los campos relacionados con la consulta y edición
+     * de datos de un supervisor. Este método permite la edición de varios
+     * componentes en la interfaz gráfica asociados al contexto de supervisores,
+     * preparándolos para la modificación de información.
+     */
     public void volverEditableSup() {
         au.jtCedula.setEditable(false);
         au.jtNom.setEditable(true);
@@ -693,6 +790,13 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
         au.jtPassword.setEditable(true);
         au.jcTurno.setEnabled(true);
     }
+
+    /**
+     * Habilita la edición de los campos relacionados con la consulta y edición
+     * de datos de un recepcionista. Este método permite la edición de varios
+     * componentes en la interfaz gráfica asociados al contexto de
+     * recepcionistas, preparándolos para la modificación de información.
+     */
     public void volverEditableRec() {
         au.jtCedula.setEditable(false);
         au.jtNom.setEditable(true);
@@ -706,6 +810,12 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
         au.jcTurno.setEnabled(true);
     }
 
+    /**
+     * Habilita la edición de los campos relacionados con la consulta y edición
+     * de datos de un entrenador. Este método permite la edición de varios
+     * componentes en la interfaz gráfica asociados al contexto de entrenadores,
+     * preparándolos para la modificación de información.
+     */
     public void volverEditableEnt() {
         au.jtCedula.setEditable(false);
         au.jtNom.setEditable(true);
@@ -718,6 +828,12 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
         au.jcTurnoEnt.setEnabled(true);
     }
 
+    /**
+     * Habilita la edición de los campos relacionados con la consulta y edición
+     * de datos de un cliente. Este método permite la edición de varios
+     * componentes en la interfaz gráfica asociados al contexto de clientes,
+     * preparándolos para la modificación de información.
+     */
     public void volverEditableCl() {
         au.jtCedula.setEditable(false);
         au.jtNom.setEditable(true);
@@ -731,7 +847,12 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
         au.jcGrupoSanguineo.setEnabled(true);
     }
 
-    //----------------volver no editables------------------------------------------------------------------------------
+    /**
+     * Desabilita la edición de los campos relacionados con la consulta y
+     * edición de datos de un administrador. Este método permite la edición de
+     * varios componentes en la interfaz gráfica asociados al contexto de
+     * administradores, preparándolos para la modificación de información.
+     */
     public void volverNoEditableAdm() {
         au.jtCedula.setEditable(true);
         au.jtNom.setEditable(false);
@@ -744,7 +865,13 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
         au.jtPassword.setEditable(false);
     }
 
-    public void volverNoEditableSup(){
+    /**
+     * Desabilita la edición de los campos relacionados con la consulta y
+     * edición de datos de un supervisor. Este método permite la edición de
+     * varios componentes en la interfaz gráfica asociados al contexto de
+     * supervisores, preparándolos para la modificación de información.
+     */
+    public void volverNoEditableSup() {
         au.jtCedula.setEditable(true);
         au.jtNom.setEditable(false);
         au.jtApe.setEditable(false);
@@ -756,6 +883,13 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
         au.jtPassword.setEditable(false);
         au.jcTurno.setEnabled(false);
     }
+
+    /**
+     * Desabilita la edición de los campos relacionados con la consulta y
+     * edición de datos de un recepcionista. Este método permite la edición de
+     * varios componentes en la interfaz gráfica asociados al contexto de
+     * recepcionistas, preparándolos para la modificación de información.
+     */
     public void volverNoEditableRec() {
         au.jtCedula.setEditable(true);
         au.jtNom.setEditable(false);
@@ -769,6 +903,12 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
         au.jcTurno.setEnabled(false);
     }
 
+    /**
+     * Desabilita la edición de los campos relacionados con la consulta y
+     * edición de datos de un entrenador. Este método permite la edición de
+     * varios componentes en la interfaz gráfica asociados al contexto de
+     * entrenadores, preparándolos para la modificación de información.
+     */
     public void volverNoEditableEnt() {
         au.jtCedula.setEditable(true);
         au.jtNom.setEditable(false);
@@ -781,6 +921,12 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
         au.jcTurnoEnt.setEnabled(false);
     }
 
+    /**
+     * Desabilita la edición de los campos relacionados con la consulta y
+     * edición de datos de un cliente. Este método permite la edición de varios
+     * componentes en la interfaz gráfica asociados al contexto de clientes,
+     * preparándolos para la modificación de información.
+     */
     public void volverNoEditableCl() {
         au.jtCedula.setEditable(true);
         au.jtNom.setEditable(false);
@@ -794,6 +940,10 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
         au.jcGrupoSanguineo.setEnabled(false);
     }
 
+    /**
+     * Muestra un cuadro de diálogo de confirmación al intentar cerrar la
+     * ventana. Si el usuario elige "Sí", se cierra la aplicación.
+     */
     public void evento_salir() {
         int respuesta = JOptionPane.showConfirmDialog(au,
                 "¿Desea salir de la aplicación?",
@@ -804,6 +954,7 @@ public class ControlActualizarUsuario implements ActionListener, WindowListener 
         }
     }
 
+    // Implementación de WindowListener
     @Override
     public void windowOpened(WindowEvent e) {
 

@@ -1,11 +1,12 @@
-/*
-Proposito: Gestiona las interacciones del usuario en la vista Consultar Usuario.
-@author 
-    Jhon Alex Rodríguez Benítez - 2264363
-    Miguel Angel Escobar Marín - 2264305
-    John Alejandro Vallarino Cruz - 2264332
-Fecha de ultima modificacion  14/11/2023
-version: 1.2
+/**
+ * Clase ControlConsultarUsuario que implementa ActionListener y WindowListener
+ * para manejar eventos de la interfaz gráfica y consultas de usuarios.
+ *
+ * @author John Alejandro Vallarino - 2264332
+ *         Jhon Alex Rodriguez - 2264363
+ *         Miguel Ángel Escobar Marín - 2264305
+ * Ultima fecha de modificacion: 4-12-2023
+ * Version: 1.3
  */
 package Controlador;
 
@@ -27,6 +28,12 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Esta clase es responsable de controlar las interacciones del usuario
+ * relacionadas con la consulta y visualización de información de usuario.
+ * Interactúa con la vista ConsultarUsuario y utiliza la clase Conexion para
+ * operaciones de base de datos.
+ */
 public class ControlConsultarUsuario implements ActionListener, WindowListener {
 
     ConsultarUsuario cu;
@@ -105,8 +112,12 @@ public class ControlConsultarUsuario implements ActionListener, WindowListener {
                         }
                         cu.fecha_nac.setDate(fecha);
                         cu.jtEmail.setText(datos2[6]);
-                        if(datos2[8].equals("Activo")){cu.jrActivo.setSelected(true);}
-                        if(datos2[8].equals("Inactivo")){cu.jrInactivo.setSelected(true);}
+                        if (datos2[8].equals("Activo")) {
+                            cu.jrActivo.setSelected(true);
+                        }
+                        if (datos2[8].equals("Inactivo")) {
+                            cu.jrInactivo.setSelected(true);
+                        }
                         cu.jtPassword.setText(datos[1]);
                         cu.jtSueldo.setText(datos[2]);
                     }
@@ -134,8 +145,12 @@ public class ControlConsultarUsuario implements ActionListener, WindowListener {
                         }
                         cu.fecha_nac.setDate(fecha);
                         cu.jtEmail.setText(datos2[6]);
-                        if(datos2[8].equals("Activo")){cu.jrActivo.setSelected(true);}
-                        if(datos2[8].equals("Inactivo")){cu.jrInactivo.setSelected(true);}
+                        if (datos2[8].equals("Activo")) {
+                            cu.jrActivo.setSelected(true);
+                        }
+                        if (datos2[8].equals("Inactivo")) {
+                            cu.jrInactivo.setSelected(true);
+                        }
                         cu.jtPassword.setText(datos[1]);
                         cu.jcTurno.setSelectedItem(datos[2]);
                         cu.jtSueldo.setText(datos[3]);
@@ -147,7 +162,7 @@ public class ControlConsultarUsuario implements ActionListener, WindowListener {
                 boolean error = con.conectarMySQL(baseDatos, user, login, host);
                 if (!error) {
                     String datos[] = con.consultaFila("recepcionista", "id_recepcionista", cu.jtCedula.getText());
-                    
+
                     if (datos == null) {
                         JOptionPane.showMessageDialog(cu, "El o la recepcionista con cedula "
                                 + cu.jtCedula.getText() + " no existe en la tabla");
@@ -165,8 +180,12 @@ public class ControlConsultarUsuario implements ActionListener, WindowListener {
                         }
                         cu.fecha_nac.setDate(fecha);
                         cu.jtEmail.setText(datos2[6]);
-                        if(datos2[8].equals("Activo")){cu.jrActivo.setSelected(true);}
-                        if(datos2[8].equals("Inactivo")){cu.jrInactivo.setSelected(true);}
+                        if (datos2[8].equals("Activo")) {
+                            cu.jrActivo.setSelected(true);
+                        }
+                        if (datos2[8].equals("Inactivo")) {
+                            cu.jrInactivo.setSelected(true);
+                        }
                         cu.jtPassword.setText(datos[1]);
                         cu.jcTurno.setEnabled(true);
                         cu.jcTurno.setSelectedItem(datos[2]);
@@ -197,8 +216,12 @@ public class ControlConsultarUsuario implements ActionListener, WindowListener {
                         }
                         cu.fecha_nac.setDate(fecha);
                         cu.jtEmailNoLoginEnt.setText(datos2[6]);
-                        if(datos2[8].equals("Activo")){cu.jrActivo.setSelected(true);}
-                        if(datos2[8].equals("Inactivo")){cu.jrInactivo.setSelected(true);}
+                        if (datos2[8].equals("Activo")) {
+                            cu.jrActivo.setSelected(true);
+                        }
+                        if (datos2[8].equals("Inactivo")) {
+                            cu.jrInactivo.setSelected(true);
+                        }
                         cu.jcTurnoEnt.setSelectedItem((String) datos[1]);
                         cu.jtSueldo.setText(datos[2]);
                     }
@@ -227,11 +250,15 @@ public class ControlConsultarUsuario implements ActionListener, WindowListener {
                         }
                         cu.fecha_nac.setDate(fecha);
                         cu.jtEmailNoLoginCl.setText(datos2[6]);
-                        if(datos2[8].equals("Activo")){cu.jrActivo.setSelected(true);}
-                        if(datos2[8].equals("Inactivo")){cu.jrInactivo.setSelected(true);}
+                        if (datos2[8].equals("Activo")) {
+                            cu.jrActivo.setSelected(true);
+                        }
+                        if (datos2[8].equals("Inactivo")) {
+                            cu.jrInactivo.setSelected(true);
+                        }
                         cu.jcGrupoSanguineo.setSelectedItem(datos[1]);
                         cu.jcMembresia.setSelectedItem(datos3[3]);
-                        
+
                     }
                 }
             }
@@ -242,7 +269,7 @@ public class ControlConsultarUsuario implements ActionListener, WindowListener {
     private void volver() {
         cu.setVisible(false);
         cu.dispose();
-        cu.mp.setVisible(true);
+        cu.tc.ma.setVisible(true);
     }
 
     //---------------------***metodos hacer visible-----------------------------------------------------------------
@@ -330,7 +357,7 @@ public class ControlConsultarUsuario implements ActionListener, WindowListener {
         cu.jtEmailNoLoginCl.setText("");
         cu.jtCedula.requestFocus();
     }
-    
+
     public void evento_salir() {
         int respuesta = JOptionPane.showConfirmDialog(cu,
                 "¿Desea salir de la aplicación?",
