@@ -19,25 +19,27 @@ import Vista.Listados;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import Vista.MenuAdministrador;
+import Vista.MenuPrincipal;
 import Vista.ModificarProducto;
 import Vista.TipoConsulta;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JOptionPane;
 
-public class ControlMenuAdmin implements ActionListener, WindowListener {
+public class ControlMenuPrincipal implements ActionListener, WindowListener {
 
-    MenuAdministrador mp; // crea un obj de la clase que controla
+    MenuPrincipal mp; // crea un obj de la clase que controla
+    String privilegios = "";
 
-    public ControlMenuAdmin(MenuAdministrador obj) {
+    public ControlMenuPrincipal(MenuPrincipal obj, String privi) {
         mp = obj; // Guarda el objeto que recibe de MenuAdministrador en la variable antes creado
+        privilegios = privi;
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(mp.jbNuevoUsuario)) {
-            CrearUsuario cu = new CrearUsuario(mp);
+            CrearUsuario cu = new CrearUsuario(mp, privilegios);
             mp.setVisible(false);
         }
         if (e.getSource().equals(mp.jbAcerca)) {
@@ -47,17 +49,17 @@ public class ControlMenuAdmin implements ActionListener, WindowListener {
 
         if (e.getSource().equals(mp.jbConsultarUsuario)) {
             // System.out.println("Clic en jbGrafica");
-            TipoConsulta tc = new TipoConsulta(mp);
+            TipoConsulta tc = new TipoConsulta(mp, privilegios);
             mp.setVisible(false);
         }
         if (e.getSource().equals(mp.jbListados)) {
             // System.out.println("Clic en jbGrafica");
-            Listados l = new Listados(mp);
+            Listados l = new Listados(mp, privilegios);
             mp.setVisible(false);
         }
         if (e.getSource().equals(mp.jbActualizar)) {
             // System.out.println("Clic en jbGrafica");
-            ActualizarUsuario au = new ActualizarUsuario(mp);
+            ActualizarUsuario au = new ActualizarUsuario(mp, privilegios);
             mp.setVisible(false);
         }
 

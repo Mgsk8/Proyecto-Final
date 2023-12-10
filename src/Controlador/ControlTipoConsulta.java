@@ -13,8 +13,10 @@ import javax.swing.JOptionPane;
 public class ControlTipoConsulta implements ActionListener, WindowListener{
     
     TipoConsulta tc;
+    String privilegios = "";
     
-    public ControlTipoConsulta(TipoConsulta tc){
+    public ControlTipoConsulta(TipoConsulta tc, String privi){
+        privilegios = privi;
         this.tc = tc;
     }
 
@@ -24,7 +26,7 @@ public class ControlTipoConsulta implements ActionListener, WindowListener{
             volver();
         }
         if (e.getSource().equals(tc.jbFormulario)) {
-            ConsultarUsuario cu = new ConsultarUsuario(tc);
+            ConsultarUsuario cu = new ConsultarUsuario(tc, privilegios);
             tc.setVisible(false);
         }
         if (e.getSource().equals(tc.jbQr)) {

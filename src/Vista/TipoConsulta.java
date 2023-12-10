@@ -1,7 +1,6 @@
 
 package Vista;
 
-import Controlador.ControlConsultarUsuario;
 import Controlador.ControlTipoConsulta;
 import Utilerias.JButtonFuncion;
 import Utilerias.JButtonMenu;
@@ -14,14 +13,16 @@ import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 
 public class TipoConsulta extends JFrame {
     
-    public MenuAdministrador ma;
+    public MenuPrincipal ma;
     ControlTipoConsulta ctc;
     public JButton jbQr, jbFormulario;
     public JButtonFuncion jbVolver;
+    String privilegios = "";
     
-    public TipoConsulta(MenuAdministrador ma){
+    public TipoConsulta(MenuPrincipal ma, String privi){
         super("Tipo de consulta");
         this.ma = ma;
+        privilegios = privi;
         setSize(1000, 700);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -29,7 +30,7 @@ public class TipoConsulta extends JFrame {
         setIconImage(icono);
         setResizable(false);
         setLayout(null);
-        ctc = new ControlTipoConsulta(this);
+        ctc = new ControlTipoConsulta(this, privilegios);
         addWindowListener(ctc);
         crearGUI();
         
@@ -37,19 +38,19 @@ public class TipoConsulta extends JFrame {
     }
 
     public void crearGUI() {
-        ctc = new ControlTipoConsulta(this);
+        ctc = new ControlTipoConsulta(this, privilegios);
         JLabelTitulo jt = new JLabelTitulo(
                 60, "Tipo de consulta", this, "/Imagenes/Consultar.png");
         add(jt);
         
         jbQr = new JButtonMenu(60, (700-50)/2, 400, 50, 
-                "consulta x codigo QR", "Consulta x codigo QR", 
+                "consulta x codigo QR", "Ir a Consulta x codigo QR", 
                 "/imagenes/qr.png", 'C', this);
         jbQr.addActionListener(ctc);
         add(jbQr);
         
         jbFormulario = new JButtonMenu(550, (700-50)/2, 400, 50, 
-                "Consulta x formulario", "Ir a crear usuarios", 
+                "Consulta x formulario", "Ir a Consulta x formulario", 
                 "/imagenes/formulario.png", 'C', this);
         jbFormulario.addActionListener(ctc);
         add(jbFormulario);

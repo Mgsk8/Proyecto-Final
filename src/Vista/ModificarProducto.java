@@ -20,9 +20,9 @@ public class ModificarProducto extends JFrame{
     public JButtonFuncion jbVolver, jbLimpiar,jbConsultar,jbActualizar;
     public JPanel jpIngresarDatosBase;
     ControlModificarProducto cmp;
-    public MenuAdministrador ma;
+    public MenuPrincipal ma;
     
-    public ModificarProducto(MenuAdministrador ma) {
+    public ModificarProducto(MenuPrincipal ma) {
         super("Crear Producto");
         this.ma = ma;
         setSize(1000, 700);

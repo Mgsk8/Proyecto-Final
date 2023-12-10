@@ -47,11 +47,11 @@ public class Graficos extends JFrame implements DatosConexion{
     JFreeChart chart;
     public Graficos g;
     public ControlGraficos cg;
-    public MenuAdministrador mp;
+    public MenuPrincipal mp;
     public JButton jbVolver, jbLimpiar, jbConsultar;
     public JPanel jpGraficoPersonal, jpGraficoEstado, jpGrupoSanguineo;
 
-    public Graficos(MenuAdministrador obj){
+    public Graficos(MenuPrincipal obj){
         super("Graficos");
         mp = obj;
         setSize(1200, 700);

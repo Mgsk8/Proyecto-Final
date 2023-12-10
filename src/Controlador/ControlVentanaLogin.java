@@ -18,22 +18,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
 
 import javax.swing.JOptionPane;
 
-import Vista.MenuAdministrador;
+import Vista.MenuPrincipal;
 import Vista.VentanaLogin;
 
 public class ControlVentanaLogin implements ActionListener, WindowListener {
 
     VentanaLogin vl;
+    String Privilegios = "";
 
     public ControlVentanaLogin(VentanaLogin vl) {
         this.vl = vl;
     }
-
+   
+       
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(vl.jtVer)) {
@@ -49,7 +49,8 @@ public class ControlVentanaLogin implements ActionListener, WindowListener {
             if (login1.equals("admin") && passw.equals("admin")) {
                 vl.setVisible(false);
                 vl.dispose();
-                MenuAdministrador mp = new MenuAdministrador();
+                Privilegios = "Administrador";
+                MenuPrincipal mp = new MenuPrincipal(Privilegios);
             } else {
                 if (login1.equals("") || passw.equals("")) {
                     JOptionPane.showMessageDialog(vl, "Login y/o password no pueden ser vacios");
@@ -69,17 +70,20 @@ public class ControlVentanaLogin implements ActionListener, WindowListener {
                             if (datos[7].equals("Administrador") && datos2 != null) {
                                 vl.setVisible(false);
                                 vl.dispose();
-                                MenuAdministrador mp = new MenuAdministrador();
+                                Privilegios = "Administrador";
+                                MenuPrincipal mp = new MenuPrincipal(Privilegios);
                             } else {
                                 if (datos[7].equals("Supervisor") && datos3 != null) {
                                     vl.setVisible(false);
                                     vl.dispose();
-                                    MenuAdministrador mp = new MenuAdministrador();
+                                    Privilegios = "Supervisor";
+                                    MenuPrincipal mp = new MenuPrincipal(Privilegios);
                                 } else {
                                     if (datos[7].equals("Recepcionista") && datos4 != null) {
                                         vl.setVisible(false);
                                         vl.dispose();
-                                        MenuAdministrador mp = new MenuAdministrador();
+                                        Privilegios = "Recepcionista";
+                                        MenuPrincipal mp = new MenuPrincipal(Privilegios);
                                     } else {
                                         JOptionPane.showMessageDialog(vl, "El usuario "
                                                 + login1 + " no tiene acceso a la app, intente nuevamente con otro correo");

@@ -46,19 +46,21 @@ public class Listados extends JFrame implements DatosConexion{
     public JButton jbListadoGeneral, jbListadoEstadoxTipo, jbListadoEstadoxSanguineo;
     public JToggleButton jtListadoGeneral, jtListadoEstxSan, jtListadoEstxTip;
     public ControlListados cl;
-    public MenuAdministrador mp;
+    public MenuPrincipal mp;
     public JButton jbVolver, jbLimpiar, jbConsultar;
-    public JPanel jpListadoGeneral, jpListadoEstxSan, jpListadoEstxTip;
+    public JPanel jpListadoGeneral, jpListadoEstxSan, jpListadoEstxTip, jpListadoRecepcionista;
     public JLabel jlEstado, jlGrupoSanguineo, jlTipoUsuario;
     public JComboBox jcEstado1, jcEstado2, jcGrupoSanguineo, jcTipoUsuario;
     public JTextField jtEstado1, jtEstado2, jtGrupoSanguineo, jtTipoUsuario;
     public Listados l;
     public ModeloTabla mt, mt2, mt3;
     JTable tabla, tabla2, tabla3;
+    String privilegios = "";
 
-    public Listados(MenuAdministrador obj){
+    public Listados(MenuPrincipal obj, String privi){
         super("Listados");
         mp = obj;
+        privilegios = privi;
         setSize(1200, 700);
         setLocationRelativeTo(null);
         //getContentPane().setBackground(color.);
@@ -76,12 +78,6 @@ public class Listados extends JFrame implements DatosConexion{
 
     public void crearGUI(){
         
-        /*
-        JPanel jp = new JPanel();
-        jp.setBounds(100, 80, 800, 500);
-        jp.setBackground(Color.white);
-        jp.setLayout(null);
-        add(jp);*/
         
         JLabelTitulo jt = new JLabelTitulo(
                 60, "Listados", this, "/Imagenes/Consultar.png");
@@ -239,12 +235,24 @@ public class Listados extends JFrame implements DatosConexion{
         jlTipoUsuario.setBounds(300, 10, 200, 40);
         jpListadoEstxTip.add(jlTipoUsuario);
         jcTipoUsuario = new JComboBox<>();
-        String tipoUsuario[] = {"Administrador","Supervisor","Recepcionista","Entrenador","Cliente"};
-        for (int i = 0; i < tipoUsuario.length; i++) {
-            jcTipoUsuario.addItem(tipoUsuario[i]); 
+        
+        if (privilegios == "Administrador"){
+            String tipoUsuario[] = {"Administrador","Supervisor","Recepcionista","Entrenador","Cliente"};
+            for (int i = 0; i < tipoUsuario.length; i++) {
+                jcTipoUsuario.addItem(tipoUsuario[i]); 
+            }
+            jcTipoUsuario.setBounds(300, 50, 200, 30);
+            jpListadoEstxTip.add(jcTipoUsuario);
         }
-        jcTipoUsuario.setBounds(300, 50, 200, 30);
-        jpListadoEstxTip.add(jcTipoUsuario);
+        if (privilegios == "Supervisor"){
+            String tipoUsuario[] = {"Recepcionista","Entrenador","Cliente"};
+            for (int i = 0; i < tipoUsuario.length; i++) {
+                jcTipoUsuario.addItem(tipoUsuario[i]); 
+            }
+            jcTipoUsuario.setBounds(300, 50, 200, 30);
+            jpListadoEstxTip.add(jcTipoUsuario);
+        }
+        
         
         //------------------------- boton volver ----------------------------------
         jbVolver = new JButtonFuncion(70,500,"Volver al menu", 'v', "/Imagenes/volver.png");

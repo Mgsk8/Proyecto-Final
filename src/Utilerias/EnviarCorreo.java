@@ -80,9 +80,9 @@ public class EnviarCorreo {
     }
      
      public void enviarParametros(String correoDestinatario){ // enviar correo a varios destinatarios con archivos adjuntos
-         String parametros[] =  { "JOHN ALEJANDRO VALLARINO CRUZ",      // remitente
-                                "john.vallarino@correounivalle.edu.co", // correoRemitente
-                                "qgjy rwjf mxxy chee",               // contrasena de aplicaciones de Gmail
+         String parametros[] =  { "Gym Brokos Systems",      // remitente
+                                "systemsgymbrokos@gmail.com", // correoRemitente
+                                "myzb xzug syrp mrfc",      // contrasena de aplicaciones de Gmail
                                 "Comprobante de inscripción a brokogym_systems",      // asunto
                                 "Hola."
                  + "<br>Este correo contiene su comprobante de pago <b><u>Java</u></b><br><br>"

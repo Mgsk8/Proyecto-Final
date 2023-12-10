@@ -20,9 +20,9 @@ public class CrearProducto extends JFrame {
     public JButtonFuncion jbVolver, jbLimpiar,jbGuardar;
     public JPanel jpIngresarDatosBase;
     ControlCrearProducto ccp;
-    public MenuAdministrador ma;
+    public MenuPrincipal ma;
     
-    public CrearProducto(MenuAdministrador ma) {
+    public CrearProducto(MenuPrincipal ma) {
         super("Crear Producto");
         this.ma = ma;
         setSize(1000, 700);

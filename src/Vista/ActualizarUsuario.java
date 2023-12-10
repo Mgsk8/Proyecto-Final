@@ -42,7 +42,7 @@ public class ActualizarUsuario extends JFrame{
     public JRadioButton jrActivo, jrInactivo;
     public JToggleButton jtAdministrador, jtSupervisor, jtEntrenador, jtRecepcionista, JTcliente;
     public JButton jbVolver, jbConsultar, jbActualizar,jbLimpiar;
-    public MenuAdministrador mp;
+    public MenuPrincipal mp;
     public JTextField jtCedula, jtNom, jtApe, jtEmail,jtEmailNoLoginEnt,jtEmailNoLoginCl,jtPassword, jtSueldo;
     public JComboBox<String> jcGrupoSanguineo, jcTurno, jcTurnoEnt, jcMembresia;
     public JDateChooser fecha_nac;
@@ -51,10 +51,12 @@ public class ActualizarUsuario extends JFrame{
             ,jlTurnoEnt,jlEmailNologinCl, jlPassword, jlTurno, jlEstado, jlSueldo, jlMembresia;
     public String contextoActualizar;
     ControlActualizarUsuario cau;
+    String privilegios = "";
     
-    public ActualizarUsuario(MenuAdministrador mp){
+    public ActualizarUsuario(MenuPrincipal mp, String privi){
         super("Actualizar Usuario");
         this.mp = mp;
+        privilegios = privi;
         setSize(1000, 700);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -82,67 +84,139 @@ public class ActualizarUsuario extends JFrame{
         jpTipoUsuario.setBorder(new TitledBorder("Tipo Usuario a actualizar"));
         add(jpTipoUsuario);
 
-        jtAdministrador = new JToggleButton("Actualizar Administrador");
-        jtAdministrador.setBounds(10, 40, 200, 40);
-        jtAdministrador.setBackground(new Color(226, 0, 82));
-        jtAdministrador.setForeground(Color.white);
-        jtAdministrador.setFont(new Font("Tahoma", 1, 12));
-        jtAdministrador.setBorderPainted(false);
-        jtAdministrador.setFocusPainted(false);
-        jtAdministrador.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        jtAdministrador.addActionListener(cau);
-        jpTipoUsuario.add(jtAdministrador);
+        // -------------------- verificacion privilegios -------------------
+        
+        if (privilegios == "Recepcionista"){
+            jtEntrenador = new JToggleButton("Crear entrenador");
+            jtEntrenador.setBounds(10, 40, 200, 40);
+            jtEntrenador.setBackground(new Color(226, 0, 82));
+            jtEntrenador.setForeground(Color.white);
+            jtEntrenador.setFont(new Font("Tahoma", 1, 12));
+            jtEntrenador.setBorderPainted(false);
+            jtEntrenador.setFocusPainted(false);
+            jtEntrenador.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            jtEntrenador.addActionListener(cau);
+            jpTipoUsuario.add(jtEntrenador);
 
-        jtSupervisor = new JToggleButton("Actualizar Supervisor");
-        jtSupervisor.setBounds(10, 100, 200, 40);
-        jtSupervisor.setBackground(new Color(226, 0, 82));
-        jtSupervisor.setForeground(Color.white);
-        jtSupervisor.setFont(new Font("Tahoma", 1, 12));
-        jtSupervisor.setBorderPainted(false);
-        jtSupervisor.setFocusPainted(false);
-        jtSupervisor.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        jtSupervisor.addActionListener(cau);
-        jpTipoUsuario.add(jtSupervisor);
+            JTcliente = new JToggleButton("Crear cliente");
+            JTcliente.setBounds(10, 100, 200, 40);
+            JTcliente.setBackground(new Color(226, 0, 82));
+            JTcliente.setForeground(Color.white);
+            JTcliente.setFont(new Font("Tahoma", 1, 12));
+            JTcliente.setBorderPainted(false);
+            JTcliente.setFocusPainted(false);
+            JTcliente.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            JTcliente.addActionListener(cau);
+            jpTipoUsuario.add(JTcliente);
 
-        jtRecepcionista = new JToggleButton("Actualizar Recepcionista");
-        jtRecepcionista.setBounds(10, 160, 200, 40);
-        jtRecepcionista.setBackground(new Color(226, 0, 82));
-        jtRecepcionista.setForeground(Color.white);
-        jtRecepcionista.setFont(new Font("Tahoma", 1, 12));
-        jtRecepcionista.setBorderPainted(false);
-        jtRecepcionista.setFocusPainted(false);
-        jtRecepcionista.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        jtRecepcionista.addActionListener(cau);
-        jpTipoUsuario.add(jtRecepcionista);
+            ButtonGroup bg = new ButtonGroup();
+            bg.add(jtEntrenador);
+            bg.add(JTcliente);
+        }
+        
+        if (privilegios == "Supervisor"){
+            jtRecepcionista = new JToggleButton("Crear Recepcionista");
+            jtRecepcionista.setBounds(10, 40, 200, 40);
+            jtRecepcionista.setBackground(new Color(226, 0, 82));
+            jtRecepcionista.setForeground(Color.white);
+            jtRecepcionista.setFont(new Font("Tahoma", 1, 12));
+            jtRecepcionista.setBorderPainted(false);
+            jtRecepcionista.setFocusPainted(false);
+            jtRecepcionista.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            jtRecepcionista.addActionListener(cau);
+            jpTipoUsuario.add(jtRecepcionista);
 
-        jtEntrenador = new JToggleButton("Actualizar entrenador");
-        jtEntrenador.setBounds(10, 220, 200, 40);
-        jtEntrenador.setBackground(new Color(226, 0, 82));
-        jtEntrenador.setForeground(Color.white);
-        jtEntrenador.setFont(new Font("Tahoma", 1, 12));
-        jtEntrenador.setBorderPainted(false);
-        jtEntrenador.setFocusPainted(false);
-        jtEntrenador.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        jtEntrenador.addActionListener(cau);
-        jpTipoUsuario.add(jtEntrenador);
+            jtEntrenador = new JToggleButton("Crear entrenador");
+            jtEntrenador.setBounds(10, 100, 200, 40);
+            jtEntrenador.setBackground(new Color(226, 0, 82));
+            jtEntrenador.setForeground(Color.white);
+            jtEntrenador.setFont(new Font("Tahoma", 1, 12));
+            jtEntrenador.setBorderPainted(false);
+            jtEntrenador.setFocusPainted(false);
+            jtEntrenador.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            jtEntrenador.addActionListener(cau);
+            jpTipoUsuario.add(jtEntrenador);
 
-        JTcliente = new JToggleButton("Actualizar cliente");
-        JTcliente.setBounds(10, 280, 200, 40);
-        JTcliente.setBackground(new Color(226, 0, 82));
-        JTcliente.setForeground(Color.white);
-        JTcliente.setFont(new Font("Tahoma", 1, 12));
-        JTcliente.setBorderPainted(false);
-        JTcliente.setFocusPainted(false);
-        JTcliente.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        JTcliente.addActionListener(cau);
-        jpTipoUsuario.add(JTcliente);
+            JTcliente = new JToggleButton("Crear cliente");
+            JTcliente.setBounds(10, 160, 200, 40);
+            JTcliente.setBackground(new Color(226, 0, 82));
+            JTcliente.setForeground(Color.white);
+            JTcliente.setFont(new Font("Tahoma", 1, 12));
+            JTcliente.setBorderPainted(false);
+            JTcliente.setFocusPainted(false);
+            JTcliente.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            JTcliente.addActionListener(cau);
+            jpTipoUsuario.add(JTcliente);
 
-        ButtonGroup bg = new ButtonGroup();
-        bg.add(jtAdministrador);
-        bg.add(jtSupervisor);
-        bg.add(jtRecepcionista);
-        bg.add(jtEntrenador);
-        bg.add(JTcliente);
+            ButtonGroup bg = new ButtonGroup();
+            bg.add(jtRecepcionista);
+            bg.add(jtEntrenador);
+            bg.add(JTcliente);
+        }
+        
+        if (privilegios == "Administrador"){
+            jtAdministrador = new JToggleButton("Crear Administrador");
+            jtAdministrador.setBounds(10, 40, 200, 40);
+            jtAdministrador.setBackground(new Color(226, 0, 82));
+            jtAdministrador.setForeground(Color.white);
+            jtAdministrador.setFont(new Font("Tahoma", 1, 12));
+            jtAdministrador.setBorderPainted(false);
+            jtAdministrador.setFocusPainted(false);
+            jtAdministrador.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            jtAdministrador.addActionListener(cau);
+            jpTipoUsuario.add(jtAdministrador);
+
+            jtSupervisor = new JToggleButton("Crear Supervisor");
+            jtSupervisor.setBounds(10, 100, 200, 40);
+            jtSupervisor.setBackground(new Color(226, 0, 82));
+            jtSupervisor.setForeground(Color.white);
+            jtSupervisor.setFont(new Font("Tahoma", 1, 12));
+            jtSupervisor.setBorderPainted(false);
+            jtSupervisor.setFocusPainted(false);
+            jtSupervisor.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            jtSupervisor.addActionListener(cau);
+            jpTipoUsuario.add(jtSupervisor);
+
+            jtRecepcionista = new JToggleButton("Crear Recepcionista");
+            jtRecepcionista.setBounds(10, 160, 200, 40);
+            jtRecepcionista.setBackground(new Color(226, 0, 82));
+            jtRecepcionista.setForeground(Color.white);
+            jtRecepcionista.setFont(new Font("Tahoma", 1, 12));
+            jtRecepcionista.setBorderPainted(false);
+            jtRecepcionista.setFocusPainted(false);
+            jtRecepcionista.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            jtRecepcionista.addActionListener(cau);
+            jpTipoUsuario.add(jtRecepcionista);
+
+            jtEntrenador = new JToggleButton("Crear entrenador");
+            jtEntrenador.setBounds(10, 220, 200, 40);
+            jtEntrenador.setBackground(new Color(226, 0, 82));
+            jtEntrenador.setForeground(Color.white);
+            jtEntrenador.setFont(new Font("Tahoma", 1, 12));
+            jtEntrenador.setBorderPainted(false);
+            jtEntrenador.setFocusPainted(false);
+            jtEntrenador.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            jtEntrenador.addActionListener(cau);
+            jpTipoUsuario.add(jtEntrenador);
+
+            JTcliente = new JToggleButton("Crear cliente");
+            JTcliente.setBounds(10, 280, 200, 40);
+            JTcliente.setBackground(new Color(226, 0, 82));
+            JTcliente.setForeground(Color.white);
+            JTcliente.setFont(new Font("Tahoma", 1, 12));
+            JTcliente.setBorderPainted(false);
+            JTcliente.setFocusPainted(false);
+            JTcliente.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            JTcliente.addActionListener(cau);
+            jpTipoUsuario.add(JTcliente);
+
+            ButtonGroup bg = new ButtonGroup();
+            bg.add(jtAdministrador);
+            bg.add(jtSupervisor);
+            bg.add(jtRecepcionista);
+            bg.add(jtEntrenador);
+            bg.add(JTcliente);
+        }
 
         //--------------------JPanel Consultar Datos ----------------------------------------------------------------------
         
