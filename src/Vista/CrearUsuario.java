@@ -1,13 +1,14 @@
-/*
-Proposito: Muestra en pantalla multiples campos para la creación de usuarios, con botones para guardar,
-limpiar y volver al menú principal.
-@author 
-    Jhon Alex Rodríguez Benítez - 2264363
-    Miguel Angel Escobar Marín - 2264305
-    John Alejandro Vallarino Cruz - 2264332
-Fecha de ultima modificacion  20/10/2023
-version: 1.1
+/**
+ * Propósito: Clase que representa la interfaz gráfica para la creación de usuarios, permitiendo
+ * definir diferentes tipos de usuarios como administrador, supervisor, entrenador, recepcionista, y cliente.
+ * 
+ * @version 1.4
+ * @since 11/12/2023
+ * @author  Jhon Alex Rodríguez Benítez - 2264363
+ * @author  Miguel Angel Escobar Marín - 2264305
+ * @author  John Alejandro Vallarino Cruz - 2264332
  */
+
 package Vista;
 
 import Controlador.ControlCrearUsuario;
@@ -35,22 +36,88 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.border.TitledBorder;
 
+/**
+ * Propósito: Clase que representa la interfaz gráfica para la creación de usuarios, permitiendo
+ * definir diferentes tipos de usuarios como administrador, supervisor, entrenador, recepcionista, y cliente.
+ */
+
 public class CrearUsuario extends JFrame {
 
-    public JToggleButton jtAdministrador, jtSupervisor, jtEntrenador, jtRecepcionista, JTcliente;
-    public JButton jbVolver, jbGuardar, jbLimpiar;
+    /** Botones de alternancia para seleccionar el tipo de usuario. */
+    public JToggleButton jtAdministrador;
+    public JToggleButton jtSupervisor;
+    public JToggleButton jtEntrenador;
+    public JToggleButton jtRecepcionista;
+    public JToggleButton JTcliente;
+    
+    /** Botones de acciones en CrearUsuario. */
+    public JButton jbVolver;
+    public JButton jbGuardar;
+    public JButton jbLimpiar;
+    
+    /** Objeto MenuPrincipal que representa el menú principal de la aplicación. */
     public MenuPrincipal mp;
-    public JTextField jtCedula, jtNom, jtApe, jtEmail,jtEmailNoLoginEnt,jtEmailNoLoginCl;
+    
+    /** Campos de texto para ingresar la información del usuario. */
+    public JTextField jtCedula;
+    public JTextField jtNom;
+    public JTextField jtApe;
+    public JTextField jtEmail;
+    public JTextField jtEmailNoLoginEnt;
+    public JTextField jtEmailNoLoginCl;
+    
+    /** Campo de contraseña para ingresar la contraseña del usuario. */
     public JPasswordField jpPassword;
-    public JComboBox<String> jcGrupoSanguineo, jcTurno, jcTurnoEnt, jcMembresia;
+    
+    /** Listas desplegables para seleccionar datos del usuaio. */
+    public JComboBox<String> jcGrupoSanguineo;
+    public JComboBox<String> jcTurno;
+    public JComboBox<String> jcTurnoEnt;
+    public JComboBox<String> jcMembresia;
+    
+    /** Selector de fecha de nacimiento del usuario. */
     public JDateChooser fecha_nac;
-    public JPanel jpIngresarDatosBase, jpIngresarTurno,jpIngresarGrupoSanguineo,jpIngresarTurnoEmail,jpLoguearse;
-    public JLabel jlCed, jlNom, jlApe, jlFecha, jlGrupoSanguineo, jlEmail, jlEmailNoLoginEnt
-            ,jlTurnoEnt,jlEmailNologinCl, jlPassword, jlTurno, jlMembresia;
+    
+    /** Panel para ingresar datos base del usuario. */
+    public JPanel jpIngresarDatosBase;
+    /** Panel para ingresar el turno del usuario. */
+    public JPanel jpIngresarTurno;
+    /** Panel para ingresar el grupo sanguineo del usuario. */
+    public JPanel jpIngresarGrupoSanguineo;
+    /** Panel para ingresar el turno y correo electrónico sin iniciar sesión del usuario. */
+    public JPanel jpIngresarTurnoEmail;
+    /** Panel para loguearse con el correo electrónico. */  
+    public JPanel jpLoguearse;
+    
+    /** Etiquetas para mostrar el campo del usuario. */
+    public JLabel jlCed;
+    public JLabel jlNom;
+    public JLabel jlApe;
+    public JLabel jlFecha;
+    public JLabel jlGrupoSanguineo;
+    public JLabel jlEmail;
+    public JLabel jlEmailNoLoginEnt;
+    public JLabel jlTurnoEnt;
+    public JLabel jlEmailNologinCl;
+    public JLabel jlPassword;
+    public JLabel jlTurno;
+    public JLabel jlMembresia;
+    
+    /** Variable de contexto para guardar información relevante. */
     public String contextoGuardar;
+    
+     /** Controlador de la clase CrearUsuario. */
     ControlCrearUsuario ccu;
+    
+    /** Variable que indica los privilegios del usuario. */
     String privilegios = "";
 
+    /**
+     * Constructor de la clase CrearUsuario.
+     * 
+     * @param mp   Objeto MenuPrincipal que representa el menú principal de la aplicación.
+     * @param privi String que indica los privilegios del usuario.
+     */
     public CrearUsuario(MenuPrincipal mp, String privi) {
         super("Ingreso de datos");
         this.mp = mp;
@@ -58,7 +125,6 @@ public class CrearUsuario extends JFrame {
         privilegios = privi;
         setSize(1000, 700);
         setLocationRelativeTo(null);
-        //getContentPane().setBackground(Color.GRAY);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         Image icono = new ImageIcon(getClass().getResource("/Imagenes/LogoBlancoVentana.png")).getImage();
         setIconImage(icono);
@@ -71,6 +137,9 @@ public class CrearUsuario extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Método que crea la interfaz gráfica para la creación de usuarios.
+     */
     public void crearGUI() {
         ControlCrearUsuario ccu = new ControlCrearUsuario(this);
 

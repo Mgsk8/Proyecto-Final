@@ -1,3 +1,12 @@
+/**
+ * Proposito: Gestiona las interacciones con la interfaz de modificar producto
+ *
+ * @author John Alejandro Vallarino - 2264332
+ * @author Jhon Alex Rodriguez - 2264363
+ * @author Miguel Ángel Escobar Marín - 2264305
+ * @version 1.3
+ * @since 4-12-2023
+ */
 package Controlador;
 
 import Modelo.Producto;
@@ -19,14 +28,30 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
+/**
+ * Proposito: Gestiona las interacciones con la interfaz de modificar producto
+ */
+
 public class ControlModificarProducto implements ActionListener, WindowListener {
-
+    /**
+     * Instancia ModificarProducto asociado al controlador.
+     */
     ModificarProducto mp;
-
+    /**
+     * Constructor de ControlModificarProducto.
+     *
+     * @param mp Objeto ModificarProducto asociado al controlador.
+     */
     public ControlModificarProducto(ModificarProducto mp) {
         this.mp = mp;
     }
-
+    // Métodos de ActionListener
+    
+    /**
+     * Método que se ejecuta cuando se realiza una acción en la interfaz.
+     *
+     * @param e Evento de acción
+     */  
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(mp.jbLimpiar)) {
@@ -85,28 +110,41 @@ public class ControlModificarProducto implements ActionListener, WindowListener 
             }
         }
     }
+    /**
+     * Hace no editable el campo de idProducto.
+     */    
     public void volverNoEditable(){
         mp.jtIdProducto.setEditable(true);
         mp.jtCantidad.setEditable(false);
     }
+    /**
+     * Hace editable el campo de idProducto.
+     */    
     public void volverEditable() {
         mp.jtIdProducto.setEditable(false);
         mp.jtCantidad.setEditable(true);
     }
-
+    /**
+     * Oculta la ventana actual y muestra la ventana principal.
+     */
     public void volver() {
         mp.setVisible(false);
         mp.dispose();
         mp.ma.setVisible(true);
     }
-
+    /**
+     * Limpia los campos de la interfaz gráfica.
+     */
     public void evento_limpiar() {
         mp.jtIdProducto.setText("");
         mp.jtPrecio.setText("");
         mp.jtNombre.setText("");
         mp.jtCantidad.setText("");
     }
-
+    /**
+     * Muestra un cuadro de diálogo de confirmación al intentar cerrar la ventana.
+     * Si el usuario elige "Sí", se cierra la aplicación.
+     */
     public void evento_salir() {
         int respuesta = JOptionPane.showConfirmDialog(mp,
                 "¿Desea salir de la aplicación?",
@@ -116,32 +154,48 @@ public class ControlModificarProducto implements ActionListener, WindowListener 
             System.exit(0);
         }
     }
-
+    // Métodos de WindowListener (sin implementación detallada)
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowOpened(WindowEvent e) {
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowClosing(WindowEvent e) {
         evento_salir();
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowClosed(WindowEvent e) {
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowIconified(WindowEvent e) {
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowDeiconified(WindowEvent e) {
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowActivated(WindowEvent e) {
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowDeactivated(WindowEvent e) {
     }

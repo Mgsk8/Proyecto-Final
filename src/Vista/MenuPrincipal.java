@@ -1,14 +1,14 @@
-/*
-Proposito: Muestra en pantalla múltiples botones que nos permite la navegación entre distintas ventanas 
-@author 
-    Jhon Alex Rodríguez Benítez - 2264363
-    Miguel Angel Escobar Marín - 2264305
-    John Alejandro Vallarino Cruz - 2264332
-Fecha de ultima modificacion  20/10/2023
-version: 1.1
-*/
-
-
+/**
+ * La clase MenuPrincipal representa la interfaz gráfica de usuario del
+ * menú principal de la aplicación. Proporciona opciones de navegación y acceso
+ * a diferentes funcionalidades dependiendo de los privilegios del usuario.
+ *
+ * @author  Jhon Alex Rodríguez Benítez - 2264363
+ * @author  Miguel Angel Escobar Marín - 2264305
+ * @author  John Alejandro Vallarino Cruz - 2264332
+ * @since 11/12/2023
+ * @version 1.4
+ */
 package Vista;
 
 import Controlador.ControlMenuPrincipal;
@@ -26,16 +26,56 @@ import javax.swing.JFrame;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 
 
+/**
+ * La clase MenuPrincipal representa la interfaz gráfica de usuario del
+ * menú principal de la aplicación. Proporciona opciones de navegación y acceso
+ * a diferentes funcionalidades dependiendo de los privilegios del usuario.
+ **/
+
 public class MenuPrincipal extends JFrame{
 
-    public JButton jbNuevoUsuario, jbVentanaListado, jbConsultarUsuario,jbEstadistica,jbLiquidar, jbListados,
-            jbActualizar, jbActualizarProd, jbProducto, jbRenovarMembresia;
+    /** Botón para acceder a la creación de nuevos usuarios. */
+    public JButton jbNuevoUsuario;
+    
+    /** Botón para acceder a la renovación de membresía (solo para Recepcionista y Administrador). */
+    public JButton jbRenovarMembresia;
+    
+    /** Botón para acceder a la consulta de usuarios. */
+    public JButton jbConsultarUsuario;
+    
+    /** Botón para acceder a la estadísticas (solo para Administrador). */
+    public JButton jbEstadistica;
+    
+    /** Botón para acceder a la lista de usuarios (solo para Supervisor y Administrador). */
+    public JButton jbListados;
+    
+    /** Botón para acceder a la actualización de usuarios. */
+    public JButton jbActualizar;
+    
+    /** Botón para acceder a la actualización de productos. */
+    public JButton jbActualizarProd;
+    
+    /** Botón para acceder a la creación de nuevos productos. */
+    public JButton jbProducto;
+    
+    /** Botón para mostrar el logo de la aplicación. */
+    public JButton jbLogo;
+    
+    /** Botón para mostrar información acerca de la aplicación. */
+    public JButton jbAcerca;
+            
+     /** Controlador asociado al menú principal. */
     ControlMenuPrincipal cma;
+    
+    /** Privilegios del usuario que accede al menú. */
     String Privilegios = "";
     
-    
-    public JButton jbLogo, jbAcerca;
-    
+    /**
+     * Constructor de la clase MenuPrincipal.
+     *
+     * @param privi Privilegios del usuario.
+     */
+
     public MenuPrincipal(String privi){
         super("Menú principal");
         Privilegios = privi;
@@ -56,6 +96,9 @@ public class MenuPrincipal extends JFrame{
         setVisible(true);
     }
     
+    /**
+     * Método privado para crear y configurar los componentes de la interfaz gráfica.
+     */
     public void crearGUI(){
         
         JLabelTitulo jt = new JLabelTitulo(
@@ -86,7 +129,7 @@ public class MenuPrincipal extends JFrame{
             add(jbActualizar);
             
             jbRenovarMembresia = new JButtonMenu(490, 230, 400, 50,
-                "renovar membresia", "Ir a renovar membresia", 
+                "Membresia", "Ir a membresia", 
                 "/imagenes/membresia.png", 'r', this);
             jbRenovarMembresia.addActionListener(cma);
             add(jbRenovarMembresia);
@@ -150,7 +193,7 @@ public class MenuPrincipal extends JFrame{
             add(jbActualizarProd);
         
             jbRenovarMembresia = new JButtonMenu((1000-400)/2, 430, 400, 50,
-                "renovar membresia", "Ir a renovar membresia", 
+                "Membresia", "Ir a Membresia", 
                 "/imagenes/membresia.png", 'r', this);
             jbRenovarMembresia.addActionListener(cma);
             add(jbRenovarMembresia);
@@ -208,7 +251,7 @@ public class MenuPrincipal extends JFrame{
             add(jbActualizarProd);
         
             jbRenovarMembresia = new JButtonMenu(490, 430, 400, 50,
-                "renovar membresia", "Ir a renovar membresia", 
+                "Membresia", "Membresia", 
                 "/imagenes/membresia.png", 'r', this);
             jbRenovarMembresia.addActionListener(cma);
             add(jbRenovarMembresia);
@@ -220,8 +263,6 @@ public class MenuPrincipal extends JFrame{
             jbAcerca.addActionListener(cma);
             add(jbAcerca);
         }
-        
-       
         
         jbLogo = new JButtonRoll(800, 480, 150, 150, 
                 "", "Logo", 

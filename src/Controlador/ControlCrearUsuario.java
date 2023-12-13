@@ -1,11 +1,11 @@
-/*
-Proposito: Gestiona las interacciones del usuario en la vista Crear Usuario.
-@author 
-    Jhon Alex Rodríguez Benítez - 2264363
-    Miguel Angel Escobar Marín - 2264305
-    John Alejandro Vallarino Cruz - 2264332
-Fecha de ultima modificacion  14/11/2023
-version: 1.2
+/**
+ * Proposito: Gestiona las interacciones del usuario en la vista Crear Usuario.
+ *
+ * @author John Alejandro Vallarino - 2264332
+ * @author Jhon Alex Rodriguez - 2264363
+ * @author Miguel Ángel Escobar Marín - 2264305
+ * @version 1.3
+ * @since 4-12-2023
  */
 package Controlador;
 
@@ -32,22 +32,36 @@ import Vista.CrearUsuario;
 import com.toedter.calendar.JCalendar;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class ControlCrearUsuario implements ActionListener, WindowListener, DatosConexion {
+/**
+ * Proposito: Gestiona las interacciones del usuario en la vista Crear Usuario.
+ */
 
+public class ControlCrearUsuario implements ActionListener, WindowListener, DatosConexion {
+    /**
+     * Objeto de la vista CrearUsuario.
+     */
     CrearUsuario cu;
 
+    /**
+     * Constructor de la clase ControlCrearUsuario.
+     *
+     * @param obj Objeto de la clase CrearUsuario asociado al controlador.
+     */
     public ControlCrearUsuario(CrearUsuario obj) {
         cu = obj;
     }
+    // Métodos de ActionListener
 
+    /**
+     * Método que se ejecuta cuando se realiza una acción en la interfaz.
+     *
+     * @param e Evento de acción
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(cu.jbLimpiar)) {
@@ -126,12 +140,12 @@ public class ControlCrearUsuario implements ActionListener, WindowListener, Dato
                     datosUsu.add(adm.getEmail());
                     datosUsu.add(cu.contextoGuardar);
                     datosUsu.add("Activo");
-                    
+
                     ArrayList<String> datosAdm = new ArrayList<>();
                     datosAdm.add(adm.getCedula());
                     datosAdm.add(adm.getPassword());
                     datosAdm.add(adm.getSalario());
-                    
+
                     Conexion con = new Conexion();
                     boolean error = con.conectarMySQL(baseDatos, user, login, host);
                     boolean error2 = error;
@@ -189,7 +203,7 @@ public class ControlCrearUsuario implements ActionListener, WindowListener, Dato
                     datosUsu.add(sup.getEmail());
                     datosUsu.add(cu.contextoGuardar);
                     datosUsu.add("Activo");
-                    
+
                     ArrayList<String> datosSup = new ArrayList<>();
                     datosSup.add(sup.getCedula());
                     datosSup.add(sup.getPassword());
@@ -252,7 +266,7 @@ public class ControlCrearUsuario implements ActionListener, WindowListener, Dato
                     datosUsu.add(rec.getEmail());
                     datosUsu.add(cu.contextoGuardar);
                     datosUsu.add("Activo");
-                    
+
                     ArrayList<String> datosRec = new ArrayList<>();
                     datosRec.add(rec.getCedula());
                     datosRec.add(rec.getPassword());
@@ -300,7 +314,6 @@ public class ControlCrearUsuario implements ActionListener, WindowListener, Dato
                     String turno = (String) cu.jcTurno.getSelectedItem();
                     ent.setTurno(turno);
                     ent.setEmail(cu.jtEmailNoLoginEnt.getText());
-                    
 
                     //guardar los datos en la base de datos
                     ArrayList<String> datosUsu = new ArrayList<>();
@@ -313,7 +326,7 @@ public class ControlCrearUsuario implements ActionListener, WindowListener, Dato
                     datosUsu.add(ent.getEmail());
                     datosUsu.add(cu.contextoGuardar);
                     datosUsu.add("Activo");
-                    
+
                     ArrayList<String> datosEnt = new ArrayList<>();
                     datosEnt.add(ent.getCedula());
                     datosEnt.add(ent.getTurno());
@@ -375,13 +388,12 @@ public class ControlCrearUsuario implements ActionListener, WindowListener, Dato
                     datosUsu.add(cl.getEmail());
                     datosUsu.add(cu.contextoGuardar);
                     datosUsu.add("Activo");
-                    
+
                     ArrayList<String> datosCli = new ArrayList<>();
                     datosCli.add(cl.getCedula());
                     datosCli.add(cl.getGrupoSanguineo());
-                    
+
                     LocalDate fechaActual = LocalDate.now();
-                    //String fechaInicio = fechaActual.getDayOfMonth() + "-" + fechaActual.getMonth() + "-" + fechaActual.getYear();
                     String fechaInicio = fechaActual.toString();
                     String fechaFinal = fechaActual.plusMonths(1).toString();
                     ArrayList<String> datosMem = new ArrayList<>();
@@ -390,15 +402,20 @@ public class ControlCrearUsuario implements ActionListener, WindowListener, Dato
                     datosMem.add(fechaFinal);
                     datosMem.add(cu.jcMembresia.getSelectedItem().toString());
                     datosMem.add(cl.getCedula());
-                    
+                    datosMem.add("Activo");
+
                     Conexion con = new Conexion();
                     boolean error = con.conectarMySQL(baseDatos, user, login, host);
                     boolean error2 = error;
                     boolean error3 = error;
                     if (!error) { // si no hay error de conexion a la bd, entonces ...
                         error = con.insertar("usuario", datosUsu); // insertar los datos en la tabla clientes
-                        if(!error){error2 = con.insertar("cliente", datosCli);}
-                        if(!error2){error3 = con.insertar("membresia_cliente", datosMem);}
+                        if (!error) {
+                            error2 = con.insertar("cliente", datosCli);
+                            if (!error2) {
+                            error3 = con.insertar("membresia_cliente", datosMem);
+                            }
+                        }
                         
                         if (!error && !error2 && !error3) { // si no hay error al insertar en la tabla, mostrar un mensaje de confirmación
                             ClienteMembresiaPDF cmpdf = new ClienteMembresiaPDF(datosUsu, datosCli, datosMem);
@@ -420,33 +437,66 @@ public class ControlCrearUsuario implements ActionListener, WindowListener, Dato
         }
     }
 
-    
-    public void hacerVisibleAdm(){
+    /**
+     * Hace visibles los paneles necesarios para la consulta y edición de datos
+     * de un administrador. Este método ajusta la visibilidad de los paneles en
+     * la interfaz gráfica de acuerdo al contexto de la operación relacionada
+     * con administradores.
+     */
+    public void hacerVisibleAdm() {
         cu.jpIngresarDatosBase.setVisible(true);
         cu.jpLoguearse.setVisible(true);
         cu.jpIngresarTurno.setVisible(false);
         cu.jpIngresarGrupoSanguineo.setVisible(false);
     }
-    public void hacerVisibleEmp(){
+
+    /**
+     * Hace visibles los paneles necesarios para la consulta y edición de datos
+     * de un supervisor o recepcionista. Este método ajusta la visibilidad de
+     * los paneles en la interfaz gráfica de acuerdo al contexto de la operación
+     * relacionada con supervisores o recepcionistas.
+     */
+    public void hacerVisibleEmp() {
         cu.jpIngresarDatosBase.setVisible(true);
         cu.jpLoguearse.setVisible(true);
         cu.jpIngresarTurno.setVisible(true);
         cu.jpIngresarGrupoSanguineo.setVisible(false);
     }
-    public void hacerVisibleEnt(){
+
+    /**
+     * Hace visibles los paneles necesarios para la consulta y edición de datos
+     * de un entrenador. Este método ajusta la visibilidad de los paneles en la
+     * interfaz gráfica de acuerdo al contexto de la operación relacionada con
+     * entrenadores.
+     */
+    public void hacerVisibleEnt() {
         cu.jpIngresarDatosBase.setVisible(true);
         cu.jpLoguearse.setVisible(false);
         cu.jpIngresarTurno.setVisible(false);
         cu.jpIngresarTurnoEmail.setVisible(true);
         cu.jpIngresarGrupoSanguineo.setVisible(false);
     }
-    public void hacerVisibleCl(){
+
+    /**
+     * Hace visibles los paneles necesarios para la consulta y edición de datos
+     * de un cliente. Este método ajusta la visibilidad de los paneles en la
+     * interfaz gráfica de acuerdo al contexto de la operación relacionada con
+     * clientes.
+     */
+    public void hacerVisibleCl() {
         cu.jpIngresarDatosBase.setVisible(true);
         cu.jpLoguearse.setVisible(false);
         cu.jpIngresarTurno.setVisible(false);
         cu.jpIngresarTurnoEmail.setVisible(false);
         cu.jpIngresarGrupoSanguineo.setVisible(true);
     }
+
+    /**
+     * Limpia los campos y configuraciones relacionados con la consulta y
+     * edición de datos de un administrador. Este método restablece los valores
+     * de varios componentes en la interfaz gráfica asociados al contexto de
+     * administradores, preparándolos para una nueva operación.
+     */
     private void limpiarAdmin() {
         cu.jtCedula.setText("");
         cu.jtNom.setText("");
@@ -457,8 +507,14 @@ public class ControlCrearUsuario implements ActionListener, WindowListener, Dato
         cu.jpPassword.setText("");
         cu.jtCedula.requestFocus();
     }
-    
-    
+
+    /**
+     * Limpia los campos y configuraciones relacionados con la consulta y
+     * edición de datos de un recepcionista o supervisor. Este método restablece
+     * los valores de varios componentes en la interfaz gráfica asociados al
+     * contexto de recepcionistas o supervisores, preparándolos para una nueva
+     * operación.
+     */
     private void limpiarPersonal() {
         cu.jtCedula.setText("");
         cu.jtNom.setText("");
@@ -470,7 +526,13 @@ public class ControlCrearUsuario implements ActionListener, WindowListener, Dato
         cu.jpPassword.setText("");
         cu.jtCedula.requestFocus();
     }
-    
+
+    /**
+     * Limpia los campos y configuraciones relacionados con la consulta y
+     * edición de datos de un entrenador. Este método restablece los valores de
+     * varios componentes en la interfaz gráfica asociados al contexto de
+     * entrenadores, preparándolos para una nueva operación.
+     */
     private void limpiarEntrenador() {
         cu.jtCedula.setText("");
         cu.jtNom.setText("");
@@ -481,6 +543,13 @@ public class ControlCrearUsuario implements ActionListener, WindowListener, Dato
         cu.jtEmailNoLoginEnt.setText("");
         cu.jtCedula.requestFocus();
     }
+
+    /**
+     * Limpia los campos y configuraciones relacionados con la consulta y
+     * edición de datos de un cliente. Este método restablece los valores de
+     * varios componentes en la interfaz gráfica asociados al contexto de
+     * clientes, preparándolos para una nueva operación.
+     */
     private void limpiarCliente() {
         cu.jtCedula.setText("");
         cu.jtNom.setText("");
@@ -492,13 +561,20 @@ public class ControlCrearUsuario implements ActionListener, WindowListener, Dato
         cu.jtEmailNoLoginCl.setText("");
         cu.jtCedula.requestFocus();
     }
-    
+
+    /**
+     * Oculta la ventana actual y muestra la ventana principal.
+     */
     private void volver() {
         cu.setVisible(false);
         cu.dispose();
         cu.mp.setVisible(true);
     }
 
+    /**
+     * Muestra un cuadro de diálogo de confirmación al intentar cerrar la
+     * ventana. Si el usuario elige "Sí", se cierra la aplicación.
+     */
     public void evento_salir() {
         int respuesta = JOptionPane.showConfirmDialog(cu,
                 "¿Desea salir de la aplicación?",
@@ -508,39 +584,61 @@ public class ControlCrearUsuario implements ActionListener, WindowListener, Dato
             System.exit(0);
         }
     }
+    // Métodos de WindowListener (sin implementación detallada)
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-public void windowOpened(WindowEvent e) {
+    public void windowOpened(WindowEvent e) {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-public void windowClosing(WindowEvent e) {
+    public void windowClosing(WindowEvent e) {
         evento_salir();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-public void windowClosed(WindowEvent e) {
+    public void windowClosed(WindowEvent e) {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-public void windowIconified(WindowEvent e) {
+    public void windowIconified(WindowEvent e) {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-public void windowDeiconified(WindowEvent e) {
+    public void windowDeiconified(WindowEvent e) {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-public void windowActivated(WindowEvent e) {
+    public void windowActivated(WindowEvent e) {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-public void windowDeactivated(WindowEvent e) {
+    public void windowDeactivated(WindowEvent e) {
 
     }
 

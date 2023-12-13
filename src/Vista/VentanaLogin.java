@@ -1,13 +1,14 @@
-/*
-Proposito: Muestra en pantalla un login donde el usuario deberá ingresar su correo y constraseña para poder
-ingresar a la aplicación con 2 botones de cancelar e ingresar. 
-@author 
-    Jhon Alex Rodríguez Benítez - 2264363
-    Miguel Angel Escobar Marín - 2264305
-    John Alejandro Vallarino Cruz - 2264332
-Fecha de ultima modificacion  20/10/2023
-version: 1.1
-*/
+/**
+ * VentanaLogin es una clase que representa la interfaz gráfica de usuario
+ * para el ingreso al sistema. Permite al usuario introducir su correo y
+ * contraseña para autenticarse.
+ * 
+ * @author  Jhon Alex Rodríguez Benítez - 2264363
+ * @author  Miguel Angel Escobar Marín - 2264305
+ * @author  John Alejandro Vallarino Cruz - 2264332
+ * @since 11/12/2023
+ * @version 1.4
+ */
 
 package Vista;
 
@@ -25,16 +26,54 @@ import javax.swing.JToggleButton;
 import Controlador.ControlVentanaLogin;
 import Utilerias.LimitadorCaracteres;
 import java.awt.Image;
+import static java.awt.image.ImageObserver.ABORT;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 
+
+/**
+ * VentanaLogin es una clase que representa la interfaz gráfica de usuario
+ * para el ingreso al sistema. Permite al usuario introducir su correo y
+ * contraseña para autenticarse.
+ */
 public class VentanaLogin extends JFrame{
     
+    /**
+     * Campo de texto para ingresar el correo.
+     */
     public JTextField jtLogin;
+    /**
+     * Campo de contraseña para ingresar la contraseña.
+     */
     public JPasswordField jpPassw;
-    public JToggleButton jtVer; //para ver u ocultar el password
-    public JButton jbCancelar, jbingresar;
-    public ImageIcon ver, no_ver;
+    /**
+     * Botón de alternancia para mostrar u ocultar la contraseña.
+     */
+    public JToggleButton jtVer;
+     /**
+     * Botón para cancelar el proceso de ingreso.
+     */
+    public JButton jbCancelar;
+    /**
+     * Botón para realizar el proceso de ingreso.
+     */
+    public JButton jbingresar;
+    /**
+     * Icono para mostrar la contraseña.
+     */
+    public ImageIcon ver;
+    /**
+     * Icono para ocultar la contraseña.
+     */
+    public ImageIcon no_ver;
+    /**
+     * Controlador asociado a la ventana de login.
+     */
     ControlVentanaLogin cvl;
-
+    
+    /**
+     * Constructor de la clase VentanaLogin.
+     * Inicializa la interfaz gráfica y muestra la ventana de login.
+     */
     public VentanaLogin(){
         super("Ingreso al sistema");
         setSize(400, 300);
@@ -50,6 +89,10 @@ public class VentanaLogin extends JFrame{
         setVisible(true);
         JOptionPane.showMessageDialog(this, "Usuario por defecto: admin \nPassword por defecto: admin");
     }
+    
+    /**
+     * Método privado para crear y configurar los componentes de la interfaz gráfica.
+     */
     private void crerGUI() {
         ControlVentanaLogin cvl = new ControlVentanaLogin(this);
         ImageIcon im = new ImageIcon(getClass().getResource("/Imagenes/login.png"));
@@ -105,6 +148,11 @@ public class VentanaLogin extends JFrame{
         jbingresar.addActionListener(cvl);
         add(jbingresar);
 
+    /**
+     * Método principal para ejecutar la aplicación.
+     *
+     * @param args Los argumentos de la línea de comandos.
+     */
     }
     public static void main(String[] args) {
         VentanaLogin vl = new VentanaLogin();

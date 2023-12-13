@@ -1,11 +1,11 @@
-/*
-Proposito: Nos permite controlar la acciones de la vista menu principal
-@author 
-    Jhon Alex Rodríguez Benítez - 2264363
-    Miguel Angel Escobar Marín - 2264305
-    John Alejandro Vallarino Cruz - 2264332
-    Fecha de ultima modificacion  20/10/2023
-version: 1.1
+/**
+ * Nos permite controlar la acciones de la vista menu principal
+ *
+ * @author John Alejandro Vallarino - 2264332
+ * @author Jhon Alex Rodriguez - 2264363
+ * @author Miguel Ángel Escobar Marín - 2264305
+ * @version 1.3
+ * @since 20-10-2023
  */
 package Controlador;
 
@@ -16,6 +16,7 @@ import Vista.CrearProducto;
 import Vista.CrearUsuario;
 import Vista.Graficos;
 import Vista.Listados;
+import Vista.Membresia;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,16 +27,32 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JOptionPane;
 
+
+/**
+ * Nos permite controlar la acciones de la vista menu principal
+ */
 public class ControlMenuPrincipal implements ActionListener, WindowListener {
-
+    /**
+     * Instancia de MenuPrincipal.
+     */
     MenuPrincipal mp; // crea un obj de la clase que controla
+    /**
+     * Almacena el nivel de privilegios del usuario.
+     */    
     String privilegios = "";
-
+    /**
+     * Constructor que recibe una instancia de MenuPrincipal y los privilegios del usuario.
+     *
+     * @param obj Instancia de MenuPrincipal.
+     * @param privi Privilegios del usuario.
+     */
     public ControlMenuPrincipal(MenuPrincipal obj, String privi) {
         mp = obj; // Guarda el objeto que recibe de MenuAdministrador en la variable antes creado
         privilegios = privi;
     }
-    
+    /**
+     * {@inheritDoc}
+     */    
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(mp.jbNuevoUsuario)) {
@@ -64,7 +81,6 @@ public class ControlMenuPrincipal implements ActionListener, WindowListener {
         }
 
         if (e.getSource().equals(mp.jbEstadistica)) {
-            // System.out.println("Clic en jbGrafica");
             Graficos g = new Graficos(mp);
             mp.setVisible(false);
         }
@@ -77,10 +93,13 @@ public class ControlMenuPrincipal implements ActionListener, WindowListener {
             mp.setVisible(false);
         }
         if(e.getSource().equals(mp.jbRenovarMembresia)){
-            JOptionPane.showMessageDialog(mp, "Proximamente...");
+            Membresia rm = new Membresia(mp);
+            mp.setVisible(false);
         }
     }
-
+    /**
+     * Método para manejar el evento de salir de la aplicación.
+     */
     public void evento_salir() {
         int respuesta = JOptionPane.showConfirmDialog(mp,
                 "¿Desea salir de la aplicación?",
@@ -90,37 +109,52 @@ public class ControlMenuPrincipal implements ActionListener, WindowListener {
             System.exit(0);
         }
     }
-
+    // Métodos de WindowListener (sin implementación detallada)
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowOpened(WindowEvent e) {
 
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowClosing(WindowEvent e) {
         evento_salir();
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowClosed(WindowEvent e) {
 
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowIconified(WindowEvent e) {
 
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowDeiconified(WindowEvent e) {
 
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowActivated(WindowEvent e) {
 
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowDeactivated(WindowEvent e) {
 

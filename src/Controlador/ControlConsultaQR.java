@@ -1,3 +1,12 @@
+/**
+ * Proposito: Gestiona las interacciones de la consulta por medio de QR.
+ *
+ * @author John Alejandro Vallarino - 2264332
+ * @author Jhon Alex Rodriguez - 2264363
+ * @author Miguel Ángel Escobar Marín - 2264305
+ * @version 1.3
+ * @since 4-12-2023
+ */
 package Controlador;
 
 import Utilerias.Conexion;
@@ -19,14 +28,31 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import net.glxn.qrgen.QRCode;
 
+
+/**
+ * Proposito: Gestiona las interacciones de la consulta por medio de QR.
+ */
+
 public class ControlConsultaQR implements ActionListener, WindowListener {
-
+    /**
+     * Instancia de la vista ConsultaQR.
+     */
     ConsultaQR cqr;
-
+    /**
+     * Constructor que recibe la instancia de la vista ConsultaQR.
+     *
+     * @param cqr Instancia de ConsultaQR.
+     */
     public ControlConsultaQR(ConsultaQR cqr) {
         this.cqr = cqr;
     }
-
+    // Métodos de ActionListener
+    
+    /**
+     * Método que se ejecuta cuando se realiza una acción en la interfaz.
+     *
+     * @param e Evento de acción
+     */  
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(cqr.jbvolver)){
@@ -72,12 +98,17 @@ public class ControlConsultaQR implements ActionListener, WindowListener {
             }
         }
     }
+    /**
+     * Método para volver a la vista anterior.
+     */    
     private void volver() {
         cqr.setVisible(false);
         cqr.dispose();
         cqr.tc.ma.setVisible(true);
     }
-
+    /**
+     * Método para manejar el evento de salir de la aplicación.
+     */
     public void evento_salir() {
         int respuesta = JOptionPane.showConfirmDialog(cqr,
                 "¿Desea salir de la aplicación?",
@@ -87,21 +118,31 @@ public class ControlConsultaQR implements ActionListener, WindowListener {
             System.exit(0);
         }
     }
-
+    // Métodos de WindowListener (sin implementación detallada)
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowOpened(WindowEvent e) {
         
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowClosing(WindowEvent e) {
         evento_salir();
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowClosed(WindowEvent e) {
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowIconified(WindowEvent e) {
     }
@@ -109,11 +150,15 @@ public class ControlConsultaQR implements ActionListener, WindowListener {
     @Override
     public void windowDeiconified(WindowEvent e) {
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowActivated(WindowEvent e) {
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowDeactivated(WindowEvent e) {
     }

@@ -1,12 +1,12 @@
-/*
-Proposito: Muestra información sobre los programadores
-@author 
-    Jhon Alex Rodríguez Benítez - 2264363
-    Miguel Angel Escobar Marín - 2264305
-    John Alejandro Vallarino Cruz - 2264332
-Fecha de ultima modificacion  20/10/2023
-version: 1.1
-*/
+/**
+ * Propósito: Clase que representa la ventana de Acerca De.
+ * 
+ * @version 1.4
+ * @since 11/12/2023
+ * @author  Jhon Alex Rodríguez Benítez - 2264363
+ * @author  Miguel Angel Escobar Marín - 2264305
+ * @author  John Alejandro Vallarino Cruz - 2264332
+ */
 
 
 package Vista;
@@ -21,12 +21,52 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+/**
+ * Propósito: Clase que representa la ventana de Acerca De.
+ */
 public class AcercaDe extends JDialog{
     
+    /** Menú principal. */
     public MenuPrincipal mp;
+
+    /** Controlador de Acerca De. */
     public ControlAcercaDe cad;
-    public JLabel jlNom1, jlCorreo1, jlimg1, jlNom2, jlCorreo2, jlimg2, jlNom3, jlCorreo3, jlimg3;
+
+    /** Etiqueta para el nombre del desarrollador 1. */
+    public JLabel jlNom1;
+
+    /** Etiqueta para el correo del desarrollador 1. */
+    public JLabel jlCorreo1;
+
+    /** Etiqueta para la imagen del desarrollador 1. */
+    public JLabel jlimg1;
+
+    /** Etiqueta para el nombre del desarrollador 2. */
+    public JLabel jlNom2;
+
+    /** Etiqueta para el correo del desarrollador 2. */
+    public JLabel jlCorreo2;
+
+    /** Etiqueta para la imagen del desarrollador 2. */
+    public JLabel jlimg2;
+
+    /** Etiqueta para el nombre del desarrollador 3. */
+    public JLabel jlNom3;
+
+    /** Etiqueta para el correo del desarrollador 3. */
+    public JLabel jlCorreo3;
+
+    /** Etiqueta para la imagen del desarrollador 3. */
+    public JLabel jlimg3;
+
+    /** Botón para volver. */
     public JButton jbVolver;
+
+    /**
+     * Constructor de la clase AcercaDe.
+     * 
+     * @param mp Menú principal.
+     */
     
     public AcercaDe(MenuPrincipal mp){
         super(mp, "Acerca de...", true);
@@ -36,21 +76,19 @@ public class AcercaDe extends JDialog{
         setLocationRelativeTo(mp);
         setLayout(null);
         cad = new ControlAcercaDe(this);
-        //addWindowListener(cad);
         
         crearGUI();
         setVisible(true);
     }
 
+    /**
+     * Método que crea la interfaz gráfica de la ventana de Acerca De.
+     */
     private void crearGUI() {
         ControlAcercaDe cad = new ControlAcercaDe(this);
         JLabelTitulo titulo = new JLabelTitulo(60, "Info sobre los desarrolladores", this, "/Imagenes/info.png");
         add(titulo);
-        /*
-        Imagen o avatar
-        Nombre
-        Código – correo institucional
-        */
+       
         ImageIcon imgPro1 = new ImageIcon(
                 getClass().getResource("/Imagenes/programador1.png"));
         jlimg1 = new JLabel(imgPro1);

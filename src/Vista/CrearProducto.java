@@ -1,3 +1,14 @@
+/**
+ * Propósito: Clase que representa la interfaz gráfica para la creación de productos, permitiendo
+ * ingresar información básica del producto como el ID, nombre, precio y cantidad.
+ * 
+ * @version 1.0
+ * @since 11/12/2023
+ * @author  Jhon Alex Rodríguez Benítez - 2264363
+ * @author  Miguel Angel Escobar Marín - 2264305
+ * @author  John Alejandro Vallarino Cruz - 2264332
+ */
+
 package Vista;
 
 import Controlador.ControlCrearProducto;
@@ -13,14 +24,61 @@ import javax.swing.JTextField;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.border.TitledBorder;
 
+
+/**
+ * Propósito: Clase que representa la interfaz gráfica para la creación de productos, permitiendo
+ * ingresar información básica del producto como el ID, nombre, precio y cantidad.
+ */
+
 public class CrearProducto extends JFrame {
     
-    public JLabel jlIdProducto, jlNombre, jlPrecio, jlCantidad;
-    public JTextField jtIdProducto, jtNombre, jtPrecio, jtCantidad;
-    public JButtonFuncion jbVolver, jbLimpiar,jbGuardar;
+    /** Etiqueta para mostrar el campo del ID del producto. */
+    public JLabel jlIdProducto;
+
+    /** Etiqueta para mostrar el campo del nombre del producto. */
+    public JLabel jlNombre;
+
+    /** Etiqueta para mostrar el campo del precio del producto. */
+    public JLabel jlPrecio;
+
+    /** Etiqueta para mostrar el campo de la cantidad del producto. */
+    public JLabel jlCantidad;
+
+    /** Campo de texto para ingresar el ID del producto. */
+    public JTextField jtIdProducto;
+
+    /** Campo de texto para ingresar el nombre del producto. */
+    public JTextField jtNombre;
+
+    /** Campo de texto para ingresar el precio del producto. */
+    public JTextField jtPrecio;
+
+    /** Campo de texto para ingresar la cantidad del producto. */
+    public JTextField jtCantidad;
+
+    /** Botón de función para volver al menú principal. */
+    public JButtonFuncion jbVolver;
+
+    /** Botón de función para limpiar los campos de entrada. */
+    public JButtonFuncion jbLimpiar;
+
+    /** Botón de función para guardar la información del producto. */
+    public JButtonFuncion jbGuardar;
+
+    /** Panel para ingresar los datos base del producto. */
     public JPanel jpIngresarDatosBase;
+
+    /** Controlador de la clase CrearProducto. */
     ControlCrearProducto ccp;
+
+    /** Objeto MenuPrincipal que representa el menú principal de la aplicación. */
     public MenuPrincipal ma;
+
+    /**
+     * Constructor de la clase CrearProducto.
+     * 
+     * @param ma Objeto MenuPrincipal que representa el menú principal de la aplicación.
+     */
     
     public CrearProducto(MenuPrincipal ma) {
         super("Crear Producto");
@@ -40,6 +98,9 @@ public class CrearProducto extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Método que crea la interfaz gráfica para la creación de productos.
+     */
     private void crearGUI() {
         JLabelTitulo jt = new JLabelTitulo(
                 60, "Ingresar Producto", this, "/Imagenes/productoIMG.png");

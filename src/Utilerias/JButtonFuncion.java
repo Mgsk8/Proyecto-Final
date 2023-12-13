@@ -1,12 +1,15 @@
- /*
-Proposito: está clase nos permite implementar un botón de manera rápida y general para la vista que lo necesite.
-@author 
-    Jhon Alex Rodríguez Benítez - 2264363
-    Miguel Angel Escobar Marín - 2264305
-    John Alejandro Vallarino Cruz - 2264332
-Fecha de ultima modificacion  20/10/2023
-version: 1.1
-*/
+/**
+ * Clase JButtonFuncion que extiende JButton y proporciona un botón diseñado para funciones específicas.
+ * 
+ * Este botón personalizado incluye características como posición del texto, mnemotecnia, imagen,
+ * y configuraciones visuales para representar funciones específicas.
+ * 
+ * @version 1.4
+ * @since 11/12/2023
+ * @author  Jhon Alex Rodríguez Benítez - 2264363
+ * @author  Miguel Angel Escobar Marín - 2264305
+ * @author  John Alejandro Vallarino Cruz - 2264332
+ */
 
 package Utilerias;
 
@@ -16,7 +19,24 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
+/**
+ * Clase JButtonFuncion que extiende JButton y proporciona un botón diseñado para funciones específicas.
+ * 
+ * Este botón personalizado incluye características como posición del texto, mnemotecnia, imagen,
+ * y configuraciones visuales para representar funciones específicas.
+ */
+
 public class JButtonFuncion extends JButton {
+    
+    /**
+     * Constructor para crear un JButtonFuncion con características específicas.
+     *
+     * @param x      Coordenada X del botón en el contenedor.
+     * @param y      Coordenada Y del botón en el contenedor.
+     * @param texto  Texto a mostrar en el botón.
+     * @param letra  Mnemotecnia para activar el botón con una tecla de acceso rápido.
+     * @param imagen Ruta de la imagen a mostrar en el botón.
+     */
     
     public JButtonFuncion(int x,int y, String texto, char letra, String imagen){
 

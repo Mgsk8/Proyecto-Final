@@ -1,3 +1,15 @@
+/**
+ * La clase ModificarProducto representa la interfaz gráfica de usuario
+ * para modificar un producto existente en el sistema. Permite ingresar
+ * datos base del producto y actualizar la información en la base de datos.
+ *
+ * @author  Jhon Alex Rodríguez Benítez - 2264363
+ * @author  Miguel Angel Escobar Marín - 2264305
+ * @author  John Alejandro Vallarino Cruz - 2264332
+ * @since 11/12/2023
+ * @version 1.4
+ */
+
 package Vista;
 
 import Controlador.ControlCrearProducto;
@@ -14,13 +26,65 @@ import javax.swing.JTextField;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.border.TitledBorder;
 
+/**
+ * La clase ModificarProducto representa la interfaz gráfica de usuario
+ * para modificar un producto existente en el sistema. Permite ingresar
+ * datos base del producto y actualizar la información en la base de datos.
+ **/
+
 public class ModificarProducto extends JFrame{
-    public JLabel jlIdProducto, jlNombre, jlPrecio, jlCantidad;
-    public JTextField jtIdProducto, jtNombre, jtPrecio, jtCantidad;
-    public JButtonFuncion jbVolver, jbLimpiar,jbConsultar,jbActualizar;
+    
+    /** Etiqueta para el campo "Id producto". */
+    public JLabel jlIdProducto;
+    
+     /** Etiqueta para el campo "Nombre". */
+    public JLabel jlNombre;
+    
+    /** Etiqueta para el campo "Precio". */
+    public JLabel jlPrecio;
+    
+    /** Etiqueta para el campo "Cantidad". */
+    public JLabel jlCantidad;
+    
+    /** Campo de texto para ingresar el "Id producto". */
+    public JTextField jtIdProducto;
+    
+     /** Campo de texto para ingresar el "Nombre". */
+    public JTextField jtNombre;
+    
+    /** Campo de texto para ingresar el "Precio". */
+    public JTextField jtPrecio;
+    
+    /** Campo de texto para ingresar la "Cantidad". */
+    public JTextField jtCantidad;
+    
+    /** Botón para volver al menú principal. */
+    public JButtonFuncion jbVolver;
+    
+    /** Botón para limpiar los campos de texto. */
+    public JButtonFuncion jbLimpiar;
+    
+    /** Botón para consultar información del producto. */
+    public JButtonFuncion jbConsultar;
+    
+     /** Botón para actualizar la información del producto. */
+    public JButtonFuncion jbActualizar;
+    
+    /** Panel para ingresar datos base del producto. */
     public JPanel jpIngresarDatosBase;
+    
+    /** Controlador asociado a la modificación de productos. */
     ControlModificarProducto cmp;
+    
+    /** Instancia de la clase MenuPrincipal. */
     public MenuPrincipal ma;
+    
+    
+    /**
+     * Constructor de la clase ModificarProducto.
+     *
+     * @param ma Instancia de la clase MenuPrincipal.
+     */
     
     public ModificarProducto(MenuPrincipal ma) {
         super("Crear Producto");
@@ -40,6 +104,9 @@ public class ModificarProducto extends JFrame{
         setVisible(true);
     }
 
+    /**
+     * Método privado para crear y configurar los componentes de la interfaz gráfica.
+     */
     private void crearGUI() {
         JLabelTitulo jt = new JLabelTitulo(
                 60, "Ingresar Producto", this, "/Imagenes/productoIMG.png");

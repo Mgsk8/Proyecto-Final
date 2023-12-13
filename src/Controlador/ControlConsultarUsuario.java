@@ -1,12 +1,11 @@
 /**
- * Clase ControlConsultarUsuario que implementa ActionListener y WindowListener
- * para manejar eventos de la interfaz gráfica y consultas de usuarios.
+ * Proposito: Gestiona las interacciones del usuario en la vista Consultar Usuario.
  *
  * @author John Alejandro Vallarino - 2264332
- *         Jhon Alex Rodriguez - 2264363
- *         Miguel Ángel Escobar Marín - 2264305
- * Ultima fecha de modificacion: 4-12-2023
- * Version: 1.3
+ * @author Jhon Alex Rodriguez - 2264363
+ * @author Miguel Ángel Escobar Marín - 2264305
+ * @version 1.3
+ * @since 4-12-2023
  */
 package Controlador;
 
@@ -35,13 +34,25 @@ import java.util.logging.Logger;
  * operaciones de base de datos.
  */
 public class ControlConsultarUsuario implements ActionListener, WindowListener {
-
+    /**
+     * Objeto de la vista ConsultarUsuario.
+     */
     ConsultarUsuario cu;
-
+    /**
+     * Constructor de la clase ControlConsultarUsuario.
+     *
+     * @param obj Objeto de la clase ConsultarUsuario asociado al controlador.
+     */
     public ControlConsultarUsuario(ConsultarUsuario obj) {
         cu = obj;
     }
+    // Métodos de ActionListener
 
+    /**
+     * Método que se ejecuta cuando se realiza una acción en la interfaz.
+     *
+     * @param e Evento de acción
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(cu.jbVolver)) {
@@ -265,14 +276,21 @@ public class ControlConsultarUsuario implements ActionListener, WindowListener {
         }
     }
 
-    //--------------------***metodo volver***----------------------------------------------------------------------
+    /**
+     * Oculta la ventana actual y muestra la ventana principal.
+     */
     private void volver() {
         cu.setVisible(false);
         cu.dispose();
         cu.tc.ma.setVisible(true);
     }
 
-    //---------------------***metodos hacer visible-----------------------------------------------------------------
+    /**
+     * Hace visibles los paneles necesarios para la consulta y edición de datos
+     * de un administrador. Este método ajusta la visibilidad de los paneles en
+     * la interfaz gráfica de acuerdo al contexto de la operación relacionada
+     * con administradores.
+     */
     public void hacerVisibleAdm() {
         cu.jpConsultarDatosBase.setVisible(true);
         cu.jpLoguearse.setVisible(true);
@@ -280,7 +298,12 @@ public class ControlConsultarUsuario implements ActionListener, WindowListener {
         cu.jpConsultarGrupoSanguineo.setVisible(false);
         cu.jpSueldo.setVisible(true);
     }
-
+    /**
+     * Hace visibles los paneles necesarios para la consulta y edición de datos
+     * de un supervisor o recepcionista. Este método ajusta la visibilidad de
+     * los paneles en la interfaz gráfica de acuerdo al contexto de la operación
+     * relacionada con supervisores o recepcionistas.
+     */
     public void hacerVisibleEmp() {
         cu.jpConsultarDatosBase.setVisible(true);
         cu.jpLoguearse.setVisible(true);
@@ -288,7 +311,12 @@ public class ControlConsultarUsuario implements ActionListener, WindowListener {
         cu.jpConsultarGrupoSanguineo.setVisible(false);
         cu.jpSueldo.setVisible(true);
     }
-
+    /**
+     * Hace visibles los paneles necesarios para la consulta y edición de datos
+     * de un entrenador. Este método ajusta la visibilidad de los paneles en la
+     * interfaz gráfica de acuerdo al contexto de la operación relacionada con
+     * entrenadores.
+     */
     public void hacerVisibleEnt() {
         cu.jpConsultarDatosBase.setVisible(true);
         cu.jpLoguearse.setVisible(false);
@@ -297,7 +325,12 @@ public class ControlConsultarUsuario implements ActionListener, WindowListener {
         cu.jpConsultarGrupoSanguineo.setVisible(false);
         cu.jpSueldo.setVisible(true);
     }
-
+    /**
+     * Hace visibles los paneles necesarios para la consulta y edición de datos
+     * de un cliente. Este método ajusta la visibilidad de los paneles en la
+     * interfaz gráfica de acuerdo al contexto de la operación relacionada con
+     * clientes.
+     */
     public void hacerVisibleCl() {
         cu.jpConsultarDatosBase.setVisible(true);
         cu.jpLoguearse.setVisible(false);
@@ -307,7 +340,12 @@ public class ControlConsultarUsuario implements ActionListener, WindowListener {
         cu.jpSueldo.setVisible(false);
     }
 
-    //---------------------***metodos limpiar***-------------------------------------------------------------------
+    /**
+     * Limpia los campos y configuraciones relacionados con la consulta y
+     * edición de datos de un administrador. Este método restablece los valores
+     * de varios componentes en la interfaz gráfica asociados al contexto de
+     * administradores, preparándolos para una nueva operación.
+     */
     private void limpiarAdmin() {
         cu.jtCedula.setText("");
         cu.jtNom.setText("");
@@ -321,7 +359,13 @@ public class ControlConsultarUsuario implements ActionListener, WindowListener {
         cu.jrInactivo.setSelected(false);
         cu.jtSueldo.setText("");
     }
-
+    /**
+     * Limpia los campos y configuraciones relacionados con la consulta y
+     * edición de datos de un recepcionista o supervisor. Este método restablece
+     * los valores de varios componentes en la interfaz gráfica asociados al
+     * contexto de recepcionistas o supervisores, preparándolos para una nueva
+     * operación.
+     */
     private void limpiarPersonal() {
         cu.jtCedula.setText("");
         cu.jtNom.setText("");
@@ -334,7 +378,12 @@ public class ControlConsultarUsuario implements ActionListener, WindowListener {
         cu.jtCedula.requestFocus();
         cu.jtSueldo.setText("");
     }
-
+    /**
+     * Limpia los campos y configuraciones relacionados con la consulta y
+     * edición de datos de un entrenador. Este método restablece los valores de
+     * varios componentes en la interfaz gráfica asociados al contexto de
+     * entrenadores, preparándolos para una nueva operación.
+     */
     private void limpiarEntrenador() {
         cu.jtCedula.setText("");
         cu.jtNom.setText("");
@@ -346,7 +395,12 @@ public class ControlConsultarUsuario implements ActionListener, WindowListener {
         cu.jtCedula.requestFocus();
         cu.jtSueldo.setText("");
     }
-
+    /**
+     * Limpia los campos y configuraciones relacionados con la consulta y
+     * edición de datos de un cliente. Este método restablece los valores de
+     * varios componentes en la interfaz gráfica asociados al contexto de
+     * clientes, preparándolos para una nueva operación.
+     */
     private void limpiarCliente() {
         cu.jtCedula.setText("");
         cu.jtNom.setText("");
@@ -357,7 +411,10 @@ public class ControlConsultarUsuario implements ActionListener, WindowListener {
         cu.jtEmailNoLoginCl.setText("");
         cu.jtCedula.requestFocus();
     }
-
+    /**
+     * Muestra un cuadro de diálogo de confirmación al intentar cerrar la
+     * ventana. Si el usuario elige "Sí", se cierra la aplicación.
+     */
     public void evento_salir() {
         int respuesta = JOptionPane.showConfirmDialog(cu,
                 "¿Desea salir de la aplicación?",
@@ -367,37 +424,53 @@ public class ControlConsultarUsuario implements ActionListener, WindowListener {
             System.exit(0);
         }
     }
+    // Métodos de WindowListener (sin implementación detallada)
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowOpened(WindowEvent e) {
 
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowClosing(WindowEvent e) {
         evento_salir();
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowClosed(WindowEvent e) {
 
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowIconified(WindowEvent e) {
 
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowDeiconified(WindowEvent e) {
 
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowActivated(WindowEvent e) {
 
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void windowDeactivated(WindowEvent e) {
 

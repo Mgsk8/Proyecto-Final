@@ -1,14 +1,12 @@
-/*
-Proposito: Permite buscar un usuario y muestra en pantalla sus campos para la modificación
-y actulización de los datos del usuario, con botones para actulizar, buscar, limpiar y volver
-al menú principal.
-@author 
-    Jhon Alex Rodríguez Benítez - 2264363
-    Miguel Angel Escobar Marín - 2264305
-    John Alejandro Vallarino Cruz - 2264332
-Fecha de ultima modificacion  20/10/2023
-version: 1.1
-*/
+/**
+ * Propósito: Clase que representa la interfaz gráfica para actualizar la información de un usuario.
+ * 
+ * @version 1.4
+ * @since 11/12/2023
+ * @author  Jhon Alex Rodríguez Benítez - 2264363
+ * @author  Miguel Angel Escobar Marín - 2264305
+ * @author  John Alejandro Vallarino Cruz - 2264332
+ */
 
 package Vista;
 
@@ -36,22 +34,161 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.border.TitledBorder;
 
+/**
+ * Propósito: Clase que representa la interfaz gráfica para actualizar la información de un usuario.
+ */
 
 public class ActualizarUsuario extends JFrame{
     
-    public JRadioButton jrActivo, jrInactivo;
-    public JToggleButton jtAdministrador, jtSupervisor, jtEntrenador, jtRecepcionista, JTcliente;
-    public JButton jbVolver, jbConsultar, jbActualizar,jbLimpiar;
+    /** Radio button para indicar si el usuario está activo. */
+    public JRadioButton jrActivo;
+
+    /** Radio button para indicar si el usuario está inactivo. */
+    public JRadioButton jrInactivo;
+
+    /** Toggle button para indicar el rol de administrador. */
+    public JToggleButton jtAdministrador;
+
+    /** Toggle button para indicar el rol de supervisor. */
+    public JToggleButton jtSupervisor;
+
+    /** Toggle button para indicar el rol de entrenador. */
+    public JToggleButton jtEntrenador;
+
+    /** Toggle button para indicar el rol de recepcionista. */
+    public JToggleButton jtRecepcionista;
+
+    /** Toggle button para indicar el rol de cliente. */
+    public JToggleButton JTcliente;
+
+    /** Botón para volver. */
+    public JButton jbVolver;
+
+    /** Botón para consultar información. */
+    public JButton jbConsultar;
+
+    /** Botón para actualizar la información. */
+    public JButton jbActualizar;
+
+    /** Botón para limpiar campos. */
+    public JButton jbLimpiar;
+
+    /** Menú principal. */
     public MenuPrincipal mp;
-    public JTextField jtCedula, jtNom, jtApe, jtEmail,jtEmailNoLoginEnt,jtEmailNoLoginCl,jtPassword, jtSueldo;
-    public JComboBox<String> jcGrupoSanguineo, jcTurno, jcTurnoEnt, jcMembresia;
+
+    /** Campo de texto para la cédula. */
+    public JTextField jtCedula;
+
+    /** Campo de texto para el nombre. */
+    public JTextField jtNom;
+
+    /** Campo de texto para el apellido. */
+    public JTextField jtApe;
+
+    /** Campo de texto para el email. */
+    public JTextField jtEmail;
+
+    /** Campo de texto para el email sin login de entrenador. */
+    public JTextField jtEmailNoLoginEnt;
+
+    /** Campo de texto para el email sin login de cliente. */
+    public JTextField jtEmailNoLoginCl;
+
+    /** Campo de texto para la contraseña. */
+    public JTextField jtPassword;
+
+    /** Campo de texto para el sueldo. */
+    public JTextField jtSueldo;
+
+    /** Lista desplegable para el grupo sanguíneo. */
+    public JComboBox<String> jcGrupoSanguineo;
+
+    /** Lista desplegable para el turno. */
+    public JComboBox<String> jcTurno;
+
+    /** Lista desplegable para el turno del entrenador. */
+    public JComboBox<String> jcTurnoEnt;
+
+    /** Lista desplegable para la membresía. */
+    public JComboBox<String> jcMembresia;
+
+    /** Selector de fechas. */
     public JDateChooser fecha_nac;
-    public JPanel jpConsultarDatosBase, jpConsultarTurno,jpConsultarGrupoSanguineo,jpConsultarTurnoEmail,jpLoguearse, jpSueldo;
-    public JLabel jlCed, jlNom, jlApe, jlFecha, jlGrupoSanguineo, jlEmail, jlEmailNoLoginEnt
-            ,jlTurnoEnt,jlEmailNologinCl, jlPassword, jlTurno, jlEstado, jlSueldo, jlMembresia;
+
+    /** Panel para consultar datos base. */
+    public JPanel jpConsultarDatosBase;
+
+    /** Panel para consultar turno. */
+    public JPanel jpConsultarTurno;
+
+    /** Panel para consultar grupo sanguíneo. */
+    public JPanel jpConsultarGrupoSanguineo;
+
+    /** Panel para consultar turno de email. */
+    public JPanel jpConsultarTurnoEmail;
+
+    /** Panel para loguearse. */
+    public JPanel jpLoguearse;
+
+    /** Panel para el sueldo. */
+    public JPanel jpSueldo;
+
+    /** Etiqueta para la cédula. */
+    public JLabel jlCed;
+
+    /** Etiqueta para el nombre. */
+    public JLabel jlNom;
+
+    /** Etiqueta para el apellido. */
+    public JLabel jlApe;
+
+    /** Etiqueta para la fecha de nacimiento. */
+    public JLabel jlFecha;
+
+    /** Etiqueta para el grupo sanguíneo. */
+    public JLabel jlGrupoSanguineo;
+
+    /** Etiqueta para el email. */
+    public JLabel jlEmail;
+
+    /** Etiqueta para el email sin login de entrenador. */
+    public JLabel jlEmailNoLoginEnt;
+
+    /** Etiqueta para el turno de entrenador. */
+    public JLabel jlTurnoEnt;
+
+    /** Etiqueta para el email sin login de cliente. */
+    public JLabel jlEmailNologinCl;
+
+    /** Etiqueta para la contraseña. */
+    public JLabel jlPassword;
+
+    /** Etiqueta para el turno. */
+    public JLabel jlTurno;
+
+    /** Etiqueta para el estado. */
+    public JLabel jlEstado;
+
+    /** Etiqueta para el sueldo. */
+    public JLabel jlSueldo;
+
+    /** Etiqueta para la membresía. */
+    public JLabel jlMembresia;
+
+    /** Contexto para actualizar. */
     public String contextoActualizar;
+
+    /** Controlador de la clase ActualizarUsuario. */
     ControlActualizarUsuario cau;
+
+    /** Privilegios del usuario. */
     String privilegios = "";
+    
+    /**
+     * Constructor de la clase ActualizarUsuario.
+     * 
+     * @param mp Menú principal.
+     */
     
     public ActualizarUsuario(MenuPrincipal mp, String privi){
         super("Actualizar Usuario");
@@ -71,6 +208,9 @@ public class ActualizarUsuario extends JFrame{
         setVisible(true);
     }
     
+    /**
+     * Método que crea la interfaz gráfica para la actualización de información de un usuario.
+     */
     public void crearGUI(){
         ControlActualizarUsuario cau = new ControlActualizarUsuario(this);
         
@@ -87,7 +227,7 @@ public class ActualizarUsuario extends JFrame{
         // -------------------- verificacion privilegios -------------------
         
         if (privilegios == "Recepcionista"){
-            jtEntrenador = new JToggleButton("Crear entrenador");
+            jtEntrenador = new JToggleButton("Actualizar entrenador");
             jtEntrenador.setBounds(10, 40, 200, 40);
             jtEntrenador.setBackground(new Color(226, 0, 82));
             jtEntrenador.setForeground(Color.white);
@@ -98,7 +238,7 @@ public class ActualizarUsuario extends JFrame{
             jtEntrenador.addActionListener(cau);
             jpTipoUsuario.add(jtEntrenador);
 
-            JTcliente = new JToggleButton("Crear cliente");
+            JTcliente = new JToggleButton("Actualizar cliente");
             JTcliente.setBounds(10, 100, 200, 40);
             JTcliente.setBackground(new Color(226, 0, 82));
             JTcliente.setForeground(Color.white);
@@ -115,7 +255,7 @@ public class ActualizarUsuario extends JFrame{
         }
         
         if (privilegios == "Supervisor"){
-            jtRecepcionista = new JToggleButton("Crear Recepcionista");
+            jtRecepcionista = new JToggleButton("Actualizar Recepcionista");
             jtRecepcionista.setBounds(10, 40, 200, 40);
             jtRecepcionista.setBackground(new Color(226, 0, 82));
             jtRecepcionista.setForeground(Color.white);
@@ -126,7 +266,7 @@ public class ActualizarUsuario extends JFrame{
             jtRecepcionista.addActionListener(cau);
             jpTipoUsuario.add(jtRecepcionista);
 
-            jtEntrenador = new JToggleButton("Crear entrenador");
+            jtEntrenador = new JToggleButton("Actualizar entrenador");
             jtEntrenador.setBounds(10, 100, 200, 40);
             jtEntrenador.setBackground(new Color(226, 0, 82));
             jtEntrenador.setForeground(Color.white);
@@ -137,7 +277,7 @@ public class ActualizarUsuario extends JFrame{
             jtEntrenador.addActionListener(cau);
             jpTipoUsuario.add(jtEntrenador);
 
-            JTcliente = new JToggleButton("Crear cliente");
+            JTcliente = new JToggleButton("Actualizar cliente");
             JTcliente.setBounds(10, 160, 200, 40);
             JTcliente.setBackground(new Color(226, 0, 82));
             JTcliente.setForeground(Color.white);
@@ -155,7 +295,7 @@ public class ActualizarUsuario extends JFrame{
         }
         
         if (privilegios == "Administrador"){
-            jtAdministrador = new JToggleButton("Crear Administrador");
+            jtAdministrador = new JToggleButton("Actualizar Administrador");
             jtAdministrador.setBounds(10, 40, 200, 40);
             jtAdministrador.setBackground(new Color(226, 0, 82));
             jtAdministrador.setForeground(Color.white);
@@ -166,7 +306,7 @@ public class ActualizarUsuario extends JFrame{
             jtAdministrador.addActionListener(cau);
             jpTipoUsuario.add(jtAdministrador);
 
-            jtSupervisor = new JToggleButton("Crear Supervisor");
+            jtSupervisor = new JToggleButton("Actualizar Supervisor");
             jtSupervisor.setBounds(10, 100, 200, 40);
             jtSupervisor.setBackground(new Color(226, 0, 82));
             jtSupervisor.setForeground(Color.white);
@@ -177,7 +317,7 @@ public class ActualizarUsuario extends JFrame{
             jtSupervisor.addActionListener(cau);
             jpTipoUsuario.add(jtSupervisor);
 
-            jtRecepcionista = new JToggleButton("Crear Recepcionista");
+            jtRecepcionista = new JToggleButton("Actualizar Recepcionista");
             jtRecepcionista.setBounds(10, 160, 200, 40);
             jtRecepcionista.setBackground(new Color(226, 0, 82));
             jtRecepcionista.setForeground(Color.white);
@@ -188,7 +328,7 @@ public class ActualizarUsuario extends JFrame{
             jtRecepcionista.addActionListener(cau);
             jpTipoUsuario.add(jtRecepcionista);
 
-            jtEntrenador = new JToggleButton("Crear entrenador");
+            jtEntrenador = new JToggleButton("Actualizar entrenador");
             jtEntrenador.setBounds(10, 220, 200, 40);
             jtEntrenador.setBackground(new Color(226, 0, 82));
             jtEntrenador.setForeground(Color.white);
@@ -199,7 +339,7 @@ public class ActualizarUsuario extends JFrame{
             jtEntrenador.addActionListener(cau);
             jpTipoUsuario.add(jtEntrenador);
 
-            JTcliente = new JToggleButton("Crear cliente");
+            JTcliente = new JToggleButton("Actualizar cliente");
             JTcliente.setBounds(10, 280, 200, 40);
             JTcliente.setBackground(new Color(226, 0, 82));
             JTcliente.setForeground(Color.white);

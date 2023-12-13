@@ -1,3 +1,13 @@
+/**
+ * Clase EnviarCorreo que proporciona funcionalidades para enviar correos electrónicos con archivos adjuntos.
+ * 
+ * @version 1.4
+ * @since 11/12/2023
+ * @author  Jhon Alex Rodríguez Benítez - 2264363
+ * @author  Miguel Angel Escobar Marín - 2264305
+ * @author  John Alejandro Vallarino Cruz - 2264332
+ */
+
 package Utilerias;
 
 
@@ -11,13 +21,33 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+/**
+ * Clase EnviarCorreo que proporciona funcionalidades para enviar correos electrónicos con archivos adjuntos.
+ */
+
 public class EnviarCorreo {
 
     String correoDestinatario;
+    
+    /**
+     * Constructor para crear un objeto EnviarCorreo.
+     * 
+     * @param correoDestinatario Correo electrónico del destinatario.
+     */
+    
     public EnviarCorreo(String correoDestinatario){
         this.correoDestinatario = correoDestinatario;
         enviarParametros(correoDestinatario);
     }
+    
+    /**
+     * Método para enviar correos electrónicos con archivos adjuntos.
+     *
+     * @param parametros          Arreglo con información del remitente y configuración del mensaje.
+     * @param correosDestinatarios Arreglo con direcciones de correo electrónico de los destinatarios.
+     * @param archivos            Arreglo con rutas de archivos adjuntos.
+     */
+    
      public void enviar(String parametros[], String correosDestinatarios[], String archivos[]){
         try{
             // --------------------------------------------------------------------------------
@@ -78,11 +108,13 @@ public class EnviarCorreo {
             System.exit(0);
         }     
     }
-     
+     /**
+     * Método para enviar correos electrónicos con parámetros predefinidos.
+     */
      public void enviarParametros(String correoDestinatario){ // enviar correo a varios destinatarios con archivos adjuntos
-         String parametros[] =  { "Gym Brokos Systems",      // remitente
+         String parametros[] =  { "Systems Gym Brokos",      // remitente
                                 "systemsgymbrokos@gmail.com", // correoRemitente
-                                "myzb xzug syrp mrfc",      // contrasena de aplicaciones de Gmail
+                                "yohc skyb vvgc incb",               // contrasena de aplicaciones de Gmail
                                 "Comprobante de inscripción a brokogym_systems",      // asunto
                                 "Hola."
                  + "<br>Este correo contiene su comprobante de pago <b><u>Java</u></b><br><br>"

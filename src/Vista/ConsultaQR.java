@@ -1,6 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+    /**
+ * Propósito: Clase que representa la interfaz gráfica para consultar información mediante un código QR.
+ * 
+ * @version 1.4
+ * @since 11/12/2023
+ * @author  Jhon Alex Rodríguez Benítez - 2264363
+ * @author  Miguel Angel Escobar Marín - 2264305
+ * @author  John Alejandro Vallarino Cruz - 2264332
  */
 package Vista;
 
@@ -30,18 +35,39 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import net.glxn.qrgen.QRCode;
 
+
 /**
- *
- * @author migue
+ * Propósito: Clase que representa la interfaz gráfica para consultar información mediante un código QR.
  */
+
 public class ConsultaQR extends JFrame {
 
+    /** Campo de texto para ingresar la cédula. */
     public JTextField jtTexto;
-    public JButton jbCrear, jbvolver;
-    public JLabel jlCod, jlced;
+
+    /** Botón para crear el código QR. */
+    public JButton jbCrear;
+
+    /** Botón para volver. */
+    public JButton jbvolver;
+
+    /** Etiqueta para mostrar el código QR. */
+    public JLabel jlCod;
+    
+    /** Etiqueta para la cedula. */
+    public JLabel jlced;
+    
+    /** Tipo de consulta. */
     public TipoConsulta tc;
+    
+     /** Controlador de la clase ConsultaQR. */
     ControlConsultaQR ccq;
 
+    /**
+     * Constructor de la clase ConsultaQR.
+     * 
+     * @param tc Tipo de consulta.
+     */
     public ConsultaQR(TipoConsulta tc) {
         super("Consultar x QR");
         this.tc = tc;
@@ -56,7 +82,9 @@ public class ConsultaQR extends JFrame {
         addWindowListener(ccq);
         setVisible(true);
     }
-
+     /**
+     * Método que crea la interfaz gráfica para la consulta mediante código QR.
+     */
     private void crearGUI() {
         ccq = new ControlConsultaQR(this);
         jlced = new JLabel("Cedula:");

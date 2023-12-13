@@ -1,3 +1,13 @@
+/**
+ * Clase que genera un documento PDF para el comprobante de membresía del cliente.
+ *
+ * @author  Jhon Alex Rodríguez Benítez - 2264363
+ * @author  Miguel Angel Escobar Marín - 2264305
+ * @author  John Alejandro Vallarino Cruz - 2264332
+ * @since 11/12/2023
+ * @version 1.4
+ */
+
 package Utilerias;
 
 
@@ -16,10 +26,37 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+/**
+ * Clase que genera un documento PDF para el comprobante de membresía del cliente.
+ */
 public class ClienteMembresiaPDF {
     
-    ArrayList<String> datosUsu, datosCli, datosMem;
+    /**
+     * Lista de datos del usuario.
+     */
+    ArrayList<String> datosUsu;
+
+    /**
+     * Lista de datos del cliente.
+     */
+    ArrayList<String> datosCli;
+
+    /**
+     * Lista de datos de la membresía.
+     */
+    ArrayList<String> datosMem;
+
+    /**
+     * Constructor por defecto de la clase.
+     */
     public ClienteMembresiaPDF(){}
+    /**
+     * Constructor que recibe listas de datos como parámetros.
+     *
+     * @param datosUsu Lista de datos del usuario.
+     * @param datosCli Lista de datos del cliente.
+     * @param datosMem Lista de datos de la membresía.
+     */
     public ClienteMembresiaPDF(ArrayList<String> datosUsu, ArrayList<String> datosCli, ArrayList<String> datosMem)
     {
     this.datosUsu = datosUsu;
@@ -28,6 +65,13 @@ public class ClienteMembresiaPDF {
     prueba(datosUsu, datosCli, datosMem);
     }
 
+    /**
+     * Método de prueba que genera el documento PDF.
+     *
+     * @param datosUsu Lista de datos del usuario.
+     * @param datosCli Lista de datos del cliente.
+     * @param datosMem Lista de datos de la membresía.
+     */
     public void prueba(ArrayList<String> datosUsu, ArrayList<String> datosCli, ArrayList<String> datosMem) {
     //public void prueba() {
         // step 1: creation of a document-object        
@@ -36,7 +80,7 @@ public class ClienteMembresiaPDF {
         try {
             // step 2: creation of the writer
             PdfWriter writer = PdfWriter.getInstance(document, 
-                    new FileOutputStream("recibo_de_membresia.pdf."));
+                    new FileOutputStream("recibo_de_membresia.pdf"));
 
             // step 3: we open the document
             document.open();
@@ -62,8 +106,6 @@ public class ClienteMembresiaPDF {
             g.setColor(Color.WHITE);
             g.drawString("brokogym_systems", 220, 230);
             
-            /*ImageIcon img1 = new ImageIcon(getClass().getResource("imagenes/play_list_youtube-GUI_Java.jpg"));
-            g.drawImage(img1.getImage(), 200, 250, 200, 200, null);*/
             
             Font font2 = new Font("Tahoma", Font.PLAIN, 15);
             g.setFont(font2);
@@ -72,7 +114,6 @@ public class ClienteMembresiaPDF {
             g.drawString("Su pago a la incripción " + datosMem.get(3) + " se ha realizado exitosamente.", 50, 380);
             g.drawString("Fecha de inicio: " + datosMem.get(1), 50, 400);
             g.drawString("Fecha de fin: " + datosMem.get(2), 50, 420);
-            //g.drawString("del curso de GUI en Java", 210, 480);
             
         } catch (DocumentException de) {
             System.err.println(de.getMessage());
@@ -87,8 +128,4 @@ public class ClienteMembresiaPDF {
                 "Se creo el comprobante de inscripción en la carpeta del proyecto");
     }
     
-    /*public static void main(String[] args) {
-        ClienteMembresiaPDF f = new ClienteMembresiaPDF();
-        f.prueba();
-    }*/
 }

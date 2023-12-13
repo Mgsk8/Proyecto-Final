@@ -1,13 +1,11 @@
-/*
-Proposito: Muestra en pantalla un submenú con botones que permiten ir a listados con
-información de los usuarios ya registrados.
-@author 
-    Jhon Alex Rodríguez Benítez - 2264363
-    Miguel Angel Escobar Marín - 2264305
-    John Alejandro Vallarino Cruz - 2264332
-Fecha de ultima modificacion  20/10/2023
-version: 1.1
-*/
+/**
+ * Clase que representa la ventana de estadísticas del sistema.
+ * @author  Jhon Alex Rodríguez Benítez - 2264363
+ * @author  Miguel Angel Escobar Marín - 2264305
+ * @author  John Alejandro Vallarino Cruz - 2264332
+ * @version 1.4
+ * @since 11/12/2023
+ */
 
 package Vista;
 
@@ -41,22 +39,59 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.data.general.DefaultPieDataset;
 
+/**
+ * Clase que representa la ventana de estadísticas del sistema.
+*/  
 public class Graficos extends JFrame implements DatosConexion{
     
-    public JToggleButton jtGraficoPersonal, jtGraficoEstado, jtGraficoGrupoSanquineo;
-    JFreeChart chart;
+    /** ToggleButtons para seleccionar el tipo de Estadistica. */
+    public JToggleButton jtGraficoPersonal;
+    public JToggleButton jtGraficoAdm;
+    public JToggleButton jtGraficoSup;
+    public JToggleButton jtGraficoRec;
+    public JToggleButton jtGraficoEnt;
+    public JToggleButton jtGraficoCli;
+    public JToggleButton jtGraficoEstado;
+    public JToggleButton jtGraficoGrupoSanquineo;
+    
+    
+    /** Gráfico utilizado para visualizar las estadísticas. */
+    public JFreeChart chart;
+    
+    /** Instancia de Graficos. */
     public Graficos g;
+    
+     /** Controlador de la clase Graficos. */
     public ControlGraficos cg;
+    
+    /** Instancia del menú principal. */
     public MenuPrincipal mp;
-    public JButton jbVolver, jbLimpiar, jbConsultar;
-    public JPanel jpGraficoPersonal, jpGraficoEstado, jpGrupoSanguineo;
+    
+    /** Botones de acciones. */
+    public JButton jbVolver;
+    public JButton jbLimpiar;
+    public JButton jbConsultar;
+    
+    /** Paneles para mostrar los diferentes tipos de Estadisticas. */
+    public JPanel jpGraficoPersonal; 
+    public JPanel jpGraficoEstadoxTipoUsuario;
+    public JPanel jpGraficoEstado;
+    public JPanel jpGrupoSanguineo;
+    
+    /**
+     * Tipo de usuario para el gráfico seleccionado.
+     */
+    public String tipoUsuarioGrafico;
 
+    /**
+     * Constructor de la clase Graficos.
+     * @param obj Objeto de la clase MenuPrincipal.
+     */
     public Graficos(MenuPrincipal obj){
-        super("Graficos");
+        super("Estadistica");
         mp = obj;
         setSize(1200, 700);
         setLocationRelativeTo(null);
-        //getContentPane().setBackground(color.);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setLayout(null);
         setResizable(false);
@@ -69,30 +104,80 @@ public class Graficos extends JFrame implements DatosConexion{
         setVisible(true);
     }
 
+    /**
+     * Método para crear la interfaz gráfica de la ventana de estadísticas.
+     */
     public void crearGUI(){
         
-        /*
-        JPanel jp = new JPanel();
-        jp.setBounds(100, 80, 800, 500);
-        jp.setBackground(Color.white);
-        jp.setLayout(null);
-        add(jp);*/
-        
         JLabelTitulo jt = new JLabelTitulo(
-                60, "Graficos", this, "/Imagenes/Consultar.png");
+                60, "Estadisticas", this, "/Imagenes/Consultar.png");
         add(jt);
         cg = new ControlGraficos(this);
         
         //----------------------Jpanel Graficos ----------------------------------------------------------------------
         JPanel jpGraficos = new JPanel();
-        jpGraficos.setBounds(20, 80, 220, 360);
+        jpGraficos.setBounds(20, 80, 220, 500);
         jpGraficos.setLayout(null);
-        jpGraficos.setBorder(new TitledBorder("Listados"));
+        jpGraficos.setBorder(new TitledBorder("Tipo de estadisticas"));
         add(jpGraficos);
         
+        jtGraficoCli = new JToggleButton("Estadistica clientes");
+        jtGraficoCli.setBounds(10, 20, 200, 40);
+        jtGraficoCli.setBackground(new Color(226, 0, 82));
+        jtGraficoCli.setForeground(Color.white);
+        jtGraficoCli.setFont(new Font("Tahoma", 1, 12));
+        jtGraficoCli.setBorderPainted(false);
+        jtGraficoCli.setFocusPainted(false);
+        jtGraficoCli.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        jtGraficoCli.addActionListener(cg);
+        jpGraficos.add(jtGraficoCli);
         
-        jtGraficoPersonal = new JToggleButton("<html><center><p>Grafico por</p></center><center><p>tipo de usuario</p></center></html>");
-        jtGraficoPersonal.setBounds(10, 40, 200, 40);
+        jtGraficoEnt = new JToggleButton("Estadistica entrenador");
+        jtGraficoEnt.setBounds(10, 80, 200, 40);
+        jtGraficoEnt.setBackground(new Color(226, 0, 82));
+        jtGraficoEnt.setForeground(Color.white);
+        jtGraficoEnt.setFont(new Font("Tahoma", 1, 12));
+        jtGraficoEnt.setBorderPainted(false);
+        jtGraficoEnt.setFocusPainted(false);
+        jtGraficoEnt.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        jtGraficoEnt.addActionListener(cg);
+        jpGraficos.add(jtGraficoEnt);
+        
+        jtGraficoRec = new JToggleButton("Estadistica recepcionistas");
+        jtGraficoRec.setBounds(10, 140, 200, 40);
+        jtGraficoRec.setBackground(new Color(226, 0, 82));
+        jtGraficoRec.setForeground(Color.white);
+        jtGraficoRec.setFont(new Font("Tahoma", 1, 12));
+        jtGraficoRec.setBorderPainted(false);
+        jtGraficoRec.setFocusPainted(false);
+        jtGraficoRec.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        jtGraficoRec.addActionListener(cg);
+        jpGraficos.add(jtGraficoRec);
+        
+        jtGraficoSup = new JToggleButton("Estadistica supervisores");
+        jtGraficoSup.setBounds(10, 200, 200, 40);
+        jtGraficoSup.setBackground(new Color(226, 0, 82));
+        jtGraficoSup.setForeground(Color.white);
+        jtGraficoSup.setFont(new Font("Tahoma", 1, 12));
+        jtGraficoSup.setBorderPainted(false);
+        jtGraficoSup.setFocusPainted(false);
+        jtGraficoSup.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        jtGraficoSup.addActionListener(cg);
+        jpGraficos.add(jtGraficoSup);
+        
+        jtGraficoAdm = new JToggleButton("Estadistica administradores");
+        jtGraficoAdm.setBounds(10, 260, 200, 40);
+        jtGraficoAdm.setBackground(new Color(226, 0, 82));
+        jtGraficoAdm.setForeground(Color.white);
+        jtGraficoAdm.setFont(new Font("Tahoma", 1, 12));
+        jtGraficoAdm.setBorderPainted(false);
+        jtGraficoAdm.setFocusPainted(false);
+        jtGraficoAdm.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        jtGraficoAdm.addActionListener(cg);
+        jpGraficos.add(jtGraficoAdm);        
+        
+        jtGraficoPersonal = new JToggleButton("<html><center><p>Estadistica por</p></center><center><p>tipo de usuario</p></center></html>");
+        jtGraficoPersonal.setBounds(10, 320, 200, 40);
         jtGraficoPersonal.setBackground(new Color(226, 0, 82));
         jtGraficoPersonal.setForeground(Color.white);
         jtGraficoPersonal.setFont(new Font("Tahoma", 1, 12));
@@ -103,8 +188,8 @@ public class Graficos extends JFrame implements DatosConexion{
         jpGraficos.add(jtGraficoPersonal);
         
         jtGraficoEstado = new JToggleButton();
-        jtGraficoEstado.setText("<html><center><p>Grafico por</p></center><center><p>estado</p></center></html>");
-        jtGraficoEstado.setBounds(10, 120,200, 40);
+        jtGraficoEstado.setText("<html><center><p>Estadistica por</p></center><center><p>estado</p></center></html>");
+        jtGraficoEstado.setBounds(10, 380,200, 40);
         jtGraficoEstado.setBackground(new Color(226, 0, 82));
         jtGraficoEstado.setForeground(Color.white);
         jtGraficoEstado.setFont(new Font("Tahoma", 1, 12));
@@ -115,8 +200,8 @@ public class Graficos extends JFrame implements DatosConexion{
         jpGraficos.add(jtGraficoEstado);
         
         jtGraficoGrupoSanquineo = new JToggleButton();
-        jtGraficoGrupoSanquineo.setText("<html><center><p>Grafico por</p></center><center><p>grupo sanguineo</p></center></html>");
-        jtGraficoGrupoSanquineo.setBounds(10, 200, 200, 40);
+        jtGraficoGrupoSanquineo.setText("<html><center><p>Estadistica por</p></center><center><p>grupo sanguineo</p></center></html>");
+        jtGraficoGrupoSanquineo.setBounds(10, 440, 200, 40);
         jtGraficoGrupoSanquineo.setBackground(new Color(226, 0, 82));
         jtGraficoGrupoSanquineo.setForeground(Color.white);
         jtGraficoGrupoSanquineo.setFont(new Font("Tahoma", 1, 12));
@@ -127,6 +212,11 @@ public class Graficos extends JFrame implements DatosConexion{
         jpGraficos.add(jtGraficoGrupoSanquineo);
         
         ButtonGroup bg = new ButtonGroup();
+        bg.add(jtGraficoCli);
+        bg.add(jtGraficoEnt);
+        bg.add(jtGraficoRec);
+        bg.add(jtGraficoSup);
+        bg.add(jtGraficoAdm);
         bg.add(jtGraficoPersonal);
         bg.add(jtGraficoEstado);
         bg.add(jtGraficoGrupoSanquineo);
@@ -135,7 +225,7 @@ public class Graficos extends JFrame implements DatosConexion{
         jpGraficoPersonal = new JPanel();
         jpGraficoPersonal.setBounds(250, 80, 780, 570);
         jpGraficoPersonal.setLayout(null);
-        jpGraficoPersonal.setBorder(new TitledBorder ( "Grafico por tipo de usuario"));
+        jpGraficoPersonal.setBorder(new TitledBorder ( "Estadistica por tipo de usuario"));
         jpGraficoPersonal.setVisible(false);
         add(jpGraficoPersonal);
         
@@ -145,13 +235,22 @@ public class Graficos extends JFrame implements DatosConexion{
         ChartPanel panelPersonal = new ChartPanel(chart, false);
         panelPersonal.setBounds(10, 30, 760, 520);
         jpGraficoPersonal.add(panelPersonal);
-        
+    
+        //-------------------- JPanel Grafico por Estado x Tipo de Usuario ----------------------------------------------------------------------
+        jpGraficoEstadoxTipoUsuario = new JPanel();
+        jpGraficoEstadoxTipoUsuario.setBounds(250, 80, 780, 570);
+        jpGraficoEstadoxTipoUsuario.setLayout(null);
+        jpGraficoEstadoxTipoUsuario.setBorder(new TitledBorder ( "Estadistica..."));
+        jpGraficoEstadoxTipoUsuario.setVisible(false);
+        add(jpGraficoEstadoxTipoUsuario);
+       
+
         //-------------------- JPanel Grafico por Estado ----------------------------------------------------------------------
         jpGraficoEstado = new JPanel();
         jpGraficoEstado.setBounds(250, 80, 780, 570);
         //jpListadoEstxSan.setBackground(Color.gray);
         jpGraficoEstado.setLayout(null);
-        jpGraficoEstado.setBorder(new TitledBorder ( "Grafico por estado"));
+        jpGraficoEstado.setBorder(new TitledBorder ( "Estadistica por estado"));
         jpGraficoEstado.setVisible(false);
         add(jpGraficoEstado);
         
@@ -166,7 +265,7 @@ public class Graficos extends JFrame implements DatosConexion{
         jpGrupoSanguineo = new JPanel();
         jpGrupoSanguineo.setBounds(250, 80, 780, 570);
         jpGrupoSanguineo.setLayout(null);
-        jpGrupoSanguineo.setBorder(new TitledBorder ( "Grafico de clientes por tipo sanguineo"));
+        jpGrupoSanguineo.setBorder(new TitledBorder ( "Estadistica clientes tipo sanguineo"));
         jpGrupoSanguineo.setVisible(false);
         add(jpGrupoSanguineo);
         
@@ -178,12 +277,15 @@ public class Graficos extends JFrame implements DatosConexion{
         jpGrupoSanguineo.add(panelGrupoSanguineo);
         
         //------------------------- boton volver ----------------------------------
-        jbVolver = new JButtonFuncion(70,500,"Volver al menu", 'v', "/Imagenes/volver.png");
+        jbVolver = new JButtonFuncion(70,580,"Volver al menu", 'v', "/Imagenes/volver.png");
         jbVolver.addActionListener(cg);
         add(jbVolver);
     }
     
-    
+    /**
+    * Método para crear el gráfico de estadísticas por tipo de usuario.
+    * @param personal Arreglo con la cantidad de usuarios por tipo.
+    */
     public void crearGraficoPersonal(int[] personal) {
         
         for (int i = 0; i < personal.length; i++) {
@@ -238,6 +340,10 @@ public class Graficos extends JFrame implements DatosConexion{
         rotator.start();
     }
 
+    /**
+    * Método para obtener la cantidad de usuarios por tipo.
+    * @return Arreglo con la cantidad de usuarios por tipo.
+    */
     public int [] listadoPersonal() {
         boolean error = false;
         int[] personal = new int[6];
@@ -275,7 +381,51 @@ public class Graficos extends JFrame implements DatosConexion{
         return personal;
     }
     
+    /**
+     * Crea un gráfico de estadísticas de estado por tipo de usuario.
+     * @param estadoxTipoUsuario Arreglo de enteros con la cantidad de usuarios en cada estado.
+     */
+    public void crearGraficoEstadoxTipoUsuario(int[] estadoxTipoUsuario) {
+        int usuariosTotales = estadoxTipoUsuario[0];
+        double porcActivo = 0;
+        double porcInactivo = 0;
+
+        if(estadoxTipoUsuario[1] != 0){
+            porcActivo = (estadoxTipoUsuario[1] * 100) / usuariosTotales;
+        }
+        if(estadoxTipoUsuario[2] != 0){
+            porcInactivo = (estadoxTipoUsuario[2] * 100) / usuariosTotales;
+        }
+
+        DefaultPieDataset data = new DefaultPieDataset();
+        data.setValue("Activos: " + estadoxTipoUsuario[1] + " || " + porcActivo + "%", porcActivo);
+        data.setValue("Inactivos: " + estadoxTipoUsuario[2] + " || " + porcInactivo + "%", porcInactivo);
+
+        chart = ChartFactory.createPieChart3D(
+                "ESTADO", // chart title
+                data, // data
+                true, // include legend
+                true,
+                true);
+
+        chart.setBackgroundPaint(Color.ORANGE);// Color de fonde de la ventana
+        chart.getTitle().setPaint(Color.blue); // Dar color al titulo
+
+        PiePlot3D plot = (PiePlot3D) chart.getPlot();
+        plot.setLabelBackgroundPaint(Color.ORANGE);// Color de las etiquetas
+        plot.setForegroundAlpha(0.60f);// Color de el fondo del grafico
+
+        // esto es lo que lo hace rotar
+        Rotator rotator = new Rotator(plot);
+        rotator.start();
+    }
+    
+    /**
+     * Crea un gráfico de estadísticas de estado.
+     * @param personal Arreglo de enteros con la cantidad de usuarios en cada estado.
+     */
     public void crearGraficoEstado(int[] personal) {
+        // Método similar al anterior, pero aplicado a estadísticas de estado general
         
         int usuariosTotales = personal[0];
         double porcActivo = 0;
@@ -310,8 +460,45 @@ public class Graficos extends JFrame implements DatosConexion{
         Rotator rotator = new Rotator(plot);
         rotator.start();
     }
+    
+     /**
+     * Obtiene un listado de estadísticas de estado por tipo de usuario.
+     * @param tipoUsuario Tipo de usuario para el cual se desea obtener las estadísticas.
+     * @return Arreglo de enteros con la cantidad de usuarios en cada estado.
+     */
+    public int [] listadoEstadoxTipoUsuario(String tipoUsuario) {
+        // Método similar a listadoEstado, pero aplicado a un tipo de usuario específico
 
+        boolean error = false;
+        int[] estadoxTipoUsuario = new int[3];
+        int contadorUsu = 0;
+        int contadorActivo = 0;
+        int contadorInactivo = 0;
+        Conexion con = new Conexion();
+        boolean error2 = con.conectarMySQL(baseDatos, user, login, host);
+        if (!error) {
+            String[][] datos = con.consultaMatriz("usuario", "1");
+            if (datos == null) {
+                JOptionPane.showMessageDialog(this, "No existen usuarios aún");  
+            }else{
+                contadorUsu = con.contar("usuario", "tipo_usuario = '" + tipoUsuario + "'");
+                contadorActivo = con.contar("usuario", "tipo_usuario = '" + tipoUsuario + "' AND estado = 'Activo'");
+                contadorInactivo = con.contar("usuario", "tipo_usuario = '" + tipoUsuario + "' AND estado = 'Inactivo'");
+            }
+        }
+        con.cerrarConsulta();
+        estadoxTipoUsuario[0] = contadorUsu;
+        estadoxTipoUsuario[1] = contadorActivo;
+        estadoxTipoUsuario[2] = contadorInactivo;
+        return estadoxTipoUsuario;
+    }
+    /**
+     * Obtiene un listado de estadísticas de estado general.
+     * @return Arreglo de enteros con la cantidad de usuarios en cada estado.
+     */
     public int [] listadoEstado() {
+    // Método similar a listadoEstadoxTipoUsuario, pero aplicado a estadísticas generales
+
         boolean error = false;
         int[] personal = new int[3];
         int contadorUsu = 0;
@@ -336,7 +523,13 @@ public class Graficos extends JFrame implements DatosConexion{
         return personal;
     }
     
+    /**
+     * Crea un gráfico de estadísticas de grupo sanguíneo.
+     * @param personal Arreglo de enteros con la cantidad de usuarios en cada grupo sanguíneo.
+     */
     public void crearGraficoGrupoSanguineo(int[] personal) {
+    // Método similar a los anteriores, pero aplicado a estadísticas de grupo sanguíneo
+
         int usuariosTotales = personal[0];
         double porcGrupoAP = 0;
         double porcGrupoOP = 0;
@@ -401,7 +594,12 @@ public class Graficos extends JFrame implements DatosConexion{
         rotator.start();
     }
 
+    /**
+     * Obtiene un listado de estadísticas de grupo sanguíneo.
+     * @return Arreglo de enteros con la cantidad de usuarios en cada grupo sanguíneo.
+     */
     public int [] listadoGrupoSanguineo() {
+     // Método similar a listadoEstado y listadoEstadoxTipoUsuario, pero aplicado a grupo sanguíneo
         boolean error = false;
         int[] personal = new int[9];
         int contadorUsu = 0;

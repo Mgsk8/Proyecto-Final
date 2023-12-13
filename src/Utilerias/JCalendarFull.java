@@ -1,3 +1,13 @@
+/**
+ * Clase JCalendarFull que extiende JDialog y proporciona un selector de fecha con funcionalidades adicionales.
+ * 
+ * @author  Jhon Alex Rodríguez Benítez - 2264363
+ * @author  Miguel Angel Escobar Marín - 2264305
+ * @author  John Alejandro Vallarino Cruz - 2264332
+ * @since 11/12/2023
+ * @version 1.4
+ */
+
 package Utilerias;
 
 
@@ -15,6 +25,10 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+/**
+ * Clase JCalendarFull que extiende JDialog y proporciona un selector de fecha con funcionalidades adicionales.
+ */
+
 public class JCalendarFull extends JDialog {
 
     private JCalendar jcFecha;
@@ -24,21 +38,27 @@ public class JCalendarFull extends JDialog {
     String nombreDia, nombreMes, horaCadena, minutosCadena, fechaCompleta, horaCompleta;
     boolean selecciono;
     
-    // constructor para crear un JCalendar con la fecha actual del sistema
+    
+    /**
+     * Constructor para crear un JCalendar con la fecha actual del sistema.
+     *
+     * @param jf JFrame padre para el JDialog.
+     */
     public JCalendarFull(JFrame jf) {
         super(jf, "Selector de Fecha", true); 
         set(); // asignar atributos con valores por defecto
         crearGUI(); 
     }
     
-    /* 
-    Constructor para crear un JCalendar con una fecha establecida
-    La fecha que se desea establecer debe estar en formato "dia;mes;anio;hora;minutos"
-    dia, mes, hora, minutos con 2 digitos. hora en formato militar
-    anio con 4 digitos    
-    Por ej: para establecer la fecha de 7 de marzo de 1979 a las 3:30 pm, 
-    la cadena debe ser: "07;03;1979;15;30"
-    */
+    /**
+     * Constructor para crear un JCalendar con una fecha establecida.
+     * La fecha que se desea establecer debe estar en formato "dia;mes;anio;hora;minutos".
+     * Por ejemplo, para establecer la fecha de 7 de marzo de 1979 a las 3:30 pm, 
+     * la cadena debe ser: "07;03;1979;15;30".
+     *
+     * @param jf    JFrame padre para el JDialog.
+     * @param fecha Cadena con la fecha a establecer.
+     */
     public JCalendarFull(JFrame jf, String fecha) {
         super(jf, "Selector de Fecha", true);          
         set(); // asignar atributos con valores por defecto
@@ -69,12 +89,18 @@ public class JCalendarFull extends JDialog {
         setNombreMes();
     }
     
+    /**
+     * Inicializa los atributos de la clase.
+     */
     public void set(){
         dia = mes = year = diaSemana = hora = minutos = 0;
         nombreDia = nombreMes = horaCadena = minutosCadena = fechaCompleta = horaCompleta = "";
         selecciono = false;
     }
     
+    /**
+     * Crea la interfaz gráfica del JDialog.
+     */
     public void crearGUI(){
         // crear el JDialog
         setSize(315, 330);
@@ -142,6 +168,9 @@ public class JCalendarFull extends JDialog {
         add(jbLimpiar);
     }
 
+    /**
+     * Maneja el evento de aceptar la fecha seleccionada.
+     */
     private void evento_jbAceptar() {        
         selecciono = true;
         Calendar calendario = jcFecha.getCalendar();
@@ -160,6 +189,9 @@ public class JCalendarFull extends JDialog {
         setVisible(false);
     }
 
+    /**
+     * Maneja el evento de establecer la fecha actual.
+     */
     private void evento_jbAhora() {        
         jcFecha.setDate(new Date());// asignar la fecha actual del sistema al JCalendar
         
@@ -177,12 +209,17 @@ public class JCalendarFull extends JDialog {
         else jcMinutos.setSelectedItem(min + "");        
     }
     
+    /**
+     * Maneja el evento de limpiar la selección.
+     */
     private void evento_jbLimpiar() {
         set(); // asignar atributos con valores por defecto
         evento_jbAhora();
         setVisible(false);
     }
-    
+     /**
+     * Establece el nombre del día de la semana.
+     */
     public void setNombreDia(){
     	switch(diaSemana){
 	    case 1: nombreDia = "Domingo";	break;
@@ -194,7 +231,9 @@ public class JCalendarFull extends JDialog {
 	    case 7: nombreDia = "Sábado"; 	break;
     	}	
     }
-    
+    /**
+     * Establece el nombre del mes.
+     */
     public void setNombreMes(){
     	switch(mes){
 	    case 1:  nombreMes = "Enero"; 	break;
@@ -212,6 +251,11 @@ public class JCalendarFull extends JDialog {
     	}	
     }	
             
+    /**
+     * Establece la fecha en diferentes formatos.
+     *
+     * @param tipo Tipo de formato de fecha.
+     */
     public void setFecha(int tipo){
         fechaCompleta = "";
         switch (tipo) {
@@ -247,18 +291,78 @@ public class JCalendarFull extends JDialog {
         }        
     }
     
-    
+     /**
+     * Obtiene el día seleccionado.
+     *
+     * @return Día seleccionado.
+     */
     public int getDia(){ return dia; }
+     /**
+     * Obtiene el mes seleccionado.
+     *
+     * @return Mes seleccionado.
+     */
     public int getMes(){ return mes; }
+    /**
+     * Obtiene el año seleccionado.
+     *
+     * @return Año seleccionado.
+     */
     public int getYear(){ return year; }
+    /**
+     * Obtiene la hora seleccionada.
+     *
+     * @return Hora seleccionada.
+     */
     public int getHora(){ return hora; }
+     /**
+     * Obtiene los minutos seleccionados.
+     *
+     * @return Minutos seleccionados.
+     */
     public int getMinutos(){ return minutos; }
-    public int getDiaSemana(){ return diaSemana; }    
+    /**
+     * Obtiene el día de la semana seleccionado.
+     *
+     * @return Día de la semana seleccionado.
+     */
+    public int getDiaSemana(){ return diaSemana; }
+    /**
+     * Obtiene el nombre del día de la semana seleccionado.
+     *
+     * @return Nombre del día de la semana seleccionado.
+     */    
     public String getNombreDia(){ return nombreDia; }
+    /**
+     * Obtiene el nombre del mes seleccionado.
+     *
+     * @return Nombre del mes seleccionado.
+     */
     public String getNombreMes(){ return nombreMes; }
+    /**
+     * Obtiene la cadena de la hora seleccionada.
+     *
+     * @return Cadena de la hora seleccionada.
+     */
     public String getHoraCadena(){ return horaCadena; }
+     /**
+     * Obtiene la cadena de los minutos seleccionados.
+     *
+     * @return Cadena de los minutos seleccionados.
+     */
     public String getMinutosCadena(){ return minutosCadena; } 
+    /**
+     * Obtiene la hora completa en formato HH:MM.
+     *
+     * @return Hora completa en formato HH:MM.
+     */
     public String getHoraCompleta(){ return horaCadena + ":" + minutosCadena; }
+    /**
+     * Obtiene la fecha completa en el formato especificado.
+     *
+     * @param tipo Tipo de formato de fecha.
+     * @return Fecha completa en el formato especificado.
+     */
     public String getFechaCompleta(int tipo){
         if(selecciono) setFecha(tipo);
         else fechaCompleta = "";

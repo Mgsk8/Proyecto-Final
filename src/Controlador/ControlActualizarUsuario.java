@@ -6,7 +6,7 @@
  * @author John Alejandro Vallarino - 2264332
  * @author Jhon Alex Rodriguez - 2264363
  * @author Miguel Ángel Escobar Marín - 2264305
- * @version 1.3
+ * @version 1.4
  * @since 4-12-2023
  */
 package Controlador;

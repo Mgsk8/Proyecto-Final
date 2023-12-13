@@ -1,13 +1,12 @@
-/*
-Proposito: Muestra en pantalla un submenú con botones que permiten ir a listados con
-información de los usuarios ya registrados.
-@author 
-    Jhon Alex Rodríguez Benítez - 2264363
-    Miguel Angel Escobar Marín - 2264305
-    John Alejandro Vallarino Cruz - 2264332
-Fecha de ultima modificacion  20/10/2023
-version: 1.1
-*/
+/**
+ * Clase Listados que extiende de JFrame e implementa la interfaz DatosConexion.
+ * 
+ * @author  Jhon Alex Rodríguez Benítez - 2264363
+ * @author  Miguel Angel Escobar Marín - 2264305
+ * @author  John Alejandro Vallarino Cruz - 2264332
+ * @version 1.4
+ * @since 11/12/2023
+ */
 
 package Vista;
 
@@ -41,22 +40,84 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 
+/**
+ * Clase Listados que extiende de JFrame e implementa la interfaz DatosConexion.
+ */
+
 public class Listados extends JFrame implements DatosConexion{
     
-    public JButton jbListadoGeneral, jbListadoEstadoxTipo, jbListadoEstadoxSanguineo;
-    public JToggleButton jtListadoGeneral, jtListadoEstxSan, jtListadoEstxTip;
-    public ControlListados cl;
-    public MenuPrincipal mp;
-    public JButton jbVolver, jbLimpiar, jbConsultar;
-    public JPanel jpListadoGeneral, jpListadoEstxSan, jpListadoEstxTip, jpListadoRecepcionista;
-    public JLabel jlEstado, jlGrupoSanguineo, jlTipoUsuario;
-    public JComboBox jcEstado1, jcEstado2, jcGrupoSanguineo, jcTipoUsuario;
-    public JTextField jtEstado1, jtEstado2, jtGrupoSanguineo, jtTipoUsuario;
+    /** Botones para diferentes tipos de listados. */
+    public JButton jbListadoGeneral;
+    public JButton jbListadoEstadoxTipo;
+    public JButton jbListadoEstadoxSanguineo;
+    
+    /** Botones de acciones. */
+    public JButton jbVolver;
+    public JButton jbLimpiar;
+    public JButton jbConsultar;
+    
+    /** ToggleButtons para seleccionar el tipo de listado. */
+    public JToggleButton jtListadoGeneral;
+    public JToggleButton jtListadoEstxSan;
+    public JToggleButton jtListadoEstxTip;
+    public JToggleButton jtListadoMembresia;
+    
+    /** Paneles para mostrar los diferentes tipos de listados. */
+    public JPanel jpListadoGeneral;
+    public JPanel jpListadoEstxSan;
+    public JPanel jpListadoEstxTip;
+    public JPanel jpListadoRecepcionista;
+    public JPanel jpListadoMembresia;
+    
+    
+    /** Etiquetas para los filtros de listado. */
+    public JLabel jlEstado;
+    public JLabel jlGrupoSanguineo;
+    public JLabel jlTipoUsuario;
+  
+    /** ComboBox para seleccionar estado, grupo sanguíneo y tipo de usuario. */
+    public JComboBox jcEstado1;
+    public JComboBox jcEstado2;
+    public JComboBox jcGrupoSanguineo;
+    public JComboBox jcTipoUsuario;
+    
+    /** Campos de texto para ingresar valores de filtros. */
+    public JTextField jtEstado1;
+    public JTextField jtEstado2;
+    public JTextField jtGrupoSanguineo;
+    public JTextField jtTipoUsuario;
+    
+    /** Instancia de la clase Listados. */
     public Listados l;
-    public ModeloTabla mt, mt2, mt3;
-    JTable tabla, tabla2, tabla3;
+    
+    /** Modelos de tabla para los diferentes listados. */
+    public ModeloTabla mt;
+    public ModeloTabla mt2;
+    public ModeloTabla mt3;
+    public ModeloTabla mtMembresia;
+            
+    /** Controlador de la clase Listados. */
+    public ControlListados cl;
+    
+    /** Instancia del menú principal. */
+    public MenuPrincipal mp;
+    
+    /** Tablas para mostrar los resultados de los listados. */
+    JTable tabla;
+    JTable tabla2;
+    JTable tabla3;
+    JTable tablaMembresia;
+    
+    /** Privilegios del usuario actual. */
     String privilegios = "";
 
+    
+    /**
+     * Constructor de la clase Listados.
+     * 
+     * @param obj Instancia del menú principal.
+     * @param privi Privilegios del usuario.
+     */
     public Listados(MenuPrincipal obj, String privi){
         super("Listados");
         mp = obj;
@@ -76,8 +137,10 @@ public class Listados extends JFrame implements DatosConexion{
         setVisible(true);
     }
 
+    /**
+     * Método que crea la interfaz gráfica de usuario.
+     */
     public void crearGUI(){
-        
         
         JLabelTitulo jt = new JLabelTitulo(
                 60, "Listados", this, "/Imagenes/Consultar.png");
@@ -92,45 +155,108 @@ public class Listados extends JFrame implements DatosConexion{
         add(jpListados);
         
         
-        jtListadoGeneral = new JToggleButton("Listado general");
-        jtListadoGeneral.setBounds(10, 40, 200, 40);
-        jtListadoGeneral.setBackground(new Color(226, 0, 82));
-        jtListadoGeneral.setForeground(Color.white);
-        jtListadoGeneral.setFont(new Font("Tahoma", 1, 12));
-        jtListadoGeneral.setBorderPainted(false);
-        jtListadoGeneral.setFocusPainted(false);
-        jtListadoGeneral.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        jtListadoGeneral.addActionListener(cl);
-        jpListados.add(jtListadoGeneral);
+        if(privilegios == "Administrador"){
+            
+            // Botón de listado general
+            jtListadoGeneral = new JToggleButton("Listado general");
+            jtListadoGeneral.setBounds(10, 40, 200, 40);
+            jtListadoGeneral.setBackground(new Color(226, 0, 82));
+            jtListadoGeneral.setForeground(Color.white);
+            jtListadoGeneral.setFont(new Font("Tahoma", 1, 12));
+            jtListadoGeneral.setBorderPainted(false);
+            jtListadoGeneral.setFocusPainted(false);
+            jtListadoGeneral.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            jtListadoGeneral.addActionListener(cl);
+            jpListados.add(jtListadoGeneral);
+            
+            // Botón de listado por estado y grupo sanguíneo
+            jtListadoEstxSan = new JToggleButton();
+            jtListadoEstxSan.setText("<html><center><p>Listado por</p></center><center><p>estado y grupo sanguineo</p></center></html>");
+            jtListadoEstxSan.setBounds(10, 120, 200, 40);
+            jtListadoEstxSan.setBackground(new Color(226, 0, 82));
+            jtListadoEstxSan.setForeground(Color.white);
+            jtListadoEstxSan.setFont(new Font("Tahoma", 1, 12));
+            jtListadoEstxSan.setBorderPainted(false);
+            jtListadoEstxSan.setFocusPainted(false);
+            jtListadoEstxSan.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            jtListadoEstxSan.addActionListener(cl);
+            jpListados.add(jtListadoEstxSan);
         
-        jtListadoEstxSan = new JToggleButton();
-        jtListadoEstxSan.setText("<html><center><p>Listado por</p></center><center><p>estado y grupo sanguineo</p></center></html>");
-        jtListadoEstxSan.setBounds(10, 120,200, 40);
-        jtListadoEstxSan.setBackground(new Color(226, 0, 82));
-        jtListadoEstxSan.setForeground(Color.white);
-        jtListadoEstxSan.setFont(new Font("Tahoma", 1, 12));
-        jtListadoEstxSan.setBorderPainted(false);
-        jtListadoEstxSan.setFocusPainted(false);
-        jtListadoEstxSan.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        jtListadoEstxSan.addActionListener(cl);
-        jpListados.add(jtListadoEstxSan);
+            // Botón de listado por estado y tipo de usuario
+            jtListadoEstxTip = new JToggleButton();
+            jtListadoEstxTip.setText("<html><center><p>Listado por</p></center><center><p>estado y tipo de usuario</p></center></html>");
+            jtListadoEstxTip.setBounds(10, 200,200, 40);
+            jtListadoEstxTip.setBackground(new Color(226, 0, 82));
+            jtListadoEstxTip.setForeground(Color.white);
+            jtListadoEstxTip.setFont(new Font("Tahoma", 1, 12));
+            jtListadoEstxTip.setBorderPainted(false);
+            jtListadoEstxTip.setFocusPainted(false);
+            jtListadoEstxTip.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            jtListadoEstxTip.addActionListener(cl);
+            jpListados.add(jtListadoEstxTip);
+            
+            jtListadoMembresia = new JToggleButton("Listado membresias");
+            jtListadoMembresia.setBounds(10, 280, 200, 40);
+            jtListadoMembresia.setBackground(new Color(226, 0, 82));
+            jtListadoMembresia.setForeground(Color.white);
+            jtListadoMembresia.setFont(new Font("Tahoma", 1, 12));
+            jtListadoMembresia.setBorderPainted(false);
+            jtListadoMembresia.setFocusPainted(false);
+            jtListadoMembresia.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            jtListadoMembresia.addActionListener(cl);
+            jpListados.add(jtListadoMembresia);
         
-        jtListadoEstxTip = new JToggleButton();
-        jtListadoEstxTip.setText("<html><center><p>Listado por</p></center><center><p>estado y tipo de usuario</p></center></html>");
-        jtListadoEstxTip.setBounds(10, 200, 200, 40);
-        jtListadoEstxTip.setBackground(new Color(226, 0, 82));
-        jtListadoEstxTip.setForeground(Color.white);
-        jtListadoEstxTip.setFont(new Font("Tahoma", 1, 12));
-        jtListadoEstxTip.setBorderPainted(false);
-        jtListadoEstxTip.setFocusPainted(false);
-        jtListadoEstxTip.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        jtListadoEstxTip.addActionListener(cl);
-        jpListados.add(jtListadoEstxTip);
+            ButtonGroup bg = new ButtonGroup();
+            bg.add(jtListadoGeneral);
+            bg.add(jtListadoEstxSan);
+            bg.add(jtListadoEstxTip);
+            bg.add(jtListadoMembresia);
+        }
         
-        ButtonGroup bg = new ButtonGroup();
-        bg.add(jtListadoGeneral);
-        bg.add(jtListadoEstxSan);
-        bg.add(jtListadoEstxTip);
+        if(privilegios == "Supervisor"){
+            
+            // Botón de listado por estado y grupo sanguíneo
+            jtListadoEstxSan = new JToggleButton();
+            jtListadoEstxSan.setText("<html><center><p>Listado por</p></center><center><p>estado y grupo sanguineo</p></center></html>");
+            jtListadoEstxSan.setBounds(10, 40, 200, 40);
+            jtListadoEstxSan.setBackground(new Color(226, 0, 82));
+            jtListadoEstxSan.setForeground(Color.white);
+            jtListadoEstxSan.setFont(new Font("Tahoma", 1, 12));
+            jtListadoEstxSan.setBorderPainted(false);
+            jtListadoEstxSan.setFocusPainted(false);
+            jtListadoEstxSan.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            jtListadoEstxSan.addActionListener(cl);
+            jpListados.add(jtListadoEstxSan);
+        
+            // Botón de listado por estado y tipo de usuario
+            jtListadoEstxTip = new JToggleButton();
+            jtListadoEstxTip.setText("<html><center><p>Listado por</p></center><center><p>estado y tipo de usuario</p></center></html>");
+            jtListadoEstxTip.setBounds(10, 120,200, 40);
+            jtListadoEstxTip.setBackground(new Color(226, 0, 82));
+            jtListadoEstxTip.setForeground(Color.white);
+            jtListadoEstxTip.setFont(new Font("Tahoma", 1, 12));
+            jtListadoEstxTip.setBorderPainted(false);
+            jtListadoEstxTip.setFocusPainted(false);
+            jtListadoEstxTip.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            jtListadoEstxTip.addActionListener(cl);
+            jpListados.add(jtListadoEstxTip);
+            
+            jtListadoMembresia = new JToggleButton("Listado membresias");
+            jtListadoMembresia.setBounds(10, 200, 200, 40);
+            jtListadoMembresia.setBackground(new Color(226, 0, 82));
+            jtListadoMembresia.setForeground(Color.white);
+            jtListadoMembresia.setFont(new Font("Tahoma", 1, 12));
+            jtListadoMembresia.setBorderPainted(false);
+            jtListadoMembresia.setFocusPainted(false);
+            jtListadoMembresia.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            jtListadoMembresia.addActionListener(cl);
+            jpListados.add(jtListadoMembresia);
+        
+            ButtonGroup bg = new ButtonGroup();
+            bg.add(jtListadoEstxSan);
+            bg.add(jtListadoEstxTip);
+            bg.add(jtListadoMembresia);
+        }
         
          //-------------------- JPanel Listado General Admin ----------------------------------------------------------------------
         jpListadoGeneral = new JPanel();
@@ -153,6 +279,28 @@ public class Listados extends JFrame implements DatosConexion{
         js.setBounds(10, 50, 880, 270);
 
         jpListadoGeneral.add(js);
+        
+         //-------------------- JPanel Listado membresias ----------------------------------------------------------------------
+        jpListadoMembresia = new JPanel();
+        jpListadoMembresia.setBounds(250, 80, 900, 360);
+        //jpListadoMembresia.setBackground(Color.gray);
+        jpListadoMembresia.setLayout(null);
+        jpListadoMembresia.setBorder(new TitledBorder ( "Lista de membresias"));
+        jpListadoMembresia.setVisible(false);
+        add(jpListadoMembresia);
+        
+        String encabezadosMem[] = {"ID Membresia", "Fecha inicio", "Fecha fin", "Tipo de membresia", "Cedula cliente", "Estado"};
+        String datosMem[][] = { {"", "", "", "", ""}};
+        
+        mtMembresia = new ModeloTabla(datosMem, encabezadosMem);
+        tablaMembresia = new JTable(mtMembresia);
+
+        tablaMembresia.setSelectionBackground(Color.lightGray);
+
+        JScrollPane jsMem = new JScrollPane(tablaMembresia);
+        jsMem.setBounds(10, 50, 880, 270);
+
+        jpListadoMembresia.add(jsMem);
         
         //-------------------- JPanel Listado Clientes Estado x Grupo Sanguineo ----------------------------------------------------------------------
         jpListadoEstxSan = new JPanel();
@@ -271,6 +419,38 @@ public class Listados extends JFrame implements DatosConexion{
         add(jbConsultar);
     }
     
+    /**
+     * Método que llena la tabla con el listado general de Membresias.
+     */
+    
+    public void llenarTablaMembresia() {
+        for (int i = mtMembresia.getRowCount() - 1; i >= 0; i--) {
+            mtMembresia.removeRow(i);
+        }
+        Conexion con = new Conexion();
+        boolean error = con.conectarMySQL(baseDatos, user, login, host);
+        if (!error) {
+            String[][] datos = con.consultaMatriz("membresia_cliente", "1");
+            if (datos == null) {
+                JOptionPane.showMessageDialog(this, "No existen membresías aún");  
+            }else{
+                //mt.removeRow(0);
+                try {
+                    for (int i = 0; i < datos.length; i++) {
+                        String[] arreglo = datos[i];
+                        mtMembresia.addRow(arreglo);
+                    }
+                }catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Error al leer la base de datos");
+                }
+            }
+        }
+    }
+    
+    /**
+     * Método que llena la tabla con el listado general de usuarios.
+     */
+    
     public void llenarTablaGeneral() {
         for (int i = mt.getRowCount() - 1; i >= 0; i--) {
             mt.removeRow(i);
@@ -295,6 +475,11 @@ public class Listados extends JFrame implements DatosConexion{
         }
     }
     
+    /**
+    * Método que llena la tabla con el listado filtrado por estado y grupo sanguíneo.
+    * 
+    * @param valores Valores a utilizar en la consulta.
+    */
     public void llenarTablaEstadoxGrupoSanguineo(String valores) {
         for (int i = mt2.getRowCount() - 1; i >= 0; i--) {
             mt2.removeRow(i);
@@ -320,6 +505,11 @@ public class Listados extends JFrame implements DatosConexion{
         }
     }
     
+    /**
+    * Método que llena la tabla con el listado filtrado por estado y tipo de usuario.
+    * 
+   * @param valores Valores a utilizar en la consulta.
+   */
     public void llenarTablaEstadoxTipoUsuario(String valores) {
         for (int i = mt3.getRowCount() - 1; i >= 0; i--) {
             mt3.removeRow(i);

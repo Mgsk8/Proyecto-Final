@@ -1,12 +1,15 @@
-/*
-Proposito: está clase nos permite implementar un botón con efecto roll over general para la vista que lo necesite.
-@author 
-    Jhon Alex Rodríguez Benítez - 2264363
-    Miguel Angel Escobar Marín - 2264305
-    John Alejandro Vallarino Cruz - 2264332
-Fecha de ultima modificacion  20/10/2023
-version: 1.1
-*/
+/**
+ * Clase JButtonRoll que extiende JButton y proporciona un botón con efecto rollover.
+ * 
+ * Este botón personalizado incluye características como un icono, texto, mensaje emergente,
+ * y un efecto visual cuando el mouse pasa sobre el botón.
+ * 
+ * @author  Jhon Alex Rodríguez Benítez - 2264363
+ * @author  Miguel Angel Escobar Marín - 2264305
+ * @author  John Alejandro Vallarino Cruz - 2264332
+ * @since 11/12/2023
+ * @version 1.4
+ */
 
 package Utilerias;
 
@@ -16,8 +19,28 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+/**
+ * Clase JButtonRoll que extiende JButton y proporciona un botón con efecto rollover.
+ * 
+ * Este botón personalizado incluye características como un icono, texto, mensaje emergente,
+ * y un efecto visual cuando el mouse pasa sobre el botón.
+ */
 
 public class JButtonRoll extends JButton{
+    
+    /**
+     * Constructor para crear un JButtonRoll con características específicas.
+     *
+     * @param x       Coordenada X del botón en el contenedor.
+     * @param y       Coordenada Y del botón en el contenedor.
+     * @param ancho   Ancho del botón.
+     * @param alto    Alto del botón.
+     * @param texto   Texto a mostrar en el botón.
+     * @param mensaje Mensaje emergente al pasar el mouse sobre el botón.
+     * @param imagen1 Ruta de la imagen a mostrar en el botón.
+     * @param letra   Mnemotecnia para activar el botón con una tecla de acceso rápido.
+     * @param vt      Componente padre del botón.
+     */
     
     public JButtonRoll(int x, int y, int ancho, int alto,
             String texto, String mensaje, String imagen1,

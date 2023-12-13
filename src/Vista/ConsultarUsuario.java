@@ -1,13 +1,13 @@
-/*
-Proposito: Permite buscar un usuario y muestra en pantalla sus campos para la visualización de los datos del
-usuario, con botones para buscar, limpiar y volver al menú principal.
-@author 
-    Jhon Alex Rodríguez Benítez - 2264363
-    Miguel Angel Escobar Marín - 2264305
-    John Alejandro Vallarino Cruz - 2264332
-Fecha de ultima modificacion  20/10/2023
-version: 1.1
-*/
+/**
+ * Propósito: Clase que representa la interfaz gráfica para consultar información de usuarios, 
+ * permitiendo visualizar datos como la cédula, nombre, apellido, email, entre otros.
+ * 
+ * @version 1.0
+ * @since 11/12/2023
+ * @author  Jhon Alex Rodríguez Benítez - 2264363
+ * @author  Miguel Angel Escobar Marín - 2264305
+ * @author  John Alejandro Vallarino Cruz - 2264332
+ */
 
 package Vista;
 
@@ -35,23 +35,160 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.border.TitledBorder;
 
+
+/**
+ * Propósito: Clase que representa la interfaz gráfica para consultar información de usuarios, 
+ * permitiendo visualizar datos como la cédula, nombre, apellido, email, entre otros.
+ */
 public class ConsultarUsuario extends JFrame{
     
-    public JRadioButton jrActivo, jrInactivo;
-    public JToggleButton jtAdministrador, jtSupervisor, jtEntrenador, jtRecepcionista, JTcliente;
-    public JButton jbVolver, jbConsultar, jbLimpiar;
+    /** Botón de opción para seleccionar el estado "Activo". */
+    public JRadioButton jrActivo;
+
+    /** Botón de opción para seleccionar el estado "Inactivo". */
+    public JRadioButton jrInactivo;
+    
+    /** Botón de alternancia para seleccionar el tipo de usuario "Administrador". */
+    public JToggleButton jtAdministrador;
+
+    /** Botón de alternancia para seleccionar el tipo de usuario "Supervisor". */
+    public JToggleButton jtSupervisor;
+
+    /** Botón de alternancia para seleccionar el tipo de usuario "Entrenador". */
+    public JToggleButton jtEntrenador;
+
+    /** Botón de alternancia para seleccionar el tipo de usuario "Recepcionista". */
+    public JToggleButton jtRecepcionista;
+
+    /** Botón de alternancia para seleccionar el tipo de usuario "Cliente". */
+    public JToggleButton JTcliente;
+
+    /** Botón de función para volver al menú principal. */
+    public JButton jbVolver;
+
+    /** Botón de función para realizar la consulta de datos del usuario. */
+    public JButton jbConsultar;
+
+    /** Botón de función para limpiar los campos de consulta. */
+    public JButton jbLimpiar;
+
+    /** Tipo de consulta (Datos Base, Turno, Grupo Sanguíneo, etc.). */
     public TipoConsulta tc;
-    public JTextField jtCedula, jtNom, jtApe, jtEmail,jtEmailNoLoginEnt,jtEmailNoLoginCl,jtPassword, jtSueldo;
-    public JComboBox<String> jcGrupoSanguineo, jcTurno, jcTurnoEnt, jcMembresia;
+
+    /** Campo de texto para ingresar la cédula del usuario. */
+    public JTextField jtCedula;
+
+    /** Campo de texto para ingresar el nombre del usuario. */
+    public JTextField jtNom;
+
+    /** Campo de texto para ingresar el apellido del usuario. */
+    public JTextField jtApe;
+
+    /** Campo de texto para ingresar el email del usuario. */
+    public JTextField jtEmail;
+
+    /** Campo de texto para ingresar el email (sin login) del entrenador. */
+    public JTextField jtEmailNoLoginEnt;
+
+    /** Campo de texto para ingresar el email (sin login) del cliente. */
+    public JTextField jtEmailNoLoginCl;
+
+    /** Campo de texto para ingresar la contraseña del usuario. */
+    public JTextField jtPassword;
+
+    /** Campo de texto para ingresar el sueldo del usuario. */
+    public JTextField jtSueldo;
+
+    /** Lista desplegable para seleccionar el grupo sanguíneo del usuario. */
+    public JComboBox<String> jcGrupoSanguineo;
+
+    /** Lista desplegable para seleccionar el turno del usuario. */
+    public JComboBox<String> jcTurno;
+
+    /** Lista desplegable para seleccionar el turno del entrenador. */
+    public JComboBox<String> jcTurnoEnt;
+
+    /** Lista desplegable para seleccionar el tipo de membresía del usuario. */
+    public JComboBox<String> jcMembresia;
+
+    /** Selector de fecha de nacimiento. */
     public JDateChooser fecha_nac;
-    public JPanel jpConsultarDatosBase, jpConsultarTurno,jpConsultarGrupoSanguineo,jpConsultarTurnoEmail,jpLoguearse, jpSueldo;
-    public JLabel jlCed, jlNom, jlApe, jlFecha, jlGrupoSanguineo, jlEmail, jlEmailNoLoginEnt
-            ,jlTurnoEnt,jlEmailNologinCl, jlPassword, jlTurno, jlEstado, jlSueldo, jlMembresia;
+
+    /** Panel para consultar los datos base del usuario. */
+    public JPanel jpConsultarDatosBase;
+
+    /** Panel para consultar el turno del usuario. */
+    public JPanel jpConsultarTurno;
+
+    /** Panel para consultar el grupo sanguíneo del usuario. */
+    public JPanel jpConsultarGrupoSanguineo;
+
+    /** Panel para consultar el turno y email del usuario. */
+    public JPanel jpConsultarTurnoEmail;
+
+    /** Panel para loguearse como otro usuario. */
+    public JPanel jpLoguearse;
+
+    /** Panel para consultar el sueldo del usuario. */
+    public JPanel jpSueldo;
+
+    /** Etiqueta para mostrar el campo de la cédula del usuario. */
+    public JLabel jlCed;
+
+    /** Etiqueta para mostrar el campo del nombre del usuario. */
+    public JLabel jlNom;
+
+    /** Etiqueta para mostrar el campo del apellido del usuario. */
+    public JLabel jlApe;
+
+    /** Etiqueta para mostrar el campo de la fecha de nacimiento del usuario. */
+    public JLabel jlFecha;
+
+    /** Etiqueta para mostrar el campo del grupo sanguíneo del usuario. */
+    public JLabel jlGrupoSanguineo;
+
+    /** Etiqueta para mostrar el campo del email del usuario. */
+    public JLabel jlEmail;
+
+    /** Etiqueta para mostrar el campo del email (sin login) del entrenador. */
+    public JLabel jlEmailNoLoginEnt;
+
+    /** Etiqueta para mostrar el campo del turno del entrenador. */
+    public JLabel jlTurnoEnt;
+
+    /** Etiqueta para mostrar el campo del email (sin login) del cliente. */
+    public JLabel jlEmailNologinCl;
+
+    /** Etiqueta para mostrar el campo de la contraseña del usuario. */
+    public JLabel jlPassword;
+
+    /** Etiqueta para mostrar el campo del turno del usuario. */
+    public JLabel jlTurno;
+
+    /** Etiqueta para mostrar el campo del estado del usuario. */
+    public JLabel jlEstado;
+
+    /** Etiqueta para mostrar el campo del sueldo del usuario. */
+    public JLabel jlSueldo;
+
+    /** Etiqueta para mostrar el campo de la membresía del usuario. */
+    public JLabel jlMembresia;
+
+    /** Contexto para indicar si se está actualizando la información. */
     public String contextoActualizar;
+
+    /** Controlador de la clase ConsultarUsuario. */
     ControlConsultarUsuario ccu;
+
+    /** String que almacena los privilegios del usuario. */
     String privilegios = "";
-    
-    
+
+    /**
+     * Constructor de la clase ConsultarUsuario.
+     * 
+     * @param tc Tipo de consulta (Datos Base, Turno, Grupo Sanguíneo, etc.).
+     * @param privi String que almacena los privilegios del usuario.
+     */
     public ConsultarUsuario(TipoConsulta tc, String privi){
         super("Consultar datos");
         this.tc = tc;
@@ -70,6 +207,9 @@ public class ConsultarUsuario extends JFrame{
         setVisible(true);
     }
     
+    /**
+     * Método que crea la interfaz gráfica para la consulta de datos de usuario.
+     */
     public void crearGUI(){
         ccu = new ControlConsultarUsuario(this);
         JLabelTitulo jt = new JLabelTitulo(
@@ -85,7 +225,7 @@ public class ConsultarUsuario extends JFrame{
         // ------------ verificacion privilegios -------------
         
         if (privilegios == "Recepcionista"){
-            jtEntrenador = new JToggleButton("Crear entrenador");
+            jtEntrenador = new JToggleButton("Consultar entrenador");
             jtEntrenador.setBounds(10, 40, 200, 40);
             jtEntrenador.setBackground(new Color(226, 0, 82));
             jtEntrenador.setForeground(Color.white);
@@ -96,7 +236,7 @@ public class ConsultarUsuario extends JFrame{
             jtEntrenador.addActionListener(ccu);
             jpTipoUsuario.add(jtEntrenador);
 
-            JTcliente = new JToggleButton("Crear cliente");
+            JTcliente = new JToggleButton("Consultar cliente");
             JTcliente.setBounds(10, 100, 200, 40);
             JTcliente.setBackground(new Color(226, 0, 82));
             JTcliente.setForeground(Color.white);
@@ -113,7 +253,7 @@ public class ConsultarUsuario extends JFrame{
         }
         
         if (privilegios == "Supervisor") {
-            jtRecepcionista = new JToggleButton("Crear Recepcionista");
+            jtRecepcionista = new JToggleButton("Consultar Recepcionista");
             jtRecepcionista.setBounds(10, 40, 200, 40);
             jtRecepcionista.setBackground(new Color(226, 0, 82));
             jtRecepcionista.setForeground(Color.white);
@@ -124,7 +264,7 @@ public class ConsultarUsuario extends JFrame{
             jtRecepcionista.addActionListener(ccu);
             jpTipoUsuario.add(jtRecepcionista);
 
-            jtEntrenador = new JToggleButton("Crear entrenador");
+            jtEntrenador = new JToggleButton("Consultar entrenador");
             jtEntrenador.setBounds(10, 100, 200, 40);
             jtEntrenador.setBackground(new Color(226, 0, 82));
             jtEntrenador.setForeground(Color.white);
@@ -135,7 +275,7 @@ public class ConsultarUsuario extends JFrame{
             jtEntrenador.addActionListener(ccu);
             jpTipoUsuario.add(jtEntrenador);
 
-            JTcliente = new JToggleButton("Crear cliente");
+            JTcliente = new JToggleButton("Consultar cliente");
             JTcliente.setBounds(10, 160, 200, 40);
             JTcliente.setBackground(new Color(226, 0, 82));
             JTcliente.setForeground(Color.white);
@@ -153,7 +293,7 @@ public class ConsultarUsuario extends JFrame{
         }
 
         if (privilegios == "Administrador"){
-            jtAdministrador = new JToggleButton("Crear Administrador");
+            jtAdministrador = new JToggleButton("Consultar Administrador");
             jtAdministrador.setBounds(10, 40, 200, 40);
             jtAdministrador.setBackground(new Color(226, 0, 82));
             jtAdministrador.setForeground(Color.white);
@@ -164,7 +304,7 @@ public class ConsultarUsuario extends JFrame{
             jtAdministrador.addActionListener(ccu);
             jpTipoUsuario.add(jtAdministrador);
 
-            jtSupervisor = new JToggleButton("Crear Supervisor");
+            jtSupervisor = new JToggleButton("Consultar Supervisor");
             jtSupervisor.setBounds(10, 100, 200, 40);
             jtSupervisor.setBackground(new Color(226, 0, 82));
             jtSupervisor.setForeground(Color.white);
@@ -175,7 +315,7 @@ public class ConsultarUsuario extends JFrame{
             jtSupervisor.addActionListener(ccu);
             jpTipoUsuario.add(jtSupervisor);
 
-            jtRecepcionista = new JToggleButton("Crear Recepcionista");
+            jtRecepcionista = new JToggleButton("Consultar Recepcionista");
             jtRecepcionista.setBounds(10, 160, 200, 40);
             jtRecepcionista.setBackground(new Color(226, 0, 82));
             jtRecepcionista.setForeground(Color.white);
@@ -186,7 +326,7 @@ public class ConsultarUsuario extends JFrame{
             jtRecepcionista.addActionListener(ccu);
             jpTipoUsuario.add(jtRecepcionista);
 
-            jtEntrenador = new JToggleButton("Crear entrenador");
+            jtEntrenador = new JToggleButton("Consultar entrenador");
             jtEntrenador.setBounds(10, 220, 200, 40);
             jtEntrenador.setBackground(new Color(226, 0, 82));
             jtEntrenador.setForeground(Color.white);
@@ -197,7 +337,7 @@ public class ConsultarUsuario extends JFrame{
             jtEntrenador.addActionListener(ccu);
             jpTipoUsuario.add(jtEntrenador);
 
-            JTcliente = new JToggleButton("Crear cliente");
+            JTcliente = new JToggleButton("Consultar cliente");
             JTcliente.setBounds(10, 280, 200, 40);
             JTcliente.setBackground(new Color(226, 0, 82));
             JTcliente.setForeground(Color.white);

@@ -1,4 +1,12 @@
-
+/**
+ * Proposito: Gestiona las interacciones con la interfaz de Tipo Consulta
+ *
+ * @author John Alejandro Vallarino - 2264332
+ * @author Jhon Alex Rodriguez - 2264363
+ * @author Miguel Ángel Escobar Marín - 2264305
+ * @version 1.3
+ * @since 4-12-2023
+ */
 package Controlador;
 
 import Vista.ConsultaQR;
@@ -10,16 +18,36 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JOptionPane;
 
+/**
+ * Proposito: Gestiona las interacciones con la interfaz de Tipo Consulta
+ */
+
 public class ControlTipoConsulta implements ActionListener, WindowListener{
-    
+    /**
+     * Objeto TipoConsulta asociado al controlador.
+     */    
     TipoConsulta tc;
+    /**
+     * Privilegios del usuario.
+     */    
     String privilegios = "";
-    
+    /**
+     * Constructor de ControlTipoConsulta.
+     *
+     * @param tc Objeto TipoConsulta asociado al controlador.
+     * @param privi Privilegios del usuario.
+     */    
     public ControlTipoConsulta(TipoConsulta tc, String privi){
         privilegios = privi;
         this.tc = tc;
     }
-
+    // Métodos de ActionListener
+    
+    /**
+     * Método que se ejecuta cuando se realiza una acción en la interfaz.
+     *
+     * @param e Evento de acción
+     */  
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource().equals(tc.jbVolver)){
@@ -34,6 +62,10 @@ public class ControlTipoConsulta implements ActionListener, WindowListener{
             tc.setVisible(false);
         }
     }
+    /**
+     * Muestra un cuadro de diálogo de confirmación al intentar cerrar la ventana.
+     * Si el usuario elige "Sí", se cierra la aplicación.
+     */    
     public void evento_salir() {
         int respuesta = JOptionPane.showConfirmDialog(tc,
                 "¿Desea salir de la aplicación?",
@@ -43,6 +75,9 @@ public class ControlTipoConsulta implements ActionListener, WindowListener{
             System.exit(0);
         }
     }
+    /**
+     * Oculta la ventana actual y muestra la ventana principal.
+     */    
     private void volver() {
         tc.setVisible(false);
         tc.dispose();

@@ -1,22 +1,30 @@
-/*
-Proposito: está clase nos permite implementar métodos que nos verifican la cantidad de caracteres
-y que tipo de dato ingresado en un jtextField de formal general para todas las vistas que lo necesiten.
-@author 
-    Jhon Alex Rodríguez Benítez - 2264363
-    Miguel Angel Escobar Marín - 2264305
-    John Alejandro Vallarino Cruz - 2264332
-Fecha de ultima modificacion  20/10/2023
-version: 1.1
-*/
+/**
+ * Clase que representa un limitador de caracteres para un componente de texto.
+ * Permite limitar la cantidad y tipo de caracteres que se pueden ingresar.
+ * 
+ * @version 1.4
+ * @since 11/12/2023
+ * 
+ * @author  Jhon Alex Rodríguez Benítez - 2264363
+ * @author  Miguel Angel Escobar Marín - 2264305
+ * @author  John Alejandro Vallarino Cruz - 2264332
+ */
 
 package Utilerias;
+/**
+ * Clase que representa un limitador de caracteres para un componente de texto.
+ * Permite limitar la cantidad y tipo de caracteres que se pueden ingresar.
+ */
 public class LimitadorCaracteres extends javax.swing.text.PlainDocument
 {
-    private javax.swing.text.JTextComponent editor;//El editor al que se limita los caracteres
-    
-    private int numeroMaximoCaracteres;//numero maximo de caracteres que se desean en el editor   
-    
-    private int tipo;//Indica que tipo de datos se aceptaran en el editor
+    /** El editor al que se limita los caracteres. */
+    private javax.swing.text.JTextComponent editor;
+
+    /** Número máximo de caracteres que se desean en el editor. */
+    private int numeroMaximoCaracteres;
+
+    /** Indica el tipo de datos que se aceptarán en el editor. */
+    private int tipo;
     
     /**
      * Crea una instancia de LimitadorCaracteres.
@@ -34,14 +42,13 @@ public class LimitadorCaracteres extends javax.swing.text.PlainDocument
     }
     
     /**
-     * M�todo al que llama el editor cada vez que se intenta insertar caracteres.
+     * Método al que llama el editor cada vez que se intenta insertar caracteres.
      * El metodo comprueba que no se sobrepasa el limite. Si es asi, llama al
      * metodo de la clase padre para que se inserten los caracteres. Si se 
      * sobrepasa el limite, retorna sin hacer nada.
      */
     public void insertString(int arg0, String arg1, javax.swing.text.AttributeSet arg2) throws javax.swing.text.BadLocationException
     {
-    	//arg1 = arg1.toUpperCase();
     	
        switch(tipo)
        {
